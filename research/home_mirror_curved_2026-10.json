@@ -1,0 +1,1325 @@
+{
+ "title": "家居选品研究：全身镜 · 曲线斗柜 · 玄关桌",
+ "subtitle": "只用真实可查数据（2026-10-11 采集）：Adobe / NRF 等机构数据、Amazon 页面公开信号（bought in past month、榜单、价格），以及你提供的两张商品页截图。Amazon / Wayfair / Google Trends 无法从本环境直连，缺口在页尾列出。",
+ "collected_at": "2026-10-11",
+ "method": "Web 检索（搜索引擎结果 + 媒体/行业报告摘要）。每条结论标注来源与可信度：高 = 一手机构数据（Adobe、NRF、Amazon 页面）；中 = 行业媒体/调研；低 = 聚合站、无日期或单一来源。",
+ "kpis": [
+  {
+   "label": "2025 美国线上假日季家具销售",
+   "value": "$31.1B",
+   "delta": "+6.6% YoY",
+   "note": "Adobe，11/1–12/31，全渠道线上",
+   "conf": "高"
+  },
+  {
+   "label": "2025 黑五线上总销售",
+   "value": "$11.8B",
+   "delta": "+9.1% YoY",
+   "note": "Adobe，全品类",
+   "conf": "高"
+  },
+  {
+   "label": "2026 假日季家具预测",
+   "value": "$33.4B",
+   "delta": "+7.3%",
+   "note": "Adobe 2026 预测",
+   "conf": "中"
+  },
+  {
+   "label": "2026 宿舍/公寓家居开支",
+   "value": "$14.0B",
+   "delta": "$194/人",
+   "note": "NRF Back-to-College",
+   "conf": "中"
+  },
+  {
+   "label": "Gen Z 租房家庭（2026）",
+   "value": "10.4M",
+   "delta": "占租客 23%",
+   "note": "Apartments.com 引用分析",
+   "conf": "中"
+  },
+  {
+   "label": "装饰镜全球市场 CAGR",
+   "value": "~5.8%",
+   "delta": "2025→2034",
+   "note": "Marketintelo；与另一估算 5.78% 一致",
+   "conf": "低"
+  }
+ ],
+ "dorm_spend": {
+  "title": "宿舍/公寓家居开支（NRF Back-to-College）",
+  "labels": [
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "values": [
+   12.2,
+   12.8,
+   14.0
+  ],
+  "unit": "$B",
+  "note": "学生/租房人群在家居上的预算逐年增长，但人均基本持平（2025 $191 vs 2024 $192），增长来自人数与高收入家庭 → 产品要便宜、好看、易搬。"
+ },
+ "sections": [
+  {
+   "id": "trend",
+   "title": "① 类目趋势：增长还是下滑？",
+   "verdict": "温和增长（约 5–7%/年），不是爆发期；增长点在细分款式迁移，而不是品类扩张。",
+   "findings": [
+    {
+     "text": "装饰镜全球市场 2025 约 $4.2B，预计 2034 年 $6.9B，CAGR 5.8%；另一估算 2025 $7.93B → 2034 $13.16B（CAGR 5.78%）。口径不同但增速一致。",
+     "conf": "低",
+     "sources": [
+      {
+       "name": "Marketintelo",
+       "url": "https://marketintelo.com/report/decorative-mirror-market"
+      },
+      {
+       "name": "Alibaba 卖家博客",
+       "url": "https://seller.alibaba.com/blogs/2026/southeast-asia/home-garden/precision-machining-mirror-standards-alibaba-b2b"
+      }
+     ]
+    },
+    {
+     "text": "美国线上家具 2025 假日季 $31.1B（+6.6%），Adobe 预测 2026 假日季 $33.4B（+7.3%），且消费者倾向更低价商品。",
+     "conf": "高",
+     "sources": [
+      {
+       "name": "Talk Business（Adobe 2025 实绩）",
+       "url": "https://talkbusiness.net/2026/01/adobe-analytics-online-holiday-sales-grew-6-8-to-257-8-billion/"
+      },
+      {
+       "name": "Adobe 2026 预测",
+       "url": "https://ecommerceparadise.com/adobe-holiday-online-sales-forecast/"
+      },
+      {
+       "name": "Digital Commerce 360",
+       "url": "https://www.digitalcommerce360.com/2025/10/08/adobe-online-holiday-sales-predictions-2025/"
+      }
+     ]
+    },
+    {
+     "text": "波浪镜（wavy/squiggle）热度进入平台期：Homes & Gardens 2025 年 2 月称其影响力“不如以往”，但会长期存在；House Digest 预测 2026 年曲线浴室镜流行。没有找到可信的搜索量增长数据。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Homes & Gardens",
+       "url": "https://www.homesandgardens.com/interior-design/is-wavy-decor-still-on-trend"
+      },
+      {
+       "name": "House Digest",
+       "url": "https://www.housedigest.com/2056374/curved-bathroom-mirror-trend-2026/"
+      }
+     ]
+    },
+    {
+     "text": "曲线语言正从镜子迁移到家具：2026 家具趋势普遍提到流畅曲线、圆角、burl 树瘤木纹、暖木色与深色（胡桃/浓缩咖啡/烟熏橡木）。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Homes & Gardens 2026 家具趋势",
+       "url": "https://www.homesandgardens.com/interior-design/furniture-trends-2026"
+      },
+      {
+       "name": "Houzz",
+       "url": "https://www.houzz.com/magazine/8-furniture-trends-to-look-out-for-in-2026-stsetivw-vs~183652982"
+      },
+      {
+       "name": "Burl wood 趋势",
+       "url": "https://ideal.house/community/news/the-burl-wood-furniture-trend-takes-the-high-street-by-storm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "season",
+   "title": "② 季节性 & 黑五",
+   "verdict": "双峰：8 月返校季 + Q4（黑五/圣诞）。黑五整体线上 +9.1%，但 Amazon 镜子类目的黑五倍数需要真实销量数据才能确认。",
+   "findings": [
+    {
+     "text": "2025 黑五线上销售 $11.8B（+9.1%），假日季总额 $257.8B（+6.8%）。",
+     "conf": "高",
+     "sources": [
+      {
+       "name": "Talk Business（Adobe）",
+       "url": "https://talkbusiness.net/2026/01/adobe-analytics-online-holiday-sales-grew-6-8-to-257-8-billion/"
+      },
+      {
+       "name": "Chain Store Age",
+       "url": "https://chainstoreage.com/ai-mobile-discounts-help-drive-online-black-friday-sales-higher"
+      }
+     ]
+    },
+    {
+     "text": "“full length mirror with stand” 搜索兴趣 2025 年 8 月达峰（指数 85），拱形全身镜兴趣最高；拱形/超大尺寸镜在 2025 年 10 月下旬出现明显上升。",
+     "conf": "低",
+     "sources": [
+      {
+       "name": "Accio（Google Trends 汇总）",
+       "url": "https://www.accio.com/business/long-mirror-with-stand-trends"
+      },
+      {
+       "name": "Accio 全身镜",
+       "url": "https://www.accio.com/business/standing-mirror-full-body-trends"
+      },
+      {
+       "name": "Accio 落地镜",
+       "url": "https://www.accio.com/business/floor-mirrors-full-length-large-size-trends"
+      }
+     ]
+    },
+    {
+     "text": "返校季：宿舍/公寓家居开支 2025 年 $12.8B（+5%），2026 年 $14.0B。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Furniture Today（NRF 2025）",
+       "url": "https://www.furnituretoday.com/research-and-analysis/back-to-campus-shoppers-trim-their-budgets-but-not-for-dorm-life"
+      },
+      {
+       "name": "NRF 新闻稿",
+       "url": "https://nrf.com/media-center/press-releases/back-to-school-season-begins-early-for-majority-of-shoppers"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "design",
+   "title": "③ Top 卖家的设计（颜色 / 款式 / 尺寸）",
+   "verdict": "全身镜榜单被“拱形 + 细铝框”统治；波浪镜集中在 63x24 绒布包框。斗柜的爆款语言是竖纹（fluted）+ 弧形边 + 暖木色。玄关桌爆款是圆角/瀑布边 + 开放层板 + 胡桃深棕。",
+   "findings": [
+    {
+     "text": "Amazon Floor & Full Length Mirrors 榜单（约 2026 年 6 月快照）前列是拱形落地镜品牌：DUMOS、OLIXIS、Antok、Aidoly、Delma。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Amazon Best Sellers 3736381",
+       "url": "https://www.amazon.com/Best-Sellers-Floor-Full-Length-Mirrors/zgbs/home-garden/3736381"
+      }
+     ]
+    },
+    {
+     "text": "爆款尺寸集中在 64x21（DUMOS、OLIXIS 64x21.5 带 Best Seller 标）、59–60x16（OLIXIS）、56x15、70x24/70x30（Delma）。颜色：黑、银、金。材质：铝合金细框 + “nano glass”。DUMOS 64x21 原价 $70、促销约 $45。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "TheStreet（DUMOS）",
+       "url": "https://www.thestreet.com/deals/dumos-arched-full-length-mirror-amazon-sale"
+      },
+      {
+       "name": "OLIXIS 60x16",
+       "url": "https://www.amazon.com/clp/B0GVMYYJRW"
+      },
+      {
+       "name": "Delma 56x15",
+       "url": "https://www.amazon.com/-/es/Delma-longitud-completa-dormitorio-aluminio/dp/B0G3VQJDPW"
+      },
+      {
+       "name": "Delma 70x30",
+       "url": "https://www.amazon.com/clp/B0G7F95TY5"
+      }
+     ]
+    },
+    {
+     "text": "波浪全身镜头部款统一为 63\"x24\"，绒布/法兰绒包木框（Ultym、BOJOY、Koonmi、Dewfig、Honyee），颜色白/粉/绿；Dewfig 白色款为 Amazon's Choice；Ultym 推出带三色灯版本。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Ultym",
+       "url": "https://www.amazon.com/Ultym-Standing-Irregular-Dressing-Entryway/dp/B0H75FDW7W"
+      },
+      {
+       "name": "BOJOY",
+       "url": "https://www.amazon.com/BOJOY-Irregular-Standing-Hanging-Leaning/dp/B0CKR7R15Z"
+      },
+      {
+       "name": "Koonmi",
+       "url": "https://us.amazon.com/clp/B0F8QJTL8Y"
+      },
+      {
+       "name": "Ultym 带灯",
+       "url": "https://us.amazon.com/clp/B0GCN61VK9"
+      }
+     ]
+    },
+    {
+     "text": "斗柜：竖纹 6 斗柜是榜单常客（Decofy 47\" 约第 14 名，TEENFON 56.3\" 弧形约第 20 名）；Decofy 55\" 原木色 400+/月，胡桃色 200+/月。你截图中的 EliteSet 63\" 弧形 9 斗柜 $382（原价 $420），4.4★/206 评，200+/月，4 种木纹色（含树瘤纹理）× 5–9 斗尺寸梯度。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Amazon Best Sellers 斗柜",
+       "url": "https://www.amazon.com/Best-Sellers-Dressers-Chests-of-Drawers/zgbs/home-garden/3733261"
+      },
+      {
+       "name": "Amada 竖纹斗柜",
+       "url": "https://www.amazon.com/clp/B0DY14PRRZ"
+      },
+      {
+       "name": "BVIUNTWO 弧形竖纹",
+       "url": "https://us.amazon.com/clp/B0G5NM1SR2"
+      },
+      {
+       "name": "Parade（T4tream $105）",
+       "url": "https://parade.com/shopping/amazon-t4tream-fluted-3-drawer-dresser-spring-sale-2026"
+      }
+     ]
+    },
+    {
+     "text": "2026 色彩：Pantone Cloud Dancer（柔白）、Sherwin-Williams Universal Khaki、Behr Hidden Gem（烟熏玉绿）、Benjamin Moore Silhouette（浓缩咖啡）、Glidden Warm Mahogany。整体转向大地暖色；鼠尾草绿已过度曝光、冷白和粉蓝退潮。",
+     "conf": "高",
+     "sources": [
+      {
+       "name": "Homes & Gardens 色彩趋势",
+       "url": "https://www.homesandgardens.com/interior-design/color-trends-2026"
+      },
+      {
+       "name": "Axios",
+       "url": "https://www.axios.com/2025/09/05/paint-color-trends-2026"
+      },
+      {
+       "name": "Woodworking Network",
+       "url": "https://www.woodworkingnetwork.com/design/2026-colors-year"
+      }
+     ]
+    },
+    {
+     "text": "玄关桌：你截图中的 Homiflex 43.7\" 圆角玄关桌 $99.99、4.6★（仅 26 评）却 500+/月，说明新品靠“圆角木作 + 胡桃深棕 + 场景图（藤编筐、画框）”即可起量；同类 Decofy 47\" 竖纹玄关桌 500+/月、Tribesigns 70.9\" 400+/月。标题埋词同时覆盖 Entryway Table / Console Table / Sofa Table Behind Couch。EliteSet 斗柜主图上方搭配的正是不规则圆镜——曲线镜子与曲线家具是同一套视觉语言。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Amazon console tables for entryway",
+       "url": "https://www.amazon.com/console-tables-entryway/s?k=console+tables+for+entryway"
+      },
+      {
+       "name": "Amazon farmhouse entryway table",
+       "url": "https://www.amazon.com/farmhouse-entryway-table/s?k=farmhouse+entryway+table"
+      },
+      {
+       "name": "Rounded console tables",
+       "url": "https://www.amazon.com/rounded-console-tables-entryway/s?k=rounded+console+tables+for+entryway"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "keywords",
+   "title": "④ 搜索关键词",
+   "verdict": "可确认的长尾方向：带灯、挂门、超大/拱形、波浪+颜色、竖纹/弧形斗柜。精确月搜索量需卖家精灵 / Helium 10 / Brand Analytics。",
+   "findings": [
+    {
+     "text": "AmzChart（无日期）：full length mirror with lights 21,361/月；door mirrors for bedroom full length 13,606/月；floor & full length mirrors 97,685/月（出现在无关类目页，仅作量级参考）。该类目上升词：pink mirror、led mirror、long mirrors for bedroom。",
+     "conf": "低",
+     "sources": [
+      {
+       "name": "AmzChart 3736381",
+       "url": "https://amzchart.com/amazon-industry-analysis/floor-full-length-mirrors-3736381"
+      }
+     ]
+    },
+    {
+     "text": "Amazon 自身生成的相关搜索页（说明这些词有真实搜索）：white wavy mirror full length、wavy standing mirror full length、wavy frame mirror、arched floor mirror、led floor mirror full length、modern curved dresser、fluted dresser、fluted tall dresser。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "white wavy mirror full length",
+       "url": "https://www.amazon.com/white-wavy-mirror-full-length/s?k=white+wavy+mirror+full+length"
+      },
+      {
+       "name": "arched floor mirror",
+       "url": "https://www.amazon.com/arched-floor-mirror/s?k=arched+floor+mirror"
+      },
+      {
+       "name": "modern curved dresser",
+       "url": "https://www.amazon.com/modern-curved-dresser/s?k=modern+curved+dresser"
+      },
+      {
+       "name": "fluted dresser",
+       "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"
+      }
+     ]
+    },
+    {
+     "text": "玄关桌标题的核心词组合（来自截图与爆款标题）：entryway table、console table、sofa table behind couch、narrow console table、farmhouse entryway table、rounded console tables for entryway、long console tables for entryway。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Amazon rounded console tables",
+       "url": "https://www.amazon.com/rounded-console-tables-entryway/s?k=rounded+console+tables+for+entryway"
+      },
+      {
+       "name": "Amazon long console tables",
+       "url": "https://www.amazon.com/Long-Console-Tables-Entryway/s?k=Long+Console+Tables+for+Entryway"
+      }
+     ]
+    }
+   ],
+   "keywords": [
+    {
+     "keyword": "floor & full length mirrors",
+     "volume": 97685,
+     "source": "AmzChart",
+     "conf": "低"
+    },
+    {
+     "keyword": "full length mirror with lights",
+     "volume": 21361,
+     "source": "AmzChart",
+     "conf": "低"
+    },
+    {
+     "keyword": "door mirrors for bedroom full length",
+     "volume": 13606,
+     "source": "AmzChart",
+     "conf": "低"
+    }
+   ]
+  },
+  {
+   "id": "persona",
+   "title": "⑤ 用户画像",
+   "verdict": "核心人群：Gen Z / 年轻租房族 + 大学生。小户型（500–700 sq ft）、不能打孔、预算敏感、重颜值、会搬家。",
+   "findings": [
+    {
+     "text": "Gen Z 租房家庭 2019–2024 新增 670 万户，2026 年达 1,040 万户、占全部租客 23%；RentCafe：Gen Z 租客 2018 年 70 万 → 2023 年 440 万。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Apartments.com",
+       "url": "https://www.apartments.com/blog/how-gen-z-renters-are-changing-the-rental-landscape"
+      },
+      {
+       "name": "Rently 2026 报告",
+       "url": "https://use.rently.com/blog/rently-2026-renting-by-generation-report/"
+      }
+     ]
+    },
+    {
+     "text": "53% 租客认为空间比通勤距离更重要；86% 的 Gen Z / 千禧租客因房价推迟人生节点 → 预算紧、偏好便宜紧凑的家具。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "CRE Daily",
+       "url": "https://www.credaily.com/briefs/renter-priorities-shift-in-2026-market/"
+      }
+     ]
+    },
+    {
+     "text": "Rently 研究：2025 年租房装饰趋势前列是“平价 Hygge”与宠物友好设计。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Business Wire（Rently）",
+       "url": "https://www.businesswire.com/news/home/20250304473370/en/Budget-Hygge-and-Pet-Friendly-Design-Top-2025-Rental-Decor-Trends-New-Rently-Study-Shows"
+      }
+     ]
+    },
+    {
+     "text": "返校季学生人均家居预算约 $191–194，且在削减其他开支、使用先买后付或二手。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Furniture Today（NRF）",
+       "url": "https://www.furnituretoday.com/research-and-analysis/back-to-campus-shoppers-trim-their-budgets-but-not-for-dorm-life"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "voc",
+   "title": "⑥ VOC：差评集中在哪",
+   "verdict": "镜子类目三大痛点：运输破损、成像变形（薄玻璃弯曲）、挂门款清晰度差。这是产品改进的切入点。",
+   "findings": [
+    {
+     "text": "运输破损是最常见的投诉（Birch Lane、Walmart BenJara 评论）。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Birch Lane 评论",
+       "url": "https://www.birchlane.com/wall-decor-mirrors/pdp/32-full-length-mirror-b100002073.html"
+      },
+      {
+       "name": "Walmart BenJara",
+       "url": "https://www.walmart.com/ip/BenJara-Cecilia-Full-Length-Standing-Mirror-with-Decorative-Design-Black-Color-Champagne-Gold-Size-71/969205309"
+      }
+     ]
+    },
+    {
+     "text": "成像变形：多数平价镜用 3mm 玻璃，靠墙时会弯曲产生“拉长/变胖”效果，建议 ≥5–6mm。Target Room Essentials 挂门镜（4.0★/2,270 评）的评论摘要指出变形与翘曲；某挂门亚克力镜 3.7★，投诉集中在清晰度。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Target Room Essentials",
+       "url": "https://target.com/p/rectangle-over-the-door-mirror-white-room-essentials-153/-/A-50398882"
+      },
+      {
+       "name": "Alibaba 评论分析",
+       "url": "https://reads.alibaba.com/vi/review-analysis-of-amazons-hottest-selling-door-mirrors-in-the-usa"
+      },
+      {
+       "name": "Trustpilot",
+       "url": "https://au.trustpilot.com/review/sorayainteriors.co.uk"
+      }
+     ]
+    },
+    {
+     "text": "波浪镜质量参差：Walmart 上 Nefoso 波浪全身镜仅 3.0★（55 评），而 Walmart Mainstays 基础挂门镜 4.5★（20,724 评）——基础款靠稳定质量积累海量评论，波浪款的品质承诺（无变形）常与评论不符。",
+     "conf": "中",
+     "sources": [
+      {
+       "name": "Walmart Nefoso",
+       "url": "https://www.walmart.com/ip/Nefoso-Wavy-Full-Length-Mirror-Freestanding-Floor-Mirror-with-Stand-65-x24-Wall-Mounted-Mirror-for-Bedroom-Pink/8673702393"
+      },
+      {
+       "name": "Walmart Mainstays",
+       "url": "https://www.walmart.com/ip/Mainstays-Over-The-Door-Mirror-with-hardware-14-25IN-X-50-25IN-White/437640676"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "product": {
+  "name": "爆款假设：小空间三用「柔波拱形」全身镜",
+  "concept": "把榜单上已验证的“拱形 + 细框”与仍有需求的“波浪”结合成柔和波浪边拱形，主打学生/租房族的挂门 + 靠墙 + 挂墙三用；用 5mm 银镜和加强包装解决变形和破损两大差评，以此支撑 $69.99 的溢价，而不是跟 $45–50 的爆款打价格战。",
+  "spec": [
+   [
+    "款式",
+    "拱形顶 + 柔和波浪侧边（比纯波浪更耐看，延续曲线趋势）"
+   ],
+   [
+    "尺寸",
+    "58x20 主尺寸：最长边控制在 59\" 以内，留在 FBA 大件档（64\" 进入 Extra-large 档，测算亏损）；副尺寸 47x16 挂门/宿舍款"
+   ],
+   [
+    "颜色",
+    "Cloud Dancer 柔白、浓缩咖啡深棕、暖原木色（burl 树瘤纹贴皮为高端款）；黑色作为基础色保留"
+   ],
+   [
+    "材质",
+    "5mm HD 银镜 + 铝合金细框（白/棕粉末喷涂）或木纹贴皮框"
+   ],
+   [
+    "功能",
+    "免打孔挂门钩 + 可拆支架 + 墙挂件三合一；防倾倒绳；可选暖光 LED 版（对应 with lights 长尾词）"
+   ],
+   [
+    "定价",
+    "$69.99（5mm 玻璃 + 三合一 + 包装升级做溢价）；Coupon/秒杀不低于 $59.99。按测算 $49.99 跟价几乎零利润"
+   ],
+   [
+    "包装",
+    "EPE 全包 + 护角 + 双层瓦楞，做 ISTA-6A 跌落测试；镜面贴防爆膜"
+   ],
+   [
+    "上新节奏",
+    "主推窗口：次年 5–6 月上架，抓 8 月返校季；Q4 黑五前 60–90 天入仓"
+   ]
+  ],
+  "improvements": [
+   [
+    "运输破损",
+    "ISTA-6A 包装 + 防爆膜；主图/A+ 展示包装测试"
+   ],
+   [
+    "成像变形",
+    "5mm 银镜 + 背板加强筋，Listing 写明 “no distortion, 5mm glass” 并配实拍对比"
+   ],
+   [
+    "挂门款清晰度差",
+    "放弃亚克力，用真玻璃；挂钩适配 1.3–2 英寸门厚"
+   ],
+   [
+    "尺寸不符",
+    "主图放人物身高参照 + 门框对比图"
+   ]
+  ],
+  "line": [
+   "同一“柔波拱形”视觉语言延展到小号桌面镜、挂墙镜（拉低入门价、做套装）",
+   "进入曲线/竖纹小家具：43\" 圆角玄关桌（Homiflex $99.99 / 500+ 已验证）→ 弧形 3–6 斗柜 → 床头柜，用同一木纹色卡（胡桃深棕、原木、树瘤纹）做店铺风格统一",
+   "颜色矩阵每季迭代：保留柔白 + 原木，测试烟熏玉绿、深咖等 2026 流行色"
+  ]
+ },
+ "depth": {
+  "verdict": "可以切入并做浅层深耕：镜子是“曲线视觉语言 + 引流”的入口（要守住 $69.99 价位和 ≤59\" 尺寸），利润与深耕主力放在玄关桌 → 斗柜的曲线木作产品线。",
+  "factors": [
+   {
+    "factor": "市场增长",
+    "rating": "中",
+    "reason": "镜子 ~5–6% CAGR，线上家具 +6.6%/+7.3%（预测）"
+   },
+   {
+    "factor": "垄断程度",
+    "rating": "低（好）",
+    "reason": "榜单前列为多个白牌（DUMOS、OLIXIS、Antok、Aidoly、Delma），无绝对龙头"
+   },
+   {
+    "factor": "差异化空间",
+    "rating": "高（好）",
+    "reason": "变形、破损两大痛点在高评论基础款和波浪款中普遍存在"
+   },
+   {
+    "factor": "评论壁垒",
+    "rating": "未知",
+    "reason": "需采集 Top 50 评论数后评估"
+   },
+   {
+    "factor": "扩线潜力",
+    "rating": "高（好）",
+    "reason": "曲线/竖纹/树瘤纹语言可以延伸到斗柜、床头柜、桌面镜"
+   },
+   {
+    "factor": "单位经济",
+    "rating": "镜子偏薄 / 家具较好",
+    "reason": "大件 FBA 费 + 15% 佣金 + ~15% 广告，镜子需 ~$70；玄关桌、斗柜客单高，利润空间更大（出厂价需工厂报价验证）"
+   }
+  ]
+ },
+ "gaps": [
+  "Amazon 关键词精确月搜索量与同比 → 卖家精灵 / Helium 10 导出 keywords.csv，或品牌备案后台 Brand Analytics",
+  "镜子 & 斗柜类目近 24–36 个月月销量（判断黑五倍数、季节性）→ Jungle Scout / 卖家精灵类目数据导出 category_monthly.csv",
+  "Top 50 竞品完整字段（价格、评论数、上架时间、变体）与评论文本 → 在你电脑上运行 `python -m amazon_selection_agent amazon-collect`",
+  "Google Trends 5 年曲线 → `python -m amazon_selection_agent google-trends`（需能访问 Google）",
+  "Wayfair 竞品与评论 → `python -m amazon_selection_agent scrape-wayfair`"
+ ],
+ "listings": {
+  "note": "从检索结果与截图中逐条摘录的真实商品信号。bought = Amazon 徽章下限（200+ 记 200）；period=周 的不计入月度合计。color_family 由标题/截图归类。segment 为按尺寸、价格、场景做的人群归属判断（推断）。",
+  "rows": [
+   {
+    "category": "全身镜",
+    "brand": "Delma",
+    "product": "落地全身镜（具体款未标）",
+    "style": "—",
+    "color_family": "—",
+    "size": "—",
+    "price": null,
+    "bought": 3000,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "租房族",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/Best-Sellers-Floor-Full-Length-Mirrors/zgbs/home-garden/3736381"
+   },
+   {
+    "category": "全身镜",
+    "brand": "Delma",
+    "product": "拱形全身镜 56x15",
+    "style": "拱形",
+    "color_family": "金属银",
+    "size": "56x15",
+    "price": null,
+    "bought": 200,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "学生/宿舍",
+    "badge": "",
+    "source": "Amazon",
+    "url": "https://www.amazon.com/-/es/Delma-longitud-completa-dormitorio-aluminio/dp/B0G3VQJDPW"
+   },
+   {
+    "category": "全身镜",
+    "brand": "Delma",
+    "product": "拱形全身镜 70x30",
+    "style": "拱形",
+    "color_family": "黑",
+    "size": "70x30",
+    "price": null,
+    "bought": 100,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室",
+     "客厅"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon",
+    "url": "https://www.amazon.com/clp/B0G7F95TY5"
+   },
+   {
+    "category": "全身镜",
+    "brand": "OLIXIS",
+    "product": "拱形全身镜（金色）",
+    "style": "拱形",
+    "color_family": "金属金",
+    "size": "—",
+    "price": null,
+    "bought": 300,
+    "period": "周",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室",
+     "客厅"
+    ],
+    "segment": "租房族",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/clp/B0GVMYYJRW"
+   },
+   {
+    "category": "全身镜",
+    "brand": "OLIXIS",
+    "product": "拱形全身镜 64x21.5",
+    "style": "拱形",
+    "color_family": "黑",
+    "size": "64x21.5",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室",
+     "客厅"
+    ],
+    "segment": "租房族",
+    "badge": "Best Seller",
+    "source": "Amazon",
+    "url": "https://www.amazon.com/clp/B0G4W6MXKM"
+   },
+   {
+    "category": "全身镜",
+    "brand": "DUMOS",
+    "product": "拱形全身镜 64x21",
+    "style": "拱形",
+    "color_family": "黑",
+    "size": "64x21",
+    "price": 45.0,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "租房族",
+    "badge": "Best Seller（原价 $70）",
+    "source": "TheStreet",
+    "url": "https://www.thestreet.com/deals/dumos-arched-full-length-mirror-amazon-sale"
+   },
+   {
+    "category": "全身镜",
+    "brand": "NeuType",
+    "product": "拱形全身镜",
+    "style": "拱形",
+    "color_family": "—",
+    "size": "—",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": 4.5,
+    "ratings": 4800,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "租房族",
+    "badge": "",
+    "source": "Don't Waste Your Money",
+    "url": "https://www.10news.com/arched-full-length-mirror-stylish-any-room"
+   },
+   {
+    "category": "全身镜",
+    "brand": "Dewfig",
+    "product": "波浪全身镜 63x24",
+    "style": "波浪",
+    "color_family": "白/米",
+    "size": "63x24",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "颜值装饰党",
+    "badge": "Amazon's Choice",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/white-wavy-mirror-full-length/s?k=white+wavy+mirror+full+length"
+   },
+   {
+    "category": "全身镜",
+    "brand": "Ultym",
+    "product": "波浪全身镜 63x24 绒布框",
+    "style": "波浪",
+    "color_family": "—",
+    "size": "63x24",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室",
+     "客厅",
+     "衣帽间",
+     "玄关"
+    ],
+    "segment": "颜值装饰党",
+    "badge": "带灯款 500+ 浏览/周",
+    "source": "Amazon",
+    "url": "https://www.amazon.com/Ultym-Standing-Irregular-Dressing-Entryway/dp/B0H75FDW7W"
+   },
+   {
+    "category": "全身镜",
+    "brand": "BOJOY",
+    "product": "波浪全身镜 63x24 法兰绒框",
+    "style": "波浪",
+    "color_family": "绿",
+    "size": "63x24",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "颜值装饰党",
+    "badge": "",
+    "source": "Amazon",
+    "url": "https://www.amazon.com/BOJOY-Irregular-Standing-Hanging-Leaning/dp/B0CKR9CSMG"
+   },
+   {
+    "category": "斗柜",
+    "brand": "Decofy",
+    "product": "55\" 竖纹 6 斗柜",
+    "style": "竖纹",
+    "color_family": "原木/橡木",
+    "size": "55\"",
+    "price": null,
+    "bought": 400,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"
+   },
+   {
+    "category": "斗柜",
+    "brand": "Decofy",
+    "product": "55\" 竖纹 6 斗柜",
+    "style": "竖纹",
+    "color_family": "胡桃/深棕",
+    "size": "55\"",
+    "price": null,
+    "bought": 200,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"
+   },
+   {
+    "category": "斗柜",
+    "brand": "Decofy",
+    "product": "47\" 竖纹 6 斗柜 金色把手",
+    "style": "竖纹",
+    "color_family": "—",
+    "size": "47\"",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "租房族",
+    "badge": "Best Sellers ~#14",
+    "source": "Amazon Best Sellers",
+    "url": "https://www.amazon.com/Best-Sellers-Dressers-Chests-of-Drawers/zgbs/home-garden/3733261"
+   },
+   {
+    "category": "斗柜",
+    "brand": "TEENFON",
+    "product": "56.3\" 弧形 6 斗柜",
+    "style": "弧形",
+    "color_family": "—",
+    "size": "56.3\"",
+    "price": null,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "新房/家庭",
+    "badge": "Best Sellers ~#20",
+    "source": "Amazon Best Sellers",
+    "url": "https://www.amazon.com/Best-Sellers-Dressers-Chests-of-Drawers/zgbs/home-garden/3733261"
+   },
+   {
+    "category": "斗柜",
+    "brand": "RoyalCraft",
+    "product": "竖纹 6 斗柜",
+    "style": "竖纹",
+    "color_family": "白/米",
+    "size": "—",
+    "price": null,
+    "bought": 100,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"
+   },
+   {
+    "category": "斗柜",
+    "brand": "Aitjunz",
+    "product": "弧形 7 斗柜",
+    "style": "弧形",
+    "color_family": "—",
+    "size": "—",
+    "price": null,
+    "bought": 100,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/modern-curved-dresser/s?k=modern+curved+dresser"
+   },
+   {
+    "category": "斗柜",
+    "brand": "EliteSet",
+    "product": "63\" 弧形 9 斗柜 Gray Oak（截图）",
+    "style": "弧形",
+    "color_family": "原木/橡木",
+    "size": "63\"",
+    "price": 382.19,
+    "bought": 200,
+    "period": "月",
+    "rating": 4.4,
+    "ratings": 206,
+    "scenes": [
+     "卧室",
+     "客厅",
+     "衣帽间",
+     "儿童房",
+     "玄关"
+    ],
+    "segment": "新房/家庭",
+    "badge": "原价 $419.99；4 色含树瘤纹；5–9 斗尺寸梯度",
+    "source": "你的截图",
+    "url": null
+   },
+   {
+    "category": "斗柜",
+    "brand": "T4tream",
+    "product": "竖纹 3 斗柜 仿大理石台面",
+    "style": "竖纹",
+    "color_family": "—",
+    "size": "—",
+    "price": 105.0,
+    "bought": null,
+    "period": "",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "卧室"
+    ],
+    "segment": "租房族",
+    "badge": "原价 $220",
+    "source": "Parade",
+    "url": "https://parade.com/shopping/amazon-t4tream-fluted-3-drawer-dresser-spring-sale-2026"
+   },
+   {
+    "category": "玄关桌",
+    "brand": "Homiflex",
+    "product": "43.7\" 圆角玄关桌 Rustic Brown（截图）",
+    "style": "圆角/瀑布边",
+    "color_family": "胡桃/深棕",
+    "size": "43.7\"",
+    "price": 99.99,
+    "bought": 500,
+    "period": "月",
+    "rating": 4.6,
+    "ratings": 26,
+    "scenes": [
+     "玄关",
+     "客厅",
+     "走廊"
+    ],
+    "segment": "租房族",
+    "badge": "BSR #36,595 Home & Kitchen；#40 Sofa Tables；ASIN B0GR4R546J",
+    "source": "你的截图",
+    "url": "https://www.amazon.com/dp/B0GR4R546J"
+   },
+   {
+    "category": "玄关桌",
+    "brand": "Homiflex",
+    "product": "43.7\" 圆角玄关桌 Natural",
+    "style": "圆角/瀑布边",
+    "color_family": "原木/橡木",
+    "size": "43.7\"",
+    "price": 90.0,
+    "bought": 50,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "玄关",
+     "客厅",
+     "走廊"
+    ],
+    "segment": "租房族",
+    "badge": "同款不同色（检索结果，时间可能更早）",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/farmhouse-entryway-table/s?k=farmhouse+entryway+table"
+   },
+   {
+    "category": "玄关桌",
+    "brand": "Decofy",
+    "product": "47\" 竖纹玄关桌 带充电 3 抽",
+    "style": "竖纹",
+    "color_family": "胡桃/深棕",
+    "size": "47\"",
+    "price": null,
+    "bought": 500,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "玄关",
+     "客厅"
+    ],
+    "segment": "租房族",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/console-tables-entryway/s?k=console+tables+for+entryway"
+   },
+   {
+    "category": "玄关桌",
+    "brand": "Tribesigns",
+    "product": "70.9\" 加长沙发后桌",
+    "style": "农舍风长方",
+    "color_family": "原木/橡木",
+    "size": "70.9\"",
+    "price": null,
+    "bought": 400,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "客厅",
+     "走廊",
+     "玄关"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/Long-Console-Tables-Entryway/s?k=Long+Console+Tables+for+Entryway"
+   },
+   {
+    "category": "玄关桌",
+    "brand": "Tribesigns",
+    "product": "63\" 三层玄关桌",
+    "style": "农舍风长方",
+    "color_family": "白/米",
+    "size": "63\"",
+    "price": null,
+    "bought": 300,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "客厅",
+     "玄关",
+     "走廊"
+    ],
+    "segment": "新房/家庭",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/entryway-table/s?k=entryway+table"
+   },
+   {
+    "category": "玄关桌",
+    "brand": "ChooChoo",
+    "product": "40\" 带抽屉玄关桌",
+    "style": "农舍风长方",
+    "color_family": "白/米",
+    "size": "40\"",
+    "price": null,
+    "bought": 100,
+    "period": "月",
+    "rating": null,
+    "ratings": null,
+    "scenes": [
+     "玄关",
+     "客厅",
+     "走廊"
+    ],
+    "segment": "租房族",
+    "badge": "",
+    "source": "Amazon 搜索页",
+    "url": "https://www.amazon.com/farmhouse-entryway-table/s?k=farmhouse+entryway+table"
+   }
+  ]
+ },
+ "market": {
+  "title": "市场容量",
+  "method": "三层口径：宏观（Adobe/NRF/行业报告）→ 类目（BSR 校准估算）→ 可见单品（徽章合计，下限）。",
+  "bsr_calibration": "你的截图：Homiflex 玄关桌 Sofa Tables 小类 #40、月销 500+。BSR 越靠前销量越高，因此 Sofa Tables 小类前 40 名每个月销 ≥ ~500 件 → 前 40 名合计 ≥ 20,000 件/月；按 ~$100 均价 ≥ $2M/月（≈ $24M/年）。这是下限估算，Top 10 通常远高于 #40。",
+  "bsr_calc": {
+   "rank": 40,
+   "units": 500,
+   "price": 100
+  }
+ },
+ "segments": {
+  "note": "用户分层综合了机构数据（规模、预算）与 Top 卖家商品信号（价格、尺寸、场景）。价格区间中 “观察到” 为真实商品价格，“推断” 为根据预算与竞品定位的判断。",
+  "rows": [
+   {
+    "name": "学生 / 宿舍",
+    "size": "宿舍/公寓家居开支 $14.0B（2026，NRF），人均 ~$194",
+    "price": "$25–60（推断：人均家居总预算 ~$194，单品需远低于此）",
+    "price_low": 25,
+    "price_high": 60,
+    "products": "挂门镜、59–60x16 窄全身镜、小号桌面波浪镜",
+    "scenes": "宿舍、门后",
+    "colors": "白、粉、ins 风",
+    "pains": "挂门镜清晰度差（亚克力）、变形、挂钩不稳",
+    "delights": "好看、省空间、免打孔",
+    "peak": "7–8 月返校季",
+    "conf": "中",
+    "key": "学生/宿舍"
+   },
+   {
+    "name": "年轻租房族（Gen Z / 千禧）",
+    "size": "Gen Z 租房家庭 1,040 万户、占租客 23%（2026）",
+    "price": "$45–110（观察到：DUMOS $45–70、Homiflex 玄关桌 $90–100）",
+    "price_low": 45,
+    "price_high": 110,
+    "products": "拱形全身镜 64x21、40–47\" 圆角/竖纹玄关桌、小号竖纹斗柜",
+    "scenes": "卧室、玄关、客厅（500–700 sq ft 小户型）",
+    "colors": "黑、原木、胡桃深棕、白",
+    "pains": "安装费时、运输破损、尺寸不符",
+    "delights": "性价比、显贵、真实无变形成像",
+    "peak": "8 月 + Q4",
+    "conf": "中",
+    "key": "租房族"
+   },
+   {
+    "name": "新房 / 年轻家庭",
+    "size": "线上家具假日季 $31.1B（+6.6%）",
+    "price": "$200–420（观察到：EliteSet 9 斗 $382、Decofy 55\" 竖纹斗柜）",
+    "price_low": 200,
+    "price_high": 420,
+    "products": "55–63\" 弧形/竖纹 6–9 斗柜、70\" 沙发后桌、70x30 大镜",
+    "scenes": "卧室、儿童房、客厅（斗柜兼电视柜）",
+    "colors": "原木/橡木、胡桃、树瘤纹（burl）",
+    "pains": "组装 2–3 小时、抽屉轨道错位、到货破损",
+    "delights": "像实木、抽屉顺滑、比 IKEA 质感好",
+    "peak": "Q4 黑五 + 1 月",
+    "conf": "中",
+    "key": "新房/家庭"
+   },
+   {
+    "name": "颜值装饰党（TikTok / Danish Pastel）",
+    "size": "无可靠规模数据（波浪镜热度进入平台期）",
+    "price": "未观察到可靠价格（63x24 绒布波浪镜）",
+    "price_low": null,
+    "price_high": null,
+    "products": "63x24 波浪镜、云朵/不规则镜、带灯款",
+    "scenes": "卧室、衣帽间",
+    "colors": "白、粉、绿",
+    "pains": "成像变形（Walmart 某波浪镜 3.0★）",
+    "delights": "aesthetic、拍照好看",
+    "peak": "无明显季节",
+    "conf": "低",
+    "key": "颜值装饰党"
+   }
+  ]
+ },
+ "delights": [
+  {
+   "text": "拱形全身镜（NeuType，4.5★/4,800+ 评）：好评集中在“Crystal clear, true reflection”无变形、结实、易组装。",
+   "conf": "中",
+   "sources": [
+    {
+     "name": "Don't Waste Your Money",
+     "url": "https://www.10news.com/arched-full-length-mirror-stylish-any-room"
+    }
+   ]
+  },
+  {
+   "text": "竖纹/弧形斗柜：好评集中在“看起来像实木”“比 IKEA 质感好”“抽屉大而顺滑”。",
+   "conf": "中",
+   "sources": [
+    {
+     "name": "Fakespot 汇总",
+     "url": "https://www.fakespot.com/product/prepac-milo-mid-century-modern-chest-4-drawer-cherry"
+    },
+    {
+     "name": "Target Walker Edison",
+     "url": "https://www.target.com/p/walker-edison-3-drawer-with-fluted-fronts-dresser/-/A-1010801948"
+    }
+   ]
+  },
+  {
+   "text": "挂门基础镜：Walmart Mainstays 4.5★/20,724 评，卖点是省空间、适合宿舍——稳定质量 + 低价能积累海量评论。",
+   "conf": "中",
+   "sources": [
+    {
+     "name": "Walmart Mainstays",
+     "url": "https://www.walmart.com/ip/Mainstays-Over-The-Door-Mirror-with-hardware-14-25IN-X-50-25IN-White/437640676"
+    }
+   ]
+  }
+ ],
+ "pains_extra": [
+  {
+   "text": "斗柜：组装 2–3+ 小时需两人、螺丝缺件、抽屉轨道几个月后错位、到货破损。",
+   "conf": "中",
+   "sources": [
+    {
+     "name": "Fakespot",
+     "url": "https://www.fakespot.com/product/tvilum-scottsdale-6-drawer-double-dresser-white-wood-grain"
+    },
+    {
+     "name": "Target",
+     "url": "https://www.target.com/p/walker-edison-3-drawer-with-fluted-fronts-dresser/-/A-1010801948"
+    }
+   ]
+  }
+ ],
+ "fees": {
+  "text": "佣金：Furniture $200 以内 15%、超出部分 10%；Home & Kitchen 15%。FBA 大件（最长边约 37–59 英寸）基础费约 $9.35 + $0.38/磅，超过 59 英寸进入 Extra-large 档；2026-04-17 起另有 3.5% 燃油物流附加费。平台平均 ACoS 约 28–32%，广告 CPC 两年涨 34% 至 $1.34。",
+  "sources": [
+   {
+    "name": "Feedvisor 佣金表",
+    "url": "https://feedvisor.com/university/referral-fee/"
+   },
+   {
+    "name": "AMZ Prep FBA 2026",
+    "url": "https://amzprep.com/amazon-fba-fees/"
+   },
+   {
+    "name": "Novadata",
+    "url": "https://novadata.io/resources/blog/amazon-seller-fees-explained"
+   },
+   {
+    "name": "Eightx ACoS",
+    "url": "https://eightx.co/blog/average-acos-by-amazon-category"
+   }
+  ]
+ },
+ "roi_scenarios": [
+  {
+   "name": "柔波拱形镜 58x20 @ $69.99（推荐）",
+   "price": 69.99,
+   "cogs": 12,
+   "freight": 5.5,
+   "fba_fee": 13,
+   "referral_rate": 0.15,
+   "furniture_tiered": false,
+   "tacos": 0.15,
+   "return_rate": 0.06,
+   "storage_other": 1.0,
+   "monthly_units": 300,
+   "note": "最长边 ≤59\"，留在大件档（基础 ~$9.35 + 重量）。出厂价/头程为假设值，请替换为工厂报价；“20% 净利目标出厂价”可直接拿去和工厂议价。"
+  },
+  {
+   "name": "同款 @ $49.99（跟爆款价）",
+   "price": 49.99,
+   "cogs": 12,
+   "freight": 5.5,
+   "fba_fee": 13,
+   "referral_rate": 0.15,
+   "furniture_tiered": false,
+   "tacos": 0.15,
+   "return_rate": 0.06,
+   "storage_other": 1.0,
+   "monthly_units": 300,
+   "note": "跟 DUMOS 促销价锚 $45–50 打价格战：在同样成本下几乎不赚钱。"
+  },
+  {
+   "name": "64x21 @ $64.99（Extra-large 档）",
+   "price": 64.99,
+   "cogs": 15,
+   "freight": 7,
+   "fba_fee": 24,
+   "referral_rate": 0.15,
+   "furniture_tiered": false,
+   "tacos": 0.15,
+   "return_rate": 0.06,
+   "storage_other": 1.5,
+   "monthly_units": 300,
+   "note": "64\" 超过 59\" 进入 Extra-large 档，FBA 费明显更高（$24 为估算，请用 FBA 计算器核实）。"
+  },
+  {
+   "name": "弧形玄关桌 43\" @ $99.99",
+   "price": 99.99,
+   "cogs": 22,
+   "freight": 9,
+   "fba_fee": 18,
+   "referral_rate": 0.15,
+   "furniture_tiered": true,
+   "tacos": 0.15,
+   "return_rate": 0.05,
+   "storage_other": 2,
+   "monthly_units": 500,
+   "note": "对标 Homiflex $99.99 / 500+。平板包装约 25–30 磅；出厂价/头程/FBA 为假设值。"
+  },
+  {
+   "name": "弧形 6 斗柜 55\" @ $259.99",
+   "price": 259.99,
+   "cogs": 75,
+   "freight": 26,
+   "fba_fee": 45,
+   "referral_rate": 0.15,
+   "furniture_tiered": true,
+   "tacos": 0.12,
+   "return_rate": 0.05,
+   "storage_other": 5,
+   "monthly_units": 200,
+   "note": "Furniture 佣金阶梯（$200 以上 10%）。2 箱约 100+ 磅；出厂价/头程/FBA 为假设值。"
+  }
+ ],
+ "win_price": {
+  "verdict": "胜率价位（销量视角，样本少，需用采集数据验证）：全身镜 $45–70、玄关桌 $90–110、斗柜 $250–400。利润视角：全身镜要卖到 ~$70 才健康，玄关桌是三者中单位经济最稳的。",
+  "notes": [
+   "同款不同色差 10 倍：Homiflex 玄关桌 Rustic Brown $99.99 → 500+/月，Natural $90 → 50+/月（时间点不同，需复核）——颜色比 $10 价差更影响胜率。",
+   "EliteSet 9 斗 $382 仍有 200+/月：家庭人群对 $300+ 大件接受度足够，前提是“弧形 + 木纹色 + 尺寸梯度”。",
+   "DUMOS 64x21 在 $45 促销价时拿到 Best Seller 标：全身镜的爆款价锚在 $50 上下。",
+   "ROI 测算（下方 ⑫）：同一面镜子 $69.99 净利约 20%，$49.99 约 0–4%；64\" 尺寸因进入 Extra-large FBA 档在 $64.99 亏损——爆款价锚 ≠ 能赚钱的价位。"
+  ]
+ }
+}

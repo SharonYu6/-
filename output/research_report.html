@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全身镜与曲线家具选品</title>
+<style>:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --surface-2: #f3f2ee;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --pos: #2a78d6;
+  --neg: #e34948;
+  --good: #006300;
+  --warn-bg: #fff4d6;
+  --warn-ink: #6b4a00;
+  --accent-bg: #e9f1fc;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --surface-2: #232321;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --pos: #3987e5;
+    --neg: #e66767;
+    --good: #0ca30c;
+    --warn-bg: #3a2e10;
+    --warn-ink: #f5d48a;
+    --accent-bg: #16263b;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface-1: #1a1a19;
+  --surface-2: #232321;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.10);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --pos: #3987e5;
+  --neg: #e66767;
+  --good: #0ca30c;
+  --warn-bg: #3a2e10;
+  --warn-ink: #f5d48a;
+  --accent-bg: #16263b;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font: 15px/1.6 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 24px 16px 64px; }
+header.top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+h1 { font-size: 26px; line-height: 1.25; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 40px 0 12px; }
+h3 { font-size: 15px; margin: 0 0 8px; color: var(--text-secondary); font-weight: 600; }
+p { margin: 0 0 8px; }
+a { color: var(--series-1); }
+.muted { color: var(--text-muted); }
+.sub { color: var(--text-secondary); font-size: 14px; }
+.banner { margin: 16px 0; padding: 10px 14px; border-radius: 8px; background: var(--warn-bg); color: var(--warn-ink); font-size: 14px; }
+.callout { padding: 14px 16px; border-radius: 10px; background: var(--accent-bg); }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-2 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); align-items: start; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
+.kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 16px; }
+.kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.kpi .v { font-size: 26px; font-weight: 650; line-height: 1.2; }
+.kpi .l { font-size: 13px; color: var(--text-secondary); }
+.kpi .d { font-size: 12px; color: var(--text-muted); }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; background: var(--surface-2); color: var(--text-secondary); margin: 0 4px 4px 0; }
+.tag.hi { background: var(--accent-bg); color: var(--text-primary); }
+ul.clean { margin: 0; padding-left: 18px; }
+ul.clean li { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--text-secondary); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scroll-x { overflow-x: auto; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tabs button { border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary); border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--text-primary); color: var(--surface-1); border-color: var(--text-primary); }
+.thumbs { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.thumb { font-size: 12px; }
+.thumb img { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 8px; border: 1px solid var(--border); }
+.src { font-size: 12px; color: var(--text-muted); }
+.conf { font-size: 11px; padding: 0 6px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-secondary); white-space: nowrap; }
+
+/* charts */
+.viz-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.viz-grid { stroke: var(--grid); stroke-width: 1; }
+.viz-axis { stroke: var(--axis); stroke-width: 1; }
+.viz-cross { stroke: var(--text-muted); stroke-width: 1; }
+.viz-tick { fill: var(--text-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.viz-label { fill: var(--text-primary); font-size: 11px; font-weight: 600; }
+.col { fill: var(--series-1); opacity: 0.45; }
+.col-hi { opacity: 1; }
+g:hover .col, g:focus .col { opacity: 0.85; }
+.viz-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+.viz-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.viz-key-line { width: 14px; height: 2px; border-radius: 1px; }
+.viz-key-rect { width: 10px; height: 10px; border-radius: 2px; }
+.viz-tip { position: fixed; display: none; z-index: 10; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); max-width: 280px; }
+.viz-tip-row { display: flex; align-items: center; gap: 8px; }
+.viz-tip-row strong { font-variant-numeric: tabular-nums; }
+.viz-tip-label { color: var(--text-secondary); }
+.viz-tip-key { width: 12px; height: 2px; border-radius: 1px; flex: none; }
+.viz-table { margin-top: 8px; font-size: 12px; }
+.viz-table summary { cursor: pointer; color: var(--text-muted); }
+.viz-table table { margin-top: 6px; }
+.hbar { display: flex; flex-direction: column; gap: 2px; }
+.hbar-row, .dbar-row { display: grid; grid-template-columns: minmax(80px, 160px) 1fr 64px; align-items: center; gap: 8px; padding: 3px 4px; border-radius: 6px; }
+.hbar-row:has(.hbar-note) { grid-template-columns: minmax(80px, 160px) 1fr 64px 64px; }
+.hbar-row:hover, .hbar-row:focus, .dbar-row:hover { background: var(--surface-2); outline: none; }
+.hbar-label { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hbar-track, .dbar-track { position: relative; height: 14px; }
+.hbar-bar { height: 100%; background: var(--series-1); border-radius: 0 4px 4px 0; }
+.hbar-row.is-hi .hbar-bar { background: var(--series-2); }
+.hbar-value, .hbar-note { font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.hbar-note { color: var(--good); }
+.dbar-mid { position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--axis); }
+.dbar-bar { position: absolute; top: 0; height: 100%; }
+.dbar-bar.pos { background: var(--pos); border-radius: 0 4px 4px 0; }
+.dbar-bar.neg { background: var(--neg); border-radius: 4px 0 0 4px; }
+@media (max-width: 520px) {
+  .hbar-row, .dbar-row, .hbar-row:has(.hbar-note) { grid-template-columns: 90px 1fr 52px; }
+  .hbar-note { display: none; }
+}
+
+/* ROI calculator */
+.roi-grid { display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) 1fr; }
+@media (max-width: 640px) { .roi-grid { grid-template-columns: 1fr; } }
+.roi-form { display: flex; flex-direction: column; gap: 6px; }
+.roi-field { display: grid; grid-template-columns: 1fr 110px; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+.roi-field input { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary); font: inherit; font-variant-numeric: tabular-nums; }
+.roi-kpis { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.roi-kpis .kpi { padding: 10px 12px; }
+.roi-kpis .kpi .v { font-size: 20px; }
+.roi-verdict { font-weight: 600; margin: 12px 0 6px; }
+
+/* price range rows */
+.range-row { display: grid; grid-template-columns: minmax(80px, 180px) 1fr 84px; align-items: center; gap: 8px; padding: 6px 4px; }
+.range-track { position: relative; height: 14px; background: var(--surface-2); border-radius: 4px; }
+.range-bar { position: absolute; top: 0; height: 100%; border-radius: 4px; opacity: 0.85; }
+.range-dot { position: absolute; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 0 2px var(--surface-1); }
+.range-track .src { position: absolute; left: 8px; top: -1px; }
+.range-axis { position: relative; height: 18px; margin: 2px 92px 0 calc(min(180px, 30%) + 12px); font-size: 11px; color: var(--text-muted); }
+.range-axis span { position: absolute; transform: translateX(-50%); }
+@media (max-width: 520px) { .range-row { grid-template-columns: 90px 1fr 70px; } .range-axis { margin: 2px 78px 0 102px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div><h1 id="title"></h1><p class="sub" id="subtitle"></p></div></header>
+  <p class="src" id="method"></p>
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2>结论速览</h2>
+    <div class="card"><ul class="clean" id="summary"></ul></div>
+  </section>
+
+  <section>
+    <h2>① 市场容量</h2>
+    <div class="grid-2">
+      <div class="card"><h3>可见爆款月销（徽章下限合计，按品类）</h3><div id="cap-chart"></div><p class="src" id="cap-note"></p></div>
+      <div class="card"><h3>BSR 校准估算（你的截图）</h3><p id="bsr"></p>
+        <div class="kpis" id="bsr-kpis" style="margin-top:8px"></div>
+        <h3 style="margin-top:16px" id="dorm-title"></h3><div id="dorm"></div><p class="sub" id="dorm-note"></p></div>
+    </div>
+  </section>
+
+  <section id="sec-trend"></section>
+  <section id="sec-season"></section>
+
+  <section>
+    <h2>④ 用户分层 & 各层价格分布</h2>
+    <p class="sub" id="seg-note"></p>
+    <div class="card"><h3>各人群可接受价格区间</h3><div id="seg-price"></div><p class="src">色条 = 该人群可接受价格区间；黑点 = 观察到的真实爆款价格</p></div>
+    <div class="grid" id="seg-cards" style="margin-top:16px"></div>
+  </section>
+
+  <section>
+    <h2>⑤ 胜率价位</h2>
+    <div class="grid-2">
+      <div class="card"><div class="callout"><strong id="win-verdict"></strong></div><ul class="clean" id="win-notes" style="margin-top:12px"></ul></div>
+      <div class="card"><h3>有价格的爆款：价格 × 月销</h3><div id="price-sales"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑥ 颜色喜好 & 款式</h2>
+    <div class="grid-2">
+      <div class="card"><h3>爆款颜色（按可见月销加权）</h3><div id="colors"></div><p class="src">权重 = bought in past month 下限；无徽章的爆款（Best Seller 等）记 1 次出现不计销量</p></div>
+      <div class="card"><h3>爆款款式（按可见月销加权）</h3><div id="styles"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑦ 应用场景</h2>
+    <div class="grid-2">
+      <div class="card"><h3>爆款标题中的场景词（按可见月销加权）</h3><div id="scenes"></div></div>
+      <div class="card"><h3>解读</h3><ul class="clean" id="scene-notes"></ul></div>
+    </div>
+  </section>
+
+  <section id="sec-design"></section>
+  <section id="sec-keywords"></section>
+
+  <section>
+    <h2>⑩ VOC：痛点 & 爽点</h2>
+    <div class="grid-2">
+      <div class="card"><h3>痛点</h3><div id="pains"></div></div>
+      <div class="card"><h3>爽点</h3><div id="delights"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑪ 产品方案</h2>
+    <div class="grid-2">
+      <div class="card"><div class="callout"><strong id="p-name"></strong><p id="p-concept" style="margin-top:6px"></p></div>
+        <table id="p-spec" style="margin-top:12px"></table></div>
+      <div class="card"><h3>针对差评的改进</h3><table id="p-improve"></table>
+        <h3 style="margin-top:14px">类目深耕 / 产品线</h3><ul class="clean" id="p-line"></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑫ 利润 & ROI 测算</h2>
+    <p class="sub" id="fees"></p>
+    <div class="card" id="roi"></div>
+  </section>
+
+  <section>
+    <h2>⑬ 能否类目深耕？</h2>
+    <div class="card"><div class="callout"><strong id="depth-verdict"></strong></div>
+      <table id="depth" style="margin-top:12px"><thead><tr><th>维度</th><th>判断</th><th>依据</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>全部真实商品信号</h2>
+    <p class="src" id="list-note"></p>
+    <div class="card scroll-x"><table id="listings"><thead><tr><th>品类</th><th>品牌</th><th>商品</th><th>颜色</th><th class="num">价格</th><th class="num">已购</th><th>人群</th><th>备注</th><th>来源</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>数据缺口 & 补齐方法</h2>
+    <div class="card"><ul class="clean" id="gaps"></ul></div>
+  </section>
+</div>
+<script>window.DATA = {"title": "家居选品研究：全身镜 · 曲线斗柜 · 玄关桌", "subtitle": "只用真实可查数据（2026-10-11 采集）：Adobe / NRF 等机构数据、Amazon 页面公开信号（bought in past month、榜单、价格），以及你提供的两张商品页截图。Amazon / Wayfair / Google Trends 无法从本环境直连，缺口在页尾列出。", "collected_at": "2026-10-11", "method": "Web 检索（搜索引擎结果 + 媒体/行业报告摘要）。每条结论标注来源与可信度：高 = 一手机构数据（Adobe、NRF、Amazon 页面）；中 = 行业媒体/调研；低 = 聚合站、无日期或单一来源。", "kpis": [{"label": "2025 美国线上假日季家具销售", "value": "$31.1B", "delta": "+6.6% YoY", "note": "Adobe，11/1–12/31，全渠道线上", "conf": "高"}, {"label": "2025 黑五线上总销售", "value": "$11.8B", "delta": "+9.1% YoY", "note": "Adobe，全品类", "conf": "高"}, {"label": "2026 假日季家具预测", "value": "$33.4B", "delta": "+7.3%", "note": "Adobe 2026 预测", "conf": "中"}, {"label": "2026 宿舍/公寓家居开支", "value": "$14.0B", "delta": "$194/人", "note": "NRF Back-to-College", "conf": "中"}, {"label": "Gen Z 租房家庭（2026）", "value": "10.4M", "delta": "占租客 23%", "note": "Apartments.com 引用分析", "conf": "中"}, {"label": "装饰镜全球市场 CAGR", "value": "~5.8%", "delta": "2025→2034", "note": "Marketintelo；与另一估算 5.78% 一致", "conf": "低"}], "dorm_spend": {"title": "宿舍/公寓家居开支（NRF Back-to-College）", "labels": ["2024", "2025", "2026"], "values": [12.2, 12.8, 14.0], "unit": "$B", "note": "学生/租房人群在家居上的预算逐年增长，但人均基本持平（2025 $191 vs 2024 $192），增长来自人数与高收入家庭 → 产品要便宜、好看、易搬。"}, "sections": [{"id": "trend", "title": "① 类目趋势：增长还是下滑？", "verdict": "温和增长（约 5–7%/年），不是爆发期；增长点在细分款式迁移，而不是品类扩张。", "findings": [{"text": "装饰镜全球市场 2025 约 $4.2B，预计 2034 年 $6.9B，CAGR 5.8%；另一估算 2025 $7.93B → 2034 $13.16B（CAGR 5.78%）。口径不同但增速一致。", "conf": "低", "sources": [{"name": "Marketintelo", "url": "https://marketintelo.com/report/decorative-mirror-market"}, {"name": "Alibaba 卖家博客", "url": "https://seller.alibaba.com/blogs/2026/southeast-asia/home-garden/precision-machining-mirror-standards-alibaba-b2b"}]}, {"text": "美国线上家具 2025 假日季 $31.1B（+6.6%），Adobe 预测 2026 假日季 $33.4B（+7.3%），且消费者倾向更低价商品。", "conf": "高", "sources": [{"name": "Talk Business（Adobe 2025 实绩）", "url": "https://talkbusiness.net/2026/01/adobe-analytics-online-holiday-sales-grew-6-8-to-257-8-billion/"}, {"name": "Adobe 2026 预测", "url": "https://ecommerceparadise.com/adobe-holiday-online-sales-forecast/"}, {"name": "Digital Commerce 360", "url": "https://www.digitalcommerce360.com/2025/10/08/adobe-online-holiday-sales-predictions-2025/"}]}, {"text": "波浪镜（wavy/squiggle）热度进入平台期：Homes & Gardens 2025 年 2 月称其影响力“不如以往”，但会长期存在；House Digest 预测 2026 年曲线浴室镜流行。没有找到可信的搜索量增长数据。", "conf": "中", "sources": [{"name": "Homes & Gardens", "url": "https://www.homesandgardens.com/interior-design/is-wavy-decor-still-on-trend"}, {"name": "House Digest", "url": "https://www.housedigest.com/2056374/curved-bathroom-mirror-trend-2026/"}]}, {"text": "曲线语言正从镜子迁移到家具：2026 家具趋势普遍提到流畅曲线、圆角、burl 树瘤木纹、暖木色与深色（胡桃/浓缩咖啡/烟熏橡木）。", "conf": "中", "sources": [{"name": "Homes & Gardens 2026 家具趋势", "url": "https://www.homesandgardens.com/interior-design/furniture-trends-2026"}, {"name": "Houzz", "url": "https://www.houzz.com/magazine/8-furniture-trends-to-look-out-for-in-2026-stsetivw-vs~183652982"}, {"name": "Burl wood 趋势", "url": "https://ideal.house/community/news/the-burl-wood-furniture-trend-takes-the-high-street-by-storm"}]}]}, {"id": "season", "title": "② 季节性 & 黑五", "verdict": "双峰：8 月返校季 + Q4（黑五/圣诞）。黑五整体线上 +9.1%，但 Amazon 镜子类目的黑五倍数需要真实销量数据才能确认。", "findings": [{"text": "2025 黑五线上销售 $11.8B（+9.1%），假日季总额 $257.8B（+6.8%）。", "conf": "高", "sources": [{"name": "Talk Business（Adobe）", "url": "https://talkbusiness.net/2026/01/adobe-analytics-online-holiday-sales-grew-6-8-to-257-8-billion/"}, {"name": "Chain Store Age", "url": "https://chainstoreage.com/ai-mobile-discounts-help-drive-online-black-friday-sales-higher"}]}, {"text": "“full length mirror with stand” 搜索兴趣 2025 年 8 月达峰（指数 85），拱形全身镜兴趣最高；拱形/超大尺寸镜在 2025 年 10 月下旬出现明显上升。", "conf": "低", "sources": [{"name": "Accio（Google Trends 汇总）", "url": "https://www.accio.com/business/long-mirror-with-stand-trends"}, {"name": "Accio 全身镜", "url": "https://www.accio.com/business/standing-mirror-full-body-trends"}, {"name": "Accio 落地镜", "url": "https://www.accio.com/business/floor-mirrors-full-length-large-size-trends"}]}, {"text": "返校季：宿舍/公寓家居开支 2025 年 $12.8B（+5%），2026 年 $14.0B。", "conf": "中", "sources": [{"name": "Furniture Today（NRF 2025）", "url": "https://www.furnituretoday.com/research-and-analysis/back-to-campus-shoppers-trim-their-budgets-but-not-for-dorm-life"}, {"name": "NRF 新闻稿", "url": "https://nrf.com/media-center/press-releases/back-to-school-season-begins-early-for-majority-of-shoppers"}]}]}, {"id": "design", "title": "③ Top 卖家的设计（颜色 / 款式 / 尺寸）", "verdict": "全身镜榜单被“拱形 + 细铝框”统治；波浪镜集中在 63x24 绒布包框。斗柜的爆款语言是竖纹（fluted）+ 弧形边 + 暖木色。玄关桌爆款是圆角/瀑布边 + 开放层板 + 胡桃深棕。", "findings": [{"text": "Amazon Floor & Full Length Mirrors 榜单（约 2026 年 6 月快照）前列是拱形落地镜品牌：DUMOS、OLIXIS、Antok、Aidoly、Delma。", "conf": "中", "sources": [{"name": "Amazon Best Sellers 3736381", "url": "https://www.amazon.com/Best-Sellers-Floor-Full-Length-Mirrors/zgbs/home-garden/3736381"}]}, {"text": "爆款尺寸集中在 64x21（DUMOS、OLIXIS 64x21.5 带 Best Seller 标）、59–60x16（OLIXIS）、56x15、70x24/70x30（Delma）。颜色：黑、银、金。材质：铝合金细框 + “nano glass”。DUMOS 64x21 原价 $70、促销约 $45。", "conf": "中", "sources": [{"name": "TheStreet（DUMOS）", "url": "https://www.thestreet.com/deals/dumos-arched-full-length-mirror-amazon-sale"}, {"name": "OLIXIS 60x16", "url": "https://www.amazon.com/clp/B0GVMYYJRW"}, {"name": "Delma 56x15", "url": "https://www.amazon.com/-/es/Delma-longitud-completa-dormitorio-aluminio/dp/B0G3VQJDPW"}, {"name": "Delma 70x30", "url": "https://www.amazon.com/clp/B0G7F95TY5"}]}, {"text": "波浪全身镜头部款统一为 63\"x24\"，绒布/法兰绒包木框（Ultym、BOJOY、Koonmi、Dewfig、Honyee），颜色白/粉/绿；Dewfig 白色款为 Amazon's Choice；Ultym 推出带三色灯版本。", "conf": "中", "sources": [{"name": "Ultym", "url": "https://www.amazon.com/Ultym-Standing-Irregular-Dressing-Entryway/dp/B0H75FDW7W"}, {"name": "BOJOY", "url": "https://www.amazon.com/BOJOY-Irregular-Standing-Hanging-Leaning/dp/B0CKR7R15Z"}, {"name": "Koonmi", "url": "https://us.amazon.com/clp/B0F8QJTL8Y"}, {"name": "Ultym 带灯", "url": "https://us.amazon.com/clp/B0GCN61VK9"}]}, {"text": "斗柜：竖纹 6 斗柜是榜单常客（Decofy 47\" 约第 14 名，TEENFON 56.3\" 弧形约第 20 名）；Decofy 55\" 原木色 400+/月，胡桃色 200+/月。你截图中的 EliteSet 63\" 弧形 9 斗柜 $382（原价 $420），4.4★/206 评，200+/月，4 种木纹色（含树瘤纹理）× 5–9 斗尺寸梯度。", "conf": "中", "sources": [{"name": "Amazon Best Sellers 斗柜", "url": "https://www.amazon.com/Best-Sellers-Dressers-Chests-of-Drawers/zgbs/home-garden/3733261"}, {"name": "Amada 竖纹斗柜", "url": "https://www.amazon.com/clp/B0DY14PRRZ"}, {"name": "BVIUNTWO 弧形竖纹", "url": "https://us.amazon.com/clp/B0G5NM1SR2"}, {"name": "Parade（T4tream $105）", "url": "https://parade.com/shopping/amazon-t4tream-fluted-3-drawer-dresser-spring-sale-2026"}]}, {"text": "2026 色彩：Pantone Cloud Dancer（柔白）、Sherwin-Williams Universal Khaki、Behr Hidden Gem（烟熏玉绿）、Benjamin Moore Silhouette（浓缩咖啡）、Glidden Warm Mahogany。整体转向大地暖色；鼠尾草绿已过度曝光、冷白和粉蓝退潮。", "conf": "高", "sources": [{"name": "Homes & Gardens 色彩趋势", "url": "https://www.homesandgardens.com/interior-design/color-trends-2026"}, {"name": "Axios", "url": "https://www.axios.com/2025/09/05/paint-color-trends-2026"}, {"name": "Woodworking Network", "url": "https://www.woodworkingnetwork.com/design/2026-colors-year"}]}, {"text": "玄关桌：你截图中的 Homiflex 43.7\" 圆角玄关桌 $99.99、4.6★（仅 26 评）却 500+/月，说明新品靠“圆角木作 + 胡桃深棕 + 场景图（藤编筐、画框）”即可起量；同类 Decofy 47\" 竖纹玄关桌 500+/月、Tribesigns 70.9\" 400+/月。标题埋词同时覆盖 Entryway Table / Console Table / Sofa Table Behind Couch。EliteSet 斗柜主图上方搭配的正是不规则圆镜——曲线镜子与曲线家具是同一套视觉语言。", "conf": "中", "sources": [{"name": "Amazon console tables for entryway", "url": "https://www.amazon.com/console-tables-entryway/s?k=console+tables+for+entryway"}, {"name": "Amazon farmhouse entryway table", "url": "https://www.amazon.com/farmhouse-entryway-table/s?k=farmhouse+entryway+table"}, {"name": "Rounded console tables", "url": "https://www.amazon.com/rounded-console-tables-entryway/s?k=rounded+console+tables+for+entryway"}]}]}, {"id": "keywords", "title": "④ 搜索关键词", "verdict": "可确认的长尾方向：带灯、挂门、超大/拱形、波浪+颜色、竖纹/弧形斗柜。精确月搜索量需卖家精灵 / Helium 10 / Brand Analytics。", "findings": [{"text": "AmzChart（无日期）：full length mirror with lights 21,361/月；door mirrors for bedroom full length 13,606/月；floor & full length mirrors 97,685/月（出现在无关类目页，仅作量级参考）。该类目上升词：pink mirror、led mirror、long mirrors for bedroom。", "conf": "低", "sources": [{"name": "AmzChart 3736381", "url": "https://amzchart.com/amazon-industry-analysis/floor-full-length-mirrors-3736381"}]}, {"text": "Amazon 自身生成的相关搜索页（说明这些词有真实搜索）：white wavy mirror full length、wavy standing mirror full length、wavy frame mirror、arched floor mirror、led floor mirror full length、modern curved dresser、fluted dresser、fluted tall dresser。", "conf": "中", "sources": [{"name": "white wavy mirror full length", "url": "https://www.amazon.com/white-wavy-mirror-full-length/s?k=white+wavy+mirror+full+length"}, {"name": "arched floor mirror", "url": "https://www.amazon.com/arched-floor-mirror/s?k=arched+floor+mirror"}, {"name": "modern curved dresser", "url": "https://www.amazon.com/modern-curved-dresser/s?k=modern+curved+dresser"}, {"name": "fluted dresser", "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"}]}, {"text": "玄关桌标题的核心词组合（来自截图与爆款标题）：entryway table、console table、sofa table behind couch、narrow console table、farmhouse entryway table、rounded console tables for entryway、long console tables for entryway。", "conf": "中", "sources": [{"name": "Amazon rounded console tables", "url": "https://www.amazon.com/rounded-console-tables-entryway/s?k=rounded+console+tables+for+entryway"}, {"name": "Amazon long console tables", "url": "https://www.amazon.com/Long-Console-Tables-Entryway/s?k=Long+Console+Tables+for+Entryway"}]}], "keywords": [{"keyword": "floor & full length mirrors", "volume": 97685, "source": "AmzChart", "conf": "低"}, {"keyword": "full length mirror with lights", "volume": 21361, "source": "AmzChart", "conf": "低"}, {"keyword": "door mirrors for bedroom full length", "volume": 13606, "source": "AmzChart", "conf": "低"}]}, {"id": "persona", "title": "⑤ 用户画像", "verdict": "核心人群：Gen Z / 年轻租房族 + 大学生。小户型（500–700 sq ft）、不能打孔、预算敏感、重颜值、会搬家。", "findings": [{"text": "Gen Z 租房家庭 2019–2024 新增 670 万户，2026 年达 1,040 万户、占全部租客 23%；RentCafe：Gen Z 租客 2018 年 70 万 → 2023 年 440 万。", "conf": "中", "sources": [{"name": "Apartments.com", "url": "https://www.apartments.com/blog/how-gen-z-renters-are-changing-the-rental-landscape"}, {"name": "Rently 2026 报告", "url": "https://use.rently.com/blog/rently-2026-renting-by-generation-report/"}]}, {"text": "53% 租客认为空间比通勤距离更重要；86% 的 Gen Z / 千禧租客因房价推迟人生节点 → 预算紧、偏好便宜紧凑的家具。", "conf": "中", "sources": [{"name": "CRE Daily", "url": "https://www.credaily.com/briefs/renter-priorities-shift-in-2026-market/"}]}, {"text": "Rently 研究：2025 年租房装饰趋势前列是“平价 Hygge”与宠物友好设计。", "conf": "中", "sources": [{"name": "Business Wire（Rently）", "url": "https://www.businesswire.com/news/home/20250304473370/en/Budget-Hygge-and-Pet-Friendly-Design-Top-2025-Rental-Decor-Trends-New-Rently-Study-Shows"}]}, {"text": "返校季学生人均家居预算约 $191–194，且在削减其他开支、使用先买后付或二手。", "conf": "中", "sources": [{"name": "Furniture Today（NRF）", "url": "https://www.furnituretoday.com/research-and-analysis/back-to-campus-shoppers-trim-their-budgets-but-not-for-dorm-life"}]}]}, {"id": "voc", "title": "⑥ VOC：差评集中在哪", "verdict": "镜子类目三大痛点：运输破损、成像变形（薄玻璃弯曲）、挂门款清晰度差。这是产品改进的切入点。", "findings": [{"text": "运输破损是最常见的投诉（Birch Lane、Walmart BenJara 评论）。", "conf": "中", "sources": [{"name": "Birch Lane 评论", "url": "https://www.birchlane.com/wall-decor-mirrors/pdp/32-full-length-mirror-b100002073.html"}, {"name": "Walmart BenJara", "url": "https://www.walmart.com/ip/BenJara-Cecilia-Full-Length-Standing-Mirror-with-Decorative-Design-Black-Color-Champagne-Gold-Size-71/969205309"}]}, {"text": "成像变形：多数平价镜用 3mm 玻璃，靠墙时会弯曲产生“拉长/变胖”效果，建议 ≥5–6mm。Target Room Essentials 挂门镜（4.0★/2,270 评）的评论摘要指出变形与翘曲；某挂门亚克力镜 3.7★，投诉集中在清晰度。", "conf": "中", "sources": [{"name": "Target Room Essentials", "url": "https://target.com/p/rectangle-over-the-door-mirror-white-room-essentials-153/-/A-50398882"}, {"name": "Alibaba 评论分析", "url": "https://reads.alibaba.com/vi/review-analysis-of-amazons-hottest-selling-door-mirrors-in-the-usa"}, {"name": "Trustpilot", "url": "https://au.trustpilot.com/review/sorayainteriors.co.uk"}]}, {"text": "波浪镜质量参差：Walmart 上 Nefoso 波浪全身镜仅 3.0★（55 评），而 Walmart Mainstays 基础挂门镜 4.5★（20,724 评）——基础款靠稳定质量积累海量评论，波浪款的品质承诺（无变形）常与评论不符。", "conf": "中", "sources": [{"name": "Walmart Nefoso", "url": "https://www.walmart.com/ip/Nefoso-Wavy-Full-Length-Mirror-Freestanding-Floor-Mirror-with-Stand-65-x24-Wall-Mounted-Mirror-for-Bedroom-Pink/8673702393"}, {"name": "Walmart Mainstays", "url": "https://www.walmart.com/ip/Mainstays-Over-The-Door-Mirror-with-hardware-14-25IN-X-50-25IN-White/437640676"}]}]}], "product": {"name": "爆款假设：小空间三用「柔波拱形」全身镜", "concept": "把榜单上已验证的“拱形 + 细框”与仍有需求的“波浪”结合成柔和波浪边拱形，主打学生/租房族的挂门 + 靠墙 + 挂墙三用；用 5mm 银镜和加强包装解决变形和破损两大差评，以此支撑 $69.99 的溢价，而不是跟 $45–50 的爆款打价格战。", "spec": [["款式", "拱形顶 + 柔和波浪侧边（比纯波浪更耐看，延续曲线趋势）"], ["尺寸", "58x20 主尺寸：最长边控制在 59\" 以内，留在 FBA 大件档（64\" 进入 Extra-large 档，测算亏损）；副尺寸 47x16 挂门/宿舍款"], ["颜色", "Cloud Dancer 柔白、浓缩咖啡深棕、暖原木色（burl 树瘤纹贴皮为高端款）；黑色作为基础色保留"], ["材质", "5mm HD 银镜 + 铝合金细框（白/棕粉末喷涂）或木纹贴皮框"], ["功能", "免打孔挂门钩 + 可拆支架 + 墙挂件三合一；防倾倒绳；可选暖光 LED 版（对应 with lights 长尾词）"], ["定价", "$69.99（5mm 玻璃 + 三合一 + 包装升级做溢价）；Coupon/秒杀不低于 $59.99。按测算 $49.99 跟价几乎零利润"], ["包装", "EPE 全包 + 护角 + 双层瓦楞，做 ISTA-6A 跌落测试；镜面贴防爆膜"], ["上新节奏", "主推窗口：次年 5–6 月上架，抓 8 月返校季；Q4 黑五前 60–90 天入仓"]], "improvements": [["运输破损", "ISTA-6A 包装 + 防爆膜；主图/A+ 展示包装测试"], ["成像变形", "5mm 银镜 + 背板加强筋，Listing 写明 “no distortion, 5mm glass” 并配实拍对比"], ["挂门款清晰度差", "放弃亚克力，用真玻璃；挂钩适配 1.3–2 英寸门厚"], ["尺寸不符", "主图放人物身高参照 + 门框对比图"]], "line": ["同一“柔波拱形”视觉语言延展到小号桌面镜、挂墙镜（拉低入门价、做套装）", "进入曲线/竖纹小家具：43\" 圆角玄关桌（Homiflex $99.99 / 500+ 已验证）→ 弧形 3–6 斗柜 → 床头柜，用同一木纹色卡（胡桃深棕、原木、树瘤纹）做店铺风格统一", "颜色矩阵每季迭代：保留柔白 + 原木，测试烟熏玉绿、深咖等 2026 流行色"]}, "depth": {"verdict": "可以切入并做浅层深耕：镜子是“曲线视觉语言 + 引流”的入口（要守住 $69.99 价位和 ≤59\" 尺寸），利润与深耕主力放在玄关桌 → 斗柜的曲线木作产品线。", "factors": [{"factor": "市场增长", "rating": "中", "reason": "镜子 ~5–6% CAGR，线上家具 +6.6%/+7.3%（预测）"}, {"factor": "垄断程度", "rating": "低（好）", "reason": "榜单前列为多个白牌（DUMOS、OLIXIS、Antok、Aidoly、Delma），无绝对龙头"}, {"factor": "差异化空间", "rating": "高（好）", "reason": "变形、破损两大痛点在高评论基础款和波浪款中普遍存在"}, {"factor": "评论壁垒", "rating": "未知", "reason": "需采集 Top 50 评论数后评估"}, {"factor": "扩线潜力", "rating": "高（好）", "reason": "曲线/竖纹/树瘤纹语言可以延伸到斗柜、床头柜、桌面镜"}, {"factor": "单位经济", "rating": "镜子偏薄 / 家具较好", "reason": "大件 FBA 费 + 15% 佣金 + ~15% 广告，镜子需 ~$70；玄关桌、斗柜客单高，利润空间更大（出厂价需工厂报价验证）"}]}, "gaps": ["Amazon 关键词精确月搜索量与同比 → 卖家精灵 / Helium 10 导出 keywords.csv，或品牌备案后台 Brand Analytics", "镜子 & 斗柜类目近 24–36 个月月销量（判断黑五倍数、季节性）→ Jungle Scout / 卖家精灵类目数据导出 category_monthly.csv", "Top 50 竞品完整字段（价格、评论数、上架时间、变体）与评论文本 → 在你电脑上运行 `python -m amazon_selection_agent amazon-collect`", "Google Trends 5 年曲线 → `python -m amazon_selection_agent google-trends`（需能访问 Google）", "Wayfair 竞品与评论 → `python -m amazon_selection_agent scrape-wayfair`"], "listings": {"note": "从检索结果与截图中逐条摘录的真实商品信号。bought = Amazon 徽章下限（200+ 记 200）；period=周 的不计入月度合计。color_family 由标题/截图归类。segment 为按尺寸、价格、场景做的人群归属判断（推断）。", "rows": [{"category": "全身镜", "brand": "Delma", "product": "落地全身镜（具体款未标）", "style": "—", "color_family": "—", "size": "—", "price": null, "bought": 3000, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "租房族", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/Best-Sellers-Floor-Full-Length-Mirrors/zgbs/home-garden/3736381"}, {"category": "全身镜", "brand": "Delma", "product": "拱形全身镜 56x15", "style": "拱形", "color_family": "金属银", "size": "56x15", "price": null, "bought": 200, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "学生/宿舍", "badge": "", "source": "Amazon", "url": "https://www.amazon.com/-/es/Delma-longitud-completa-dormitorio-aluminio/dp/B0G3VQJDPW"}, {"category": "全身镜", "brand": "Delma", "product": "拱形全身镜 70x30", "style": "拱形", "color_family": "黑", "size": "70x30", "price": null, "bought": 100, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室", "客厅"], "segment": "新房/家庭", "badge": "", "source": "Amazon", "url": "https://www.amazon.com/clp/B0G7F95TY5"}, {"category": "全身镜", "brand": "OLIXIS", "product": "拱形全身镜（金色）", "style": "拱形", "color_family": "金属金", "size": "—", "price": null, "bought": 300, "period": "周", "rating": null, "ratings": null, "scenes": ["卧室", "客厅"], "segment": "租房族", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/clp/B0GVMYYJRW"}, {"category": "全身镜", "brand": "OLIXIS", "product": "拱形全身镜 64x21.5", "style": "拱形", "color_family": "黑", "size": "64x21.5", "price": null, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室", "客厅"], "segment": "租房族", "badge": "Best Seller", "source": "Amazon", "url": "https://www.amazon.com/clp/B0G4W6MXKM"}, {"category": "全身镜", "brand": "DUMOS", "product": "拱形全身镜 64x21", "style": "拱形", "color_family": "黑", "size": "64x21", "price": 45.0, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "租房族", "badge": "Best Seller（原价 $70）", "source": "TheStreet", "url": "https://www.thestreet.com/deals/dumos-arched-full-length-mirror-amazon-sale"}, {"category": "全身镜", "brand": "NeuType", "product": "拱形全身镜", "style": "拱形", "color_family": "—", "size": "—", "price": null, "bought": null, "period": "", "rating": 4.5, "ratings": 4800, "scenes": ["卧室"], "segment": "租房族", "badge": "", "source": "Don't Waste Your Money", "url": "https://www.10news.com/arched-full-length-mirror-stylish-any-room"}, {"category": "全身镜", "brand": "Dewfig", "product": "波浪全身镜 63x24", "style": "波浪", "color_family": "白/米", "size": "63x24", "price": null, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "颜值装饰党", "badge": "Amazon's Choice", "source": "Amazon 搜索页", "url": "https://www.amazon.com/white-wavy-mirror-full-length/s?k=white+wavy+mirror+full+length"}, {"category": "全身镜", "brand": "Ultym", "product": "波浪全身镜 63x24 绒布框", "style": "波浪", "color_family": "—", "size": "63x24", "price": null, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室", "客厅", "衣帽间", "玄关"], "segment": "颜值装饰党", "badge": "带灯款 500+ 浏览/周", "source": "Amazon", "url": "https://www.amazon.com/Ultym-Standing-Irregular-Dressing-Entryway/dp/B0H75FDW7W"}, {"category": "全身镜", "brand": "BOJOY", "product": "波浪全身镜 63x24 法兰绒框", "style": "波浪", "color_family": "绿", "size": "63x24", "price": null, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "颜值装饰党", "badge": "", "source": "Amazon", "url": "https://www.amazon.com/BOJOY-Irregular-Standing-Hanging-Leaning/dp/B0CKR9CSMG"}, {"category": "斗柜", "brand": "Decofy", "product": "55\" 竖纹 6 斗柜", "style": "竖纹", "color_family": "原木/橡木", "size": "55\"", "price": null, "bought": 400, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "新房/家庭", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"}, {"category": "斗柜", "brand": "Decofy", "product": "55\" 竖纹 6 斗柜", "style": "竖纹", "color_family": "胡桃/深棕", "size": "55\"", "price": null, "bought": 200, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "新房/家庭", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"}, {"category": "斗柜", "brand": "Decofy", "product": "47\" 竖纹 6 斗柜 金色把手", "style": "竖纹", "color_family": "—", "size": "47\"", "price": null, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "租房族", "badge": "Best Sellers ~#14", "source": "Amazon Best Sellers", "url": "https://www.amazon.com/Best-Sellers-Dressers-Chests-of-Drawers/zgbs/home-garden/3733261"}, {"category": "斗柜", "brand": "TEENFON", "product": "56.3\" 弧形 6 斗柜", "style": "弧形", "color_family": "—", "size": "56.3\"", "price": null, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "新房/家庭", "badge": "Best Sellers ~#20", "source": "Amazon Best Sellers", "url": "https://www.amazon.com/Best-Sellers-Dressers-Chests-of-Drawers/zgbs/home-garden/3733261"}, {"category": "斗柜", "brand": "RoyalCraft", "product": "竖纹 6 斗柜", "style": "竖纹", "color_family": "白/米", "size": "—", "price": null, "bought": 100, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "新房/家庭", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/fluted-dresser/s?k=fluted+dresser"}, {"category": "斗柜", "brand": "Aitjunz", "product": "弧形 7 斗柜", "style": "弧形", "color_family": "—", "size": "—", "price": null, "bought": 100, "period": "月", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "新房/家庭", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/modern-curved-dresser/s?k=modern+curved+dresser"}, {"category": "斗柜", "brand": "EliteSet", "product": "63\" 弧形 9 斗柜 Gray Oak（截图）", "style": "弧形", "color_family": "原木/橡木", "size": "63\"", "price": 382.19, "bought": 200, "period": "月", "rating": 4.4, "ratings": 206, "scenes": ["卧室", "客厅", "衣帽间", "儿童房", "玄关"], "segment": "新房/家庭", "badge": "原价 $419.99；4 色含树瘤纹；5–9 斗尺寸梯度", "source": "你的截图", "url": null}, {"category": "斗柜", "brand": "T4tream", "product": "竖纹 3 斗柜 仿大理石台面", "style": "竖纹", "color_family": "—", "size": "—", "price": 105.0, "bought": null, "period": "", "rating": null, "ratings": null, "scenes": ["卧室"], "segment": "租房族", "badge": "原价 $220", "source": "Parade", "url": "https://parade.com/shopping/amazon-t4tream-fluted-3-drawer-dresser-spring-sale-2026"}, {"category": "玄关桌", "brand": "Homiflex", "product": "43.7\" 圆角玄关桌 Rustic Brown（截图）", "style": "圆角/瀑布边", "color_family": "胡桃/深棕", "size": "43.7\"", "price": 99.99, "bought": 500, "period": "月", "rating": 4.6, "ratings": 26, "scenes": ["玄关", "客厅", "走廊"], "segment": "租房族", "badge": "BSR #36,595 Home & Kitchen；#40 Sofa Tables；ASIN B0GR4R546J", "source": "你的截图", "url": "https://www.amazon.com/dp/B0GR4R546J"}, {"category": "玄关桌", "brand": "Homiflex", "product": "43.7\" 圆角玄关桌 Natural", "style": "圆角/瀑布边", "color_family": "原木/橡木", "size": "43.7\"", "price": 90.0, "bought": 50, "period": "月", "rating": null, "ratings": null, "scenes": ["玄关", "客厅", "走廊"], "segment": "租房族", "badge": "同款不同色（检索结果，时间可能更早）", "source": "Amazon 搜索页", "url": "https://www.amazon.com/farmhouse-entryway-table/s?k=farmhouse+entryway+table"}, {"category": "玄关桌", "brand": "Decofy", "product": "47\" 竖纹玄关桌 带充电 3 抽", "style": "竖纹", "color_family": "胡桃/深棕", "size": "47\"", "price": null, "bought": 500, "period": "月", "rating": null, "ratings": null, "scenes": ["玄关", "客厅"], "segment": "租房族", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/console-tables-entryway/s?k=console+tables+for+entryway"}, {"category": "玄关桌", "brand": "Tribesigns", "product": "70.9\" 加长沙发后桌", "style": "农舍风长方", "color_family": "原木/橡木", "size": "70.9\"", "price": null, "bought": 400, "period": "月", "rating": null, "ratings": null, "scenes": ["客厅", "走廊", "玄关"], "segment": "新房/家庭", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/Long-Console-Tables-Entryway/s?k=Long+Console+Tables+for+Entryway"}, {"category": "玄关桌", "brand": "Tribesigns", "product": "63\" 三层玄关桌", "style": "农舍风长方", "color_family": "白/米", "size": "63\"", "price": null, "bought": 300, "period": "月", "rating": null, "ratings": null, "scenes": ["客厅", "玄关", "走廊"], "segment": "新房/家庭", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/entryway-table/s?k=entryway+table"}, {"category": "玄关桌", "brand": "ChooChoo", "product": "40\" 带抽屉玄关桌", "style": "农舍风长方", "color_family": "白/米", "size": "40\"", "price": null, "bought": 100, "period": "月", "rating": null, "ratings": null, "scenes": ["玄关", "客厅", "走廊"], "segment": "租房族", "badge": "", "source": "Amazon 搜索页", "url": "https://www.amazon.com/farmhouse-entryway-table/s?k=farmhouse+entryway+table"}]}, "market": {"title": "市场容量", "method": "三层口径：宏观（Adobe/NRF/行业报告）→ 类目（BSR 校准估算）→ 可见单品（徽章合计，下限）。", "bsr_calibration": "你的截图：Homiflex 玄关桌 Sofa Tables 小类 #40、月销 500+。BSR 越靠前销量越高，因此 Sofa Tables 小类前 40 名每个月销 ≥ ~500 件 → 前 40 名合计 ≥ 20,000 件/月；按 ~$100 均价 ≥ $2M/月（≈ $24M/年）。这是下限估算，Top 10 通常远高于 #40。", "bsr_calc": {"rank": 40, "units": 500, "price": 100}}, "segments": {"note": "用户分层综合了机构数据（规模、预算）与 Top 卖家商品信号（价格、尺寸、场景）。价格区间中 “观察到” 为真实商品价格，“推断” 为根据预算与竞品定位的判断。", "rows": [{"name": "学生 / 宿舍", "size": "宿舍/公寓家居开支 $14.0B（2026，NRF），人均 ~$194", "price": "$25–60（推断：人均家居总预算 ~$194，单品需远低于此）", "price_low": 25, "price_high": 60, "products": "挂门镜、59–60x16 窄全身镜、小号桌面波浪镜", "scenes": "宿舍、门后", "colors": "白、粉、ins 风", "pains": "挂门镜清晰度差（亚克力）、变形、挂钩不稳", "delights": "好看、省空间、免打孔", "peak": "7–8 月返校季", "conf": "中", "key": "学生/宿舍"}, {"name": "年轻租房族（Gen Z / 千禧）", "size": "Gen Z 租房家庭 1,040 万户、占租客 23%（2026）", "price": "$45–110（观察到：DUMOS $45–70、Homiflex 玄关桌 $90–100）", "price_low": 45, "price_high": 110, "products": "拱形全身镜 64x21、40–47\" 圆角/竖纹玄关桌、小号竖纹斗柜", "scenes": "卧室、玄关、客厅（500–700 sq ft 小户型）", "colors": "黑、原木、胡桃深棕、白", "pains": "安装费时、运输破损、尺寸不符", "delights": "性价比、显贵、真实无变形成像", "peak": "8 月 + Q4", "conf": "中", "key": "租房族"}, {"name": "新房 / 年轻家庭", "size": "线上家具假日季 $31.1B（+6.6%）", "price": "$200–420（观察到：EliteSet 9 斗 $382、Decofy 55\" 竖纹斗柜）", "price_low": 200, "price_high": 420, "products": "55–63\" 弧形/竖纹 6–9 斗柜、70\" 沙发后桌、70x30 大镜", "scenes": "卧室、儿童房、客厅（斗柜兼电视柜）", "colors": "原木/橡木、胡桃、树瘤纹（burl）", "pains": "组装 2–3 小时、抽屉轨道错位、到货破损", "delights": "像实木、抽屉顺滑、比 IKEA 质感好", "peak": "Q4 黑五 + 1 月", "conf": "中", "key": "新房/家庭"}, {"name": "颜值装饰党（TikTok / Danish Pastel）", "size": "无可靠规模数据（波浪镜热度进入平台期）", "price": "未观察到可靠价格（63x24 绒布波浪镜）", "price_low": null, "price_high": null, "products": "63x24 波浪镜、云朵/不规则镜、带灯款", "scenes": "卧室、衣帽间", "colors": "白、粉、绿", "pains": "成像变形（Walmart 某波浪镜 3.0★）", "delights": "aesthetic、拍照好看", "peak": "无明显季节", "conf": "低", "key": "颜值装饰党"}]}, "delights": [{"text": "拱形全身镜（NeuType，4.5★/4,800+ 评）：好评集中在“Crystal clear, true reflection”无变形、结实、易组装。", "conf": "中", "sources": [{"name": "Don't Waste Your Money", "url": "https://www.10news.com/arched-full-length-mirror-stylish-any-room"}]}, {"text": "竖纹/弧形斗柜：好评集中在“看起来像实木”“比 IKEA 质感好”“抽屉大而顺滑”。", "conf": "中", "sources": [{"name": "Fakespot 汇总", "url": "https://www.fakespot.com/product/prepac-milo-mid-century-modern-chest-4-drawer-cherry"}, {"name": "Target Walker Edison", "url": "https://www.target.com/p/walker-edison-3-drawer-with-fluted-fronts-dresser/-/A-1010801948"}]}, {"text": "挂门基础镜：Walmart Mainstays 4.5★/20,724 评，卖点是省空间、适合宿舍——稳定质量 + 低价能积累海量评论。", "conf": "中", "sources": [{"name": "Walmart Mainstays", "url": "https://www.walmart.com/ip/Mainstays-Over-The-Door-Mirror-with-hardware-14-25IN-X-50-25IN-White/437640676"}]}], "pains_extra": [{"text": "斗柜：组装 2–3+ 小时需两人、螺丝缺件、抽屉轨道几个月后错位、到货破损。", "conf": "中", "sources": [{"name": "Fakespot", "url": "https://www.fakespot.com/product/tvilum-scottsdale-6-drawer-double-dresser-white-wood-grain"}, {"name": "Target", "url": "https://www.target.com/p/walker-edison-3-drawer-with-fluted-fronts-dresser/-/A-1010801948"}]}], "fees": {"text": "佣金：Furniture $200 以内 15%、超出部分 10%；Home & Kitchen 15%。FBA 大件（最长边约 37–59 英寸）基础费约 $9.35 + $0.38/磅，超过 59 英寸进入 Extra-large 档；2026-04-17 起另有 3.5% 燃油物流附加费。平台平均 ACoS 约 28–32%，广告 CPC 两年涨 34% 至 $1.34。", "sources": [{"name": "Feedvisor 佣金表", "url": "https://feedvisor.com/university/referral-fee/"}, {"name": "AMZ Prep FBA 2026", "url": "https://amzprep.com/amazon-fba-fees/"}, {"name": "Novadata", "url": "https://novadata.io/resources/blog/amazon-seller-fees-explained"}, {"name": "Eightx ACoS", "url": "https://eightx.co/blog/average-acos-by-amazon-category"}]}, "roi_scenarios": [{"name": "柔波拱形镜 58x20 @ $69.99（推荐）", "price": 69.99, "cogs": 12, "freight": 5.5, "fba_fee": 13, "referral_rate": 0.15, "furniture_tiered": false, "tacos": 0.15, "return_rate": 0.06, "storage_other": 1.0, "monthly_units": 300, "note": "最长边 ≤59\"，留在大件档（基础 ~$9.35 + 重量）。出厂价/头程为假设值，请替换为工厂报价；“20% 净利目标出厂价”可直接拿去和工厂议价。"}, {"name": "同款 @ $49.99（跟爆款价）", "price": 49.99, "cogs": 12, "freight": 5.5, "fba_fee": 13, "referral_rate": 0.15, "furniture_tiered": false, "tacos": 0.15, "return_rate": 0.06, "storage_other": 1.0, "monthly_units": 300, "note": "跟 DUMOS 促销价锚 $45–50 打价格战：在同样成本下几乎不赚钱。"}, {"name": "64x21 @ $64.99（Extra-large 档）", "price": 64.99, "cogs": 15, "freight": 7, "fba_fee": 24, "referral_rate": 0.15, "furniture_tiered": false, "tacos": 0.15, "return_rate": 0.06, "storage_other": 1.5, "monthly_units": 300, "note": "64\" 超过 59\" 进入 Extra-large 档，FBA 费明显更高（$24 为估算，请用 FBA 计算器核实）。"}, {"name": "弧形玄关桌 43\" @ $99.99", "price": 99.99, "cogs": 22, "freight": 9, "fba_fee": 18, "referral_rate": 0.15, "furniture_tiered": true, "tacos": 0.15, "return_rate": 0.05, "storage_other": 2, "monthly_units": 500, "note": "对标 Homiflex $99.99 / 500+。平板包装约 25–30 磅；出厂价/头程/FBA 为假设值。"}, {"name": "弧形 6 斗柜 55\" @ $259.99", "price": 259.99, "cogs": 75, "freight": 26, "fba_fee": 45, "referral_rate": 0.15, "furniture_tiered": true, "tacos": 0.12, "return_rate": 0.05, "storage_other": 5, "monthly_units": 200, "note": "Furniture 佣金阶梯（$200 以上 10%）。2 箱约 100+ 磅；出厂价/头程/FBA 为假设值。"}], "win_price": {"verdict": "胜率价位（销量视角，样本少，需用采集数据验证）：全身镜 $45–70、玄关桌 $90–110、斗柜 $250–400。利润视角：全身镜要卖到 ~$70 才健康，玄关桌是三者中单位经济最稳的。", "notes": ["同款不同色差 10 倍：Homiflex 玄关桌 Rustic Brown $99.99 → 500+/月，Natural $90 → 50+/月（时间点不同，需复核）——颜色比 $10 价差更影响胜率。", "EliteSet 9 斗 $382 仍有 200+/月：家庭人群对 $300+ 大件接受度足够，前提是“弧形 + 木纹色 + 尺寸梯度”。", "DUMOS 64x21 在 $45 促销价时拿到 Best Seller 标：全身镜的爆款价锚在 $50 上下。", "ROI 测算（下方 ⑫）：同一面镜子 $69.99 净利约 20%，$49.99 约 0–4%；64\" 尺寸因进入 Extra-large FBA 档在 $64.99 亏损——爆款价锚 ≠ 能赚钱的价位。"]}};</script>
+<script>/* 轻量 SVG 图表：折线（十字准线 + 提示框）、横向条形、纵向柱、发散条形。
+ * 无外部依赖。所有文字通过 textContent 写入（数据来自 CSV / 爬虫，不可信）。 */
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const SERIES = ["var(--series-1)", "var(--series-2)", "var(--series-3)", "var(--series-4)"];
+
+  function el(tag, attrs, parent) {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function h(tag, cls, text, parent) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  const tip = h("div", "viz-tip");
+  document.addEventListener("DOMContentLoaded", () => document.body.appendChild(tip));
+  function showTip(evt, rows) {
+    tip.replaceChildren();
+    rows.forEach(([key, val, color]) => {
+      const r = h("div", "viz-tip-row", null, tip);
+      if (color) { const k = h("span", "viz-tip-key", null, r); k.style.background = color; }
+      h("strong", null, val, r);
+      h("span", "viz-tip-label", key, r);
+    });
+    tip.style.display = "block";
+    const x = Math.min(evt.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+    const y = Math.max(8, evt.clientY - tip.offsetHeight - 10);
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { tip.style.display = "none"; }
+
+  function niceMax(v) {
+    if (v <= 0) return 1;
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    for (const m of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (m * p >= v) return m * p;
+    return 10 * p;
+  }
+  function width(container) { return Math.max(280, container.clientWidth || 600); }
+
+  function legend(container, names, kind) {
+    if (names.length < 2) return;
+    const lg = h("div", "viz-legend", null, container);
+    names.forEach((n, i) => {
+      const it = h("span", "viz-legend-item", null, lg);
+      const sw = h("span", kind === "line" ? "viz-key-line" : "viz-key-rect", null, it);
+      sw.style.background = SERIES[i];
+      h("span", null, n, it);
+    });
+  }
+
+  /* 折线：x 为类目标签数组，series=[{name, values}]，单一 y 轴 */
+  function line(container, x, series, fmt) {
+    container.replaceChildren();
+    legend(container, series.map(s => s.name), "line");
+    const W = width(container), H = 240, m = { l: 56, r: 16, t: 12, b: 28 };
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, class: "viz-svg", role: "img" }, container);
+    const max = niceMax(Math.max(...series.flatMap(s => s.values.filter(v => v != null))));
+    const xs = i => m.l + (i * (W - m.l - m.r)) / Math.max(1, x.length - 1);
+    const ys = v => H - m.b - (v / max) * (H - m.t - m.b);
+    for (let k = 0; k <= 4; k++) {
+      const v = (max * k) / 4, y = ys(v);
+      el("line", { x1: m.l, x2: W - m.r, y1: y, y2: y, class: k ? "viz-grid" : "viz-axis" }, svg);
+      el("text", { x: m.l - 8, y: y + 4, "text-anchor": "end", class: "viz-tick" }, svg).textContent = fmt(v);
+    }
+    const step = Math.ceil(x.length / Math.floor((W - m.l) / 70));
+    x.forEach((lab, i) => {
+      if (i % step === 0 || i === x.length - 1)
+        el("text", { x: xs(i), y: H - 8, "text-anchor": "middle", class: "viz-tick" }, svg).textContent = lab;
+    });
+    series.forEach((s, si) => {
+      const d = s.values.map((v, i) => (v == null ? "" : `${i && s.values[i - 1] != null ? "L" : "M"}${xs(i)},${ys(v)}`)).join("");
+      el("path", { d, fill: "none", stroke: SERIES[si], "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+      const li = s.values.length - 1;
+      el("circle", { cx: xs(li), cy: ys(s.values[li]), r: 4, fill: SERIES[si], stroke: "var(--surface-1)", "stroke-width": 2 }, svg);
+    });
+    const cross = el("line", { y1: m.t, y2: H - m.b, class: "viz-cross", visibility: "hidden" }, svg);
+    const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent", tabindex: 0 }, svg);
+    const move = evt => {
+      const r = svg.getBoundingClientRect();
+      const px = ((evt.clientX - r.left) / r.width) * W;
+      const i = Math.max(0, Math.min(x.length - 1, Math.round(((px - m.l) / (W - m.l - m.r)) * (x.length - 1))));
+      cross.setAttribute("x1", xs(i)); cross.setAttribute("x2", xs(i)); cross.setAttribute("visibility", "visible");
+      showTip(evt, [[x[i], "", null], ...series.map((s, si) => [s.name, fmt(s.values[i]), SERIES[si]])]);
+    };
+    hit.addEventListener("pointermove", move);
+    hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
+    table(container, ["月份", ...series.map(s => s.name)], x.map((lab, i) => [lab, ...series.map(s => fmt(s.values[i]))]));
+  }
+
+  /* 横向条形：rows=[{label, value, note}] */
+  function hbar(container, rows, fmt, opts = {}) {
+    container.replaceChildren();
+    if (!rows.length) { h("p", "muted", "无数据", container); return; }
+    const max = opts.max || Math.max(...rows.map(r => r.value)) || 1;
+    const list = h("div", "hbar", null, container);
+    rows.forEach(r => {
+      const row = h("div", "hbar-row" + (r.highlight ? " is-hi" : ""), null, list);
+      row.tabIndex = 0;
+      h("div", "hbar-label", r.label, row);
+      const track = h("div", "hbar-track", null, row);
+      const bar = h("div", "hbar-bar", null, track);
+      bar.style.width = Math.max(0.5, (100 * r.value) / max) + "%";
+      if (r.color) bar.style.background = r.color;
+      h("div", "hbar-value", fmt(r.value), row);
+      if (r.note !== undefined) h("div", "hbar-note", r.note, row);
+      const tipRows = [[r.label, fmt(r.value), null]].concat(r.tip || []);
+      row.addEventListener("pointermove", e => showTip(e, tipRows));
+      row.addEventListener("pointerleave", hideTip);
+      row.addEventListener("focus", () => { const b = row.getBoundingClientRect(); showTip({ clientX: b.left + 120, clientY: b.top }, tipRows); });
+      row.addEventListener("blur", hideTip);
+    });
+  }
+
+  /* 纵向柱：labels, values；highlight 索引集合 */
+  function columns(container, labels, values, fmt, highlight = []) {
+    container.replaceChildren();
+    const W = width(container), H = 200, m = { l: 44, r: 8, t: 18, b: 26 };
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, class: "viz-svg" }, container);
+    const max = niceMax(Math.max(...values));
+    const bw = (W - m.l - m.r) / labels.length;
+    const ys = v => H - m.b - (v / max) * (H - m.t - m.b);
+    for (let k = 0; k <= 4; k++) {
+      const v = (max * k) / 4;
+      el("line", { x1: m.l, x2: W - m.r, y1: ys(v), y2: ys(v), class: k ? "viz-grid" : "viz-axis" }, svg);
+      el("text", { x: m.l - 6, y: ys(v) + 4, "text-anchor": "end", class: "viz-tick" }, svg).textContent = fmt(v);
+    }
+    labels.forEach((lab, i) => {
+      const x = m.l + i * bw + 1, y = ys(values[i]), hgt = H - m.b - y;
+      const g = el("g", { tabindex: 0 }, svg);
+      el("rect", { x: m.l + i * bw, y: m.t, width: bw, height: H - m.t - m.b, fill: "transparent" }, g);
+      el("path", { d: roundTop(x, y, bw - 2, hgt, Math.min(4, (bw - 2) / 2)), class: highlight.includes(i) ? "col col-hi" : "col" }, g);
+      if (highlight.includes(i))
+        el("text", { x: x + (bw - 2) / 2, y: y - 5, "text-anchor": "middle", class: "viz-label" }, svg).textContent = fmt(values[i]);
+      el("text", { x: x + (bw - 2) / 2, y: H - 8, "text-anchor": "middle", class: "viz-tick" }, svg).textContent = lab;
+      g.addEventListener("pointermove", e => showTip(e, [[lab, fmt(values[i]), null]]));
+      g.addEventListener("pointerleave", hideTip);
+    });
+    table(container, ["", "值"], labels.map((l, i) => [l, fmt(values[i])]));
+  }
+  function roundTop(x, y, w, hgt, r) {
+    if (hgt <= 0) return "";
+    r = Math.min(r, hgt);
+    return `M${x},${y + hgt}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + hgt}Z`;
+  }
+
+  /* 发散条形：正值蓝（需求 > 供给），负值红 */
+  function diverging(container, rows, fmt) {
+    container.replaceChildren();
+    const max = Math.max(...rows.map(r => Math.abs(r.value))) || 1;
+    const list = h("div", "dbar", null, container);
+    rows.forEach(r => {
+      const row = h("div", "dbar-row", null, list);
+      h("div", "hbar-label", r.label, row);
+      const track = h("div", "dbar-track", null, row);
+      h("div", "dbar-mid", null, track);
+      const bar = h("div", "dbar-bar " + (r.value >= 0 ? "pos" : "neg"), null, track);
+      const pct = (50 * Math.abs(r.value)) / max;
+      bar.style.width = pct + "%";
+      bar.style.left = r.value >= 0 ? "50%" : 50 - pct + "%";
+      h("div", "hbar-value", fmt(r.value), row);
+      row.addEventListener("pointermove", e => showTip(e, [[r.label, fmt(r.value), null]].concat(r.tip || [])));
+      row.addEventListener("pointerleave", hideTip);
+    });
+  }
+
+  function table(container, head, rows) {
+    const d = h("details", "viz-table", null, container);
+    h("summary", null, "表格视图", d);
+    const t = h("table", null, null, d);
+    const tr = h("tr", null, null, h("thead", null, null, t));
+    head.forEach(c => h("th", null, c, tr));
+    const tb = h("tbody", null, null, t);
+    rows.forEach(r => { const row = h("tr", null, null, tb); r.forEach(c => h("td", null, c == null ? "—" : String(c), row)); });
+  }
+
+  window.Viz = { line, hbar, columns, diverging, table, h };
+})();
+
+/* 交互式 ROI 计算器（与 analyzers/roi.py 同一公式）。
+ * Viz.roi(container, scenarios) ; scenarios = [{name, price, cogs, freight, fba_fee, referral_rate, furniture_tiered, tacos, return_rate, storage_other, monthly_units, note}] */
+(function () {
+  const { h } = Viz;
+  const FIELDS = [
+    ["price", "售价 $", 0.01],
+    ["cogs", "出厂价 FOB $", 0.1],
+    ["freight", "头程/件 $", 0.1],
+    ["fba_fee", "FBA 配送费 $", 0.1],
+    ["tacos", "广告占销售额 %", 1, true],
+    ["return_rate", "退货率 %", 1, true],
+    ["storage_other", "仓储+其他/件 $", 0.1],
+    ["monthly_units", "预计月销量", 10],
+  ];
+  function referral(p, rate, tiered) { return tiered ? 0.15 * Math.min(p, 200) + 0.10 * Math.max(p - 200, 0) : Math.max(0.3, rate * p); }
+  function calc(s) {
+    const ref = referral(s.price, s.referral_rate, s.furniture_tiered);
+    const ads = s.tacos * s.price, ret = s.return_rate * s.price, landed = s.cogs + s.freight;
+    const profit = s.price - (landed + s.fba_fee + ref + ads + ret + s.storage_other);
+    const target = s.price * 0.8 - (s.freight + s.fba_fee + ref + ads + ret + s.storage_other);
+    return { ref, ads, ret, landed, profit, margin: profit / s.price, roi: profit / landed, be: (profit + ads) / s.price, month: profit * s.monthly_units, target };
+  }
+  const money = v => (v < 0 ? "-$" : "$") + Math.abs(v).toFixed(2);
+  const pct = v => (v * 100).toFixed(0) + "%";
+
+  function roi(container, scenarios) {
+    container.replaceChildren();
+    const tabs = h("div", "tabs", null, container);
+    const body = h("div", "roi-body", null, container);
+    let cur = 0;
+    const state = scenarios.map(s => Object.assign({}, s));
+    function render() {
+      [...tabs.children].forEach((b, i) => b.setAttribute("aria-selected", i === cur));
+      body.replaceChildren();
+      const s = state[cur];
+      const grid = h("div", "roi-grid", null, body);
+      const form = h("div", "roi-form", null, grid);
+      const out = h("div", "roi-out", null, grid);
+      FIELDS.forEach(([k, label, step, isPct]) => {
+        const row = h("label", "roi-field", null, form);
+        h("span", null, label, row);
+        const inp = h("input", null, null, row);
+        inp.type = "number"; inp.step = step; inp.min = 0;
+        inp.value = isPct ? Math.round(s[k] * 100) : s[k];
+        inp.addEventListener("input", () => { const v = parseFloat(inp.value) || 0; s[k] = isPct ? v / 100 : v; update(); });
+      });
+      if (s.note) h("p", "src", s.note, form);
+      const kp = h("div", "roi-kpis", null, out);
+      const tiles = ["单件利润", "净利率", "ROI", "盈亏平衡 ACoS", "月利润", "20% 净利目标出厂价"].map(l => { const t = h("div", "kpi", null, kp); h("div", "l", l, t); return h("div", "v", "", t); });
+      const verdict = h("p", "roi-verdict", "", out);
+      const tbl = h("table", null, null, out);
+      function update() {
+        const r = calc(s);
+        tiles[0].textContent = money(r.profit);
+        tiles[1].textContent = pct(r.margin);
+        tiles[2].textContent = pct(r.roi);
+        tiles[3].textContent = pct(r.be);
+        tiles[4].textContent = money(r.month).replace(".00", "");
+        tiles[5].textContent = money(r.target);
+        verdict.textContent = r.margin >= 0.2 && r.roi >= 0.8 ? "✓ 健康：净利率 ≥20%、ROI ≥80%" : r.margin >= 0.12 ? "△ 可做但偏薄：控制广告与退货" : r.margin > 0 ? "! 利润太薄：提价、降本或换尺寸档位" : "✕ 当前假设下亏损";
+        tbl.replaceChildren();
+        [["售价", s.price], ["佣金", -r.ref], ["FBA 配送", -s.fba_fee], ["广告", -r.ads], ["退货损失", -r.ret], ["仓储/其他", -s.storage_other], ["出厂价", -s.cogs], ["头程", -s.freight], ["单件利润", r.profit]]
+          .forEach(([l, v]) => { const tr = h("tr", null, null, tbl); h("td", null, l, tr); h("td", "num", money(v), tr); });
+      }
+      update();
+    }
+    scenarios.forEach((s, i) => { const b = h("button", null, s.name, tabs); b.type = "button"; b.onclick = () => { cur = i; render(); }; });
+    render();
+  }
+  Viz.roi = roi;
+})();
+</script>
+<script>/* 渲染 research/*.json（真实检索数据）。 */
+(function () {
+  const D = window.DATA;
+  const { h } = Viz;
+  const $ = id => document.getElementById(id);
+  const num = v => (v == null ? "—" : v >= 1e3 ? (v / 1e3).toFixed(v >= 1e4 ? 0 : 1) + "K" : String(Math.round(v)));
+  const rows = D.listings.rows;
+  const monthly = rows.filter(r => r.bought && r.period === "月");
+
+  $("title").textContent = D.title;
+  $("subtitle").textContent = D.subtitle;
+  $("method").textContent = "方法：" + D.method;
+
+  function sources(parent, list) {
+    const p = h("div", "src", null, parent);
+    (list || []).forEach((s, i) => {
+      if (i) p.appendChild(document.createTextNode(" · "));
+      if (s.url) { const a = h("a", null, s.name, p); a.href = s.url; a.target = "_blank"; a.rel = "noopener"; }
+      else h("span", null, s.name, p);
+    });
+  }
+  function finding(parent, f) {
+    const li = h("li", null, null, parent);
+    if (f.conf) { h("span", "conf", "可信度 " + f.conf, li); li.appendChild(document.createTextNode(" ")); }
+    h("span", null, f.text, li);
+    sources(li, f.sources);
+  }
+
+  // KPI
+  D.kpis.forEach(k => { const t = h("div", "kpi", null, $("kpis")); h("div", "l", k.label, t); h("div", "v", k.value, t); h("div", "d", `${k.delta} · ${k.note} · 可信度${k.conf}`, t); });
+
+  // 结论速览
+  const sec = Object.fromEntries(D.sections.map(s => [s.id, s]));
+  [
+    ["市场容量", `线上家具假日季 $31.1B（+6.6%）；宿舍/公寓家居 $14.0B；Sofa Tables 小类前 40 名 ≥ 20,000 件/月（BSR 校准）`],
+    ["需求趋势", sec.trend.verdict],
+    ["季节 & 黑五", sec.season.verdict],
+    ["用户分层", D.segments.rows.map(s => s.name).join(" / ")],
+    ["胜率价位", D.win_price.verdict],
+    ["ROI", "同一面镜子 $69.99 净利约 19%、ROI 约 76%；跟爆款价 $49.99 只剩约 1%；64\" 进入 Extra-large FBA 档后亏损（出厂价为假设值，见 ⑫ 可调）"],
+    ["颜色 & 款式", sec.design.verdict],
+    ["VOC", sec.voc.verdict],
+    ["产品方案", D.product.name],
+    ["深耕", D.depth.verdict],
+  ].forEach(([k, v]) => { const li = h("li", null, null, $("summary")); h("strong", null, k + "：", li); h("span", null, v, li); });
+
+  // ① 市场容量
+  const byCat = {};
+  monthly.forEach(r => { byCat[r.category] = (byCat[r.category] || 0) + r.bought; });
+  Viz.hbar($("cap-chart"), Object.entries(byCat).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ label: k, value: v, tip: monthly.filter(r => r.category === k).map(r => [r.brand + " " + r.product, num(r.bought) + "+", null]) })), v => num(v) + "+");
+  $("cap-note").textContent = `只统计检索中出现徽章的 ${monthly.length} 个商品，是严格下限；全身镜主要来自 Delma 一款 3K+。`;
+  $("bsr").textContent = D.market.bsr_calibration;
+  const b = D.market.bsr_calc;
+  [["Sofa Tables 前 40 名月销下限", num(b.rank * b.units) + " 件"], ["月销售额下限", "$" + ((b.rank * b.units * b.price) / 1e6).toFixed(1) + "M"], ["年化下限", "$" + ((b.rank * b.units * b.price * 12) / 1e6).toFixed(0) + "M"]]
+    .forEach(([l, v]) => { const t = h("div", "kpi", null, $("bsr-kpis")); h("div", "l", l, t); h("div", "v", v, t); });
+  $("dorm-title").textContent = D.dorm_spend.title + "（" + D.dorm_spend.unit + "）";
+  Viz.columns($("dorm"), D.dorm_spend.labels, D.dorm_spend.values, v => v.toFixed(1), [D.dorm_spend.labels.length - 1]);
+  $("dorm-note").textContent = D.dorm_spend.note;
+
+  // ②③⑧⑨ 文字型章节
+  const titles = { trend: "② 需求趋势：增长还是下滑？", season: "③ 季节性 & 黑五是否爆发", design: "⑧ Top 卖家的设计", keywords: "⑨ 搜索关键词" };
+  Object.entries(titles).forEach(([id, title]) => {
+    const s = sec[id], host = $("sec-" + id);
+    h("h2", null, title, host);
+    const card = h("div", "card", null, host);
+    h("div", "callout", null, card).appendChild(h("strong", null, s.verdict));
+    const ul = h("ul", "clean", null, card); ul.style.marginTop = "12px";
+    s.findings.forEach(f => finding(ul, f));
+    if (s.keywords) {
+      const t = h("table", null, null, card); t.style.marginTop = "12px";
+      const hr = h("tr", null, null, h("thead", null, null, t));
+      ["关键词", "月搜索量", "来源", "可信度"].forEach((c, i) => h("th", i === 1 ? "num" : null, c, hr));
+      const tb = h("tbody", null, null, t);
+      s.keywords.forEach(k => { const tr = h("tr", null, null, tb); h("td", null, k.keyword, tr); h("td", "num", k.volume.toLocaleString(), tr); h("td", null, k.source, tr); h("td", null, k.conf, tr); });
+    }
+  });
+
+  // ④ 用户分层
+  $("seg-note").textContent = D.segments.note;
+  const MAX = 450, track = $("seg-price");
+  D.segments.rows.forEach((s, i) => {
+    const row = h("div", "range-row", null, track);
+    h("div", "hbar-label", s.name, row);
+    const tr = h("div", "range-track", null, row);
+    if (s.price_low != null) {
+      const bar = h("div", "range-bar", null, tr);
+      bar.style.left = (100 * s.price_low) / MAX + "%";
+      bar.style.width = (100 * (s.price_high - s.price_low)) / MAX + "%";
+      bar.style.background = `var(--series-${(i % 4) + 1})`;
+    } else h("span", "src", "无可靠价格数据", tr);
+    rows.filter(r => r.price && r.segment === s.key).forEach(r => {
+      const dot = h("div", "range-dot", null, tr);
+      dot.style.left = (100 * r.price) / MAX + "%";
+      dot.title = `${r.brand} ${r.product} $${r.price}`;
+    });
+    h("div", "hbar-value", s.price_low != null ? `$${s.price_low}–${s.price_high}` : "—", row);
+  });
+  const axis = h("div", "range-axis", null, track);
+  [0, 100, 200, 300, 400].forEach(v => { const t = h("span", null, "$" + v, axis); t.style.left = (100 * v) / MAX + "%"; });
+  Viz.table(track, ["人群", "价格区间", "依据"], D.segments.rows.map(s => [s.name, s.price_low != null ? `$${s.price_low}–${s.price_high}` : "—", s.price]));
+  D.segments.rows.forEach(s => {
+    const c = h("div", "card", null, $("seg-cards"));
+    h("h3", null, s.name, c);
+    const t = h("table", null, null, c);
+    [["规模", s.size], ["价格", s.price], ["买什么", s.products], ["用在哪", s.scenes], ["颜色", s.colors], ["痛点", s.pains], ["爽点", s.delights], ["旺季", s.peak], ["可信度", s.conf]]
+      .forEach(([k, v]) => { const tr = h("tr", null, null, t); h("th", null, k, tr); h("td", null, v, tr); });
+  });
+
+  // ⑤ 胜率价位
+  $("win-verdict").textContent = D.win_price.verdict;
+  D.win_price.notes.forEach(n => h("li", null, n, $("win-notes")));
+  const priced = rows.filter(r => r.price);
+  Viz.hbar($("price-sales"), priced.sort((a, b) => a.price - b.price).map(r => ({ label: `$${r.price} ${r.brand}`, value: r.bought || 0, note: r.category, tip: [[r.product, "", null], ["备注", r.badge || "—", null]] })), v => (v ? num(v) + "+/月" : "无徽章"));
+
+  // ⑥ 颜色 & 款式；⑦ 场景
+  function weighted(key, multi) {
+    const acc = {};
+    rows.forEach(r => {
+      const vals = multi ? r[key] : [r[key]];
+      vals.forEach(v => { if (!v || v === "—") return; acc[v] = acc[v] || { sales: 0, n: 0 }; acc[v].n += 1; if (r.period === "月") acc[v].sales += r.bought || 0; });
+    });
+    return Object.entries(acc).sort((a, b) => b[1].sales - a[1].sales || b[1].n - a[1].n)
+      .map(([k, v]) => ({ label: k, value: v.sales, note: v.n + " 款", tip: [["出现在爆款中", v.n + " 款", null]] }));
+  }
+  Viz.hbar($("colors"), weighted("color_family"), v => num(v) + "+");
+  Viz.hbar($("styles"), weighted("style"), v => num(v) + "+");
+  Viz.hbar($("scenes"), weighted("scenes", true), v => num(v) + "+");
+  [
+    "卧室是所有品类的基础场景，但增量来自“一物多场景”：EliteSet 斗柜标题同时写 Bedroom / Living Room TV Stand / Closet / Nursery / Hallway。",
+    "玄关/走廊是玄关桌的核心，也是全身镜的延伸场景（Ultym 标题含 Entryway），可以做“玄关镜 + 玄关桌”组合。",
+    "宿舍/门后对应学生：挂门镜和 59x16 窄镜，痛点是清晰度与挂钩。",
+    "儿童房（Nursery）出现在大件斗柜标题中：家庭人群把斗柜当尿布台/收纳。"
+  ].forEach(t => h("li", null, t, $("scene-notes")));
+
+  // ⑩ VOC
+  const pul = h("ul", "clean", null, $("pains"));
+  sec.voc.findings.concat(D.pains_extra).forEach(f => finding(pul, f));
+  const dul = h("ul", "clean", null, $("delights"));
+  D.delights.forEach(f => finding(dul, f));
+
+  // ⑪ 产品
+  const P = D.product;
+  $("p-name").textContent = P.name;
+  $("p-concept").textContent = P.concept;
+  P.spec.forEach(([k, v]) => { const tr = h("tr", null, null, $("p-spec")); h("th", null, k, tr); h("td", null, v, tr); });
+  P.improvements.forEach(([k, v]) => { const tr = h("tr", null, null, $("p-improve")); h("th", null, k, tr); h("td", null, v, tr); });
+  P.line.forEach(t => h("li", null, t, $("p-line")));
+
+  // ⑫ ROI
+  $("fees").textContent = D.fees.text;
+  sources($("fees").parentNode.insertBefore(h("div"), $("roi")), D.fees.sources);
+  Viz.roi($("roi"), D.roi_scenarios);
+
+  // ⑬ 深耕
+  $("depth-verdict").textContent = D.depth.verdict;
+  D.depth.factors.forEach(f => { const tr = h("tr", null, null, $("depth").querySelector("tbody")); h("td", null, f.factor, tr); h("td", null, f.rating, tr); h("td", null, f.reason, tr); });
+
+  // 全部商品
+  $("list-note").textContent = D.listings.note;
+  rows.forEach(r => {
+    const tr = h("tr", null, null, $("listings").querySelector("tbody"));
+    h("td", null, r.category, tr); h("td", null, r.brand, tr); h("td", null, r.product, tr); h("td", null, r.color_family, tr);
+    h("td", "num", r.price ? "$" + r.price.toFixed(2) : "—", tr);
+    h("td", "num", r.bought ? `${num(r.bought)}+/${r.period}` : "—", tr);
+    h("td", null, r.segment, tr); h("td", null, r.badge || "", tr);
+    const td = h("td", null, null, tr);
+    if (r.url) { const a = h("a", null, r.source, td); a.href = r.url; a.target = "_blank"; a.rel = "noopener"; } else td.textContent = r.source;
+  });
+  D.gaps.forEach(g => h("li", null, g, $("gaps")));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>选品分析看板</title>
+<style>:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --surface-2: #f3f2ee;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --pos: #2a78d6;
+  --neg: #e34948;
+  --good: #006300;
+  --warn-bg: #fff4d6;
+  --warn-ink: #6b4a00;
+  --accent-bg: #e9f1fc;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --surface-2: #232321;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --pos: #3987e5;
+    --neg: #e66767;
+    --good: #0ca30c;
+    --warn-bg: #3a2e10;
+    --warn-ink: #f5d48a;
+    --accent-bg: #16263b;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface-1: #1a1a19;
+  --surface-2: #232321;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.10);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --pos: #3987e5;
+  --neg: #e66767;
+  --good: #0ca30c;
+  --warn-bg: #3a2e10;
+  --warn-ink: #f5d48a;
+  --accent-bg: #16263b;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font: 15px/1.6 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 24px 16px 64px; }
+header.top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+h1 { font-size: 26px; line-height: 1.25; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 19px; margin: 40px 0 12px; }
+h3 { font-size: 15px; margin: 0 0 8px; color: var(--text-secondary); font-weight: 600; }
+p { margin: 0 0 8px; }
+a { color: var(--series-1); }
+.muted { color: var(--text-muted); }
+.sub { color: var(--text-secondary); font-size: 14px; }
+.banner { margin: 16px 0; padding: 10px 14px; border-radius: 8px; background: var(--warn-bg); color: var(--warn-ink); font-size: 14px; }
+.callout { padding: 14px 16px; border-radius: 10px; background: var(--accent-bg); }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-2 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); align-items: start; }
+@media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
+.kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 16px; }
+.kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.kpi .v { font-size: 26px; font-weight: 650; line-height: 1.2; }
+.kpi .l { font-size: 13px; color: var(--text-secondary); }
+.kpi .d { font-size: 12px; color: var(--text-muted); }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; background: var(--surface-2); color: var(--text-secondary); margin: 0 4px 4px 0; }
+.tag.hi { background: var(--accent-bg); color: var(--text-primary); }
+ul.clean { margin: 0; padding-left: 18px; }
+ul.clean li { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--text-secondary); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scroll-x { overflow-x: auto; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tabs button { border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary); border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--text-primary); color: var(--surface-1); border-color: var(--text-primary); }
+.thumbs { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.thumb { font-size: 12px; }
+.thumb img { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 8px; border: 1px solid var(--border); }
+.src { font-size: 12px; color: var(--text-muted); }
+.conf { font-size: 11px; padding: 0 6px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-secondary); white-space: nowrap; }
+
+/* charts */
+.viz-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.viz-grid { stroke: var(--grid); stroke-width: 1; }
+.viz-axis { stroke: var(--axis); stroke-width: 1; }
+.viz-cross { stroke: var(--text-muted); stroke-width: 1; }
+.viz-tick { fill: var(--text-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.viz-label { fill: var(--text-primary); font-size: 11px; font-weight: 600; }
+.col { fill: var(--series-1); opacity: 0.45; }
+.col-hi { opacity: 1; }
+g:hover .col, g:focus .col { opacity: 0.85; }
+.viz-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+.viz-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.viz-key-line { width: 14px; height: 2px; border-radius: 1px; }
+.viz-key-rect { width: 10px; height: 10px; border-radius: 2px; }
+.viz-tip { position: fixed; display: none; z-index: 10; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); max-width: 280px; }
+.viz-tip-row { display: flex; align-items: center; gap: 8px; }
+.viz-tip-row strong { font-variant-numeric: tabular-nums; }
+.viz-tip-label { color: var(--text-secondary); }
+.viz-tip-key { width: 12px; height: 2px; border-radius: 1px; flex: none; }
+.viz-table { margin-top: 8px; font-size: 12px; }
+.viz-table summary { cursor: pointer; color: var(--text-muted); }
+.viz-table table { margin-top: 6px; }
+.hbar { display: flex; flex-direction: column; gap: 2px; }
+.hbar-row, .dbar-row { display: grid; grid-template-columns: minmax(80px, 160px) 1fr 64px; align-items: center; gap: 8px; padding: 3px 4px; border-radius: 6px; }
+.hbar-row:has(.hbar-note) { grid-template-columns: minmax(80px, 160px) 1fr 64px 64px; }
+.hbar-row:hover, .hbar-row:focus, .dbar-row:hover { background: var(--surface-2); outline: none; }
+.hbar-label { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hbar-track, .dbar-track { position: relative; height: 14px; }
+.hbar-bar { height: 100%; background: var(--series-1); border-radius: 0 4px 4px 0; }
+.hbar-row.is-hi .hbar-bar { background: var(--series-2); }
+.hbar-value, .hbar-note { font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.hbar-note { color: var(--good); }
+.dbar-mid { position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--axis); }
+.dbar-bar { position: absolute; top: 0; height: 100%; }
+.dbar-bar.pos { background: var(--pos); border-radius: 0 4px 4px 0; }
+.dbar-bar.neg { background: var(--neg); border-radius: 4px 0 0 4px; }
+@media (max-width: 520px) {
+  .hbar-row, .dbar-row, .hbar-row:has(.hbar-note) { grid-template-columns: 90px 1fr 52px; }
+  .hbar-note { display: none; }
+}
+
+/* ROI calculator */
+.roi-grid { display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) 1fr; }
+@media (max-width: 640px) { .roi-grid { grid-template-columns: 1fr; } }
+.roi-form { display: flex; flex-direction: column; gap: 6px; }
+.roi-field { display: grid; grid-template-columns: 1fr 110px; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+.roi-field input { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary); font: inherit; font-variant-numeric: tabular-nums; }
+.roi-kpis { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.roi-kpis .kpi { padding: 10px 12px; }
+.roi-kpis .kpi .v { font-size: 20px; }
+.roi-verdict { font-weight: 600; margin: 12px 0 6px; }
+
+/* price range rows */
+.range-row { display: grid; grid-template-columns: minmax(80px, 180px) 1fr 84px; align-items: center; gap: 8px; padding: 6px 4px; }
+.range-track { position: relative; height: 14px; background: var(--surface-2); border-radius: 4px; }
+.range-bar { position: absolute; top: 0; height: 100%; border-radius: 4px; opacity: 0.85; }
+.range-dot { position: absolute; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 0 2px var(--surface-1); }
+.range-track .src { position: absolute; left: 8px; top: -1px; }
+.range-axis { position: relative; height: 18px; margin: 2px 92px 0 calc(min(180px, 30%) + 12px); font-size: 11px; color: var(--text-muted); }
+.range-axis span { position: absolute; transform: translateX(-50%); }
+@media (max-width: 520px) { .range-row { grid-template-columns: 90px 1fr 70px; } .range-axis { margin: 2px 78px 0 102px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1 id="title">选品分析</h1>
+      <p class="sub" id="meta"></p>
+    </div>
+  </header>
+  <div class="banner" id="banner" hidden>⚠ 演示数据：本页数字由 scripts/make_demo_data.py 模拟生成，仅用于展示分析流程，不代表真实市场。接入卖家精灵/Helium 10 导出或运行 Amazon 采集脚本后自动替换。</div>
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2>① 产品开发方案（爆款假设）</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="callout"><strong id="concept"></strong></div>
+        <ul class="clean" id="spec" style="margin-top:12px"></ul>
+      </div>
+      <div class="card">
+        <h3>针对竞品差评的改进点</h3>
+        <ul class="clean" id="improve"></ul>
+        <h3 style="margin-top:14px">类目深耕 / 产品线</h3>
+        <ul class="clean" id="line"></ul>
+        <h3 style="margin-top:14px">Listing 埋词</h3>
+        <div id="lk"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>② 用户画像</h2>
+    <div class="grid-2">
+      <div class="card"><h3>人群（按场景词搜索占比）</h3><div id="persona-chart"></div></div>
+      <div class="card"><h3>证据</h3><ul class="clean" id="persona-ev"></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>③ 类目趋势：增长还是下滑？黑五是否爆发？</h2>
+    <div class="grid-2">
+      <div class="card"><h3>类目月搜索量</h3><div id="sv-line"></div></div>
+      <div class="card"><h3>类目月销量</h3><div id="units-line"></div></div>
+      <div class="card"><h3>季节性指数（1.0 = 全年平均）</h3><div id="season"></div><p class="sub" id="season-note"></p></div>
+      <div class="card"><h3>大促爆发系数</h3><div id="events"></div><p class="sub" id="events-note"></p></div>
+      <div class="card"><h3>Google Trends（0-100 指数）</h3><div id="gt-line"></div><p class="sub" id="gt-note"></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>④ 需求拆解：颜色 / 款式 / 尺寸 / 场景</h2>
+    <div class="grid-2">
+      <div class="card"><div class="tabs" id="dim-tabs" role="tablist"></div><div id="dim-chart"></div><p class="src">条长 = 搜索量占比；右列绿色 = 同比增长</p></div>
+      <div class="card scroll-x"><h3 id="rising-title"></h3>
+        <table id="rising"><thead><tr><th>关键词</th><th class="num">月搜索量</th><th class="num">同比</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑤ 竞争格局</h2>
+    <div class="grid-2">
+      <div class="card"><h3>供需差（需求占比 − 供给占比，蓝色 = 缺货属性）</h3><div id="gaps"></div></div>
+      <div class="card"><h3>价格带胜率（胜率价位）</h3><div id="bands"></div><p class="src" id="bands-note"></p></div>
+      <div class="card"><h3>品牌销售额占比</h3><div id="brands"></div></div>
+    </div>
+    <div class="card scroll-x" style="margin-top:16px"><h3>头部竞品</h3>
+      <table id="listings"><thead><tr><th>标题</th><th>品牌</th><th class="num">价格</th><th class="num">月销</th><th class="num">评论</th><th class="num">评分</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>⑤-b 利润 & ROI 测算</h2>
+    <div class="card" id="roi"></div>
+  </section>
+
+  <section>
+    <h2>⑥ VOC：用户在抱怨什么、喜欢什么</h2>
+    <div class="grid">
+      <div class="card"><h3>差评痛点（差评中提及率）</h3><div id="pain"></div></div>
+      <div class="card"><h3>好评爽点（好评中提及率）</h3><div id="delight"></div></div>
+      <div class="card"><h3>谁在买</h3><div id="who"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><h3>差评高频短语</h3><div id="phrases"></div></div>
+  </section>
+
+  <section>
+    <h2>⑦ 能否类目深耕？</h2>
+    <div class="grid-2">
+      <div class="card"><h3 id="depth-verdict"></h3><div id="depth"></div></div>
+      <div class="card"><ul class="clean" id="depth-reasons"></ul></div>
+    </div>
+  </section>
+</div>
+<script>window.DATA = {"dataset": "demo_mirror", "generated_at": "2026-10-11", "inputs": ["keywords", "category_monthly", "google_trends", "competitors", "reviews"], "keyword_volume_basis": "月搜索量", "keywords": {"keyword_count": 45, "total_monthly_search_volume": 2067700, "dimensions": {"scene": {"name": "应用场景", "labels": [{"label": "浴室", "search_volume": 180000, "share": 0.0871, "keyword_count": 1, "top_keywords": ["bathroom mirror"], "growth_yoy": 0.02}, {"label": "门后/挂门", "search_volume": 97500, "share": 0.0472, "keyword_count": 2, "top_keywords": ["over the door mirror", "over the door mirror no drill"], "growth_yoy": 0.1619}, {"label": "小空间", "search_volume": 60000, "share": 0.029, "keyword_count": 2, "top_keywords": ["mirror for small space", "full length mirror small space"], "growth_yoy": 0.432}, {"label": "卧室", "search_volume": 47000, "share": 0.0227, "keyword_count": 1, "top_keywords": ["mirror for bedroom"], "growth_yoy": 0.14}, {"label": "宿舍", "search_volume": 33000, "share": 0.016, "keyword_count": 1, "top_keywords": ["dorm mirror"], "growth_yoy": 0.36}, {"label": "租房", "search_volume": 28100, "share": 0.0136, "keyword_count": 3, "top_keywords": ["no drill mirror", "over the door mirror no drill", "apartment mirror"], "growth_yoy": 0.4788}, {"label": "客厅", "search_volume": 21000, "share": 0.0102, "keyword_count": 1, "top_keywords": ["entryway mirror"], "growth_yoy": 0.07}, {"label": "衣帽间", "search_volume": 12500, "share": 0.006, "keyword_count": 1, "top_keywords": ["closet mirror"], "growth_yoy": 0.17}]}, "color": {"name": "颜色", "labels": [{"label": "黑色", "search_volume": 31000, "share": 0.015, "keyword_count": 1, "top_keywords": ["black full length mirror"], "growth_yoy": -0.02}, {"label": "金色", "search_volume": 23000, "share": 0.0111, "keyword_count": 1, "top_keywords": ["gold arched mirror"], "growth_yoy": 0.05}, {"label": "白色", "search_volume": 21000, "share": 0.0102, "keyword_count": 1, "top_keywords": ["white wavy mirror"], "growth_yoy": 0.74}, {"label": "原木色", "search_volume": 19000, "share": 0.0092, "keyword_count": 1, "top_keywords": ["wood floor mirror"], "growth_yoy": 0.11}, {"label": "粉色", "search_volume": 9200, "share": 0.0044, "keyword_count": 1, "top_keywords": ["pink wavy mirror"], "growth_yoy": 0.5799}, {"label": "奶油色", "search_volume": 6800, "share": 0.0033, "keyword_count": 1, "top_keywords": ["cream wavy mirror"], "growth_yoy": 1.1499}, {"label": "透明/亚克力", "search_volume": 3800, "share": 0.0018, "keyword_count": 1, "top_keywords": ["acrylic wavy mirror"], "growth_yoy": 0.8803}]}, "pattern_shape": {"name": "款式/形状/纹理", "labels": [{"label": "波浪纹", "search_volume": 305200, "share": 0.1476, "keyword_count": 10, "top_keywords": ["wavy mirror", "wavy mirror full length", "white wavy mirror"], "growth_yoy": 0.7433}, {"label": "拱形", "search_volume": 160000, "share": 0.0774, "keyword_count": 3, "top_keywords": ["arched mirror", "arch floor mirror", "gold arched mirror"], "growth_yoy": 0.1793}, {"label": "圆形", "search_volume": 120000, "share": 0.058, "keyword_count": 1, "top_keywords": ["round mirror"], "growth_yoy": -0.06}, {"label": "不规则", "search_volume": 85000, "share": 0.0411, "keyword_count": 3, "top_keywords": ["irregular mirror", "asymmetrical mirror", "cloud mirror"], "growth_yoy": 0.4879}, {"label": "长方形", "search_volume": 44000, "share": 0.0213, "keyword_count": 1, "top_keywords": ["rectangle wall mirror"], "growth_yoy": -0.12}, {"label": "藤编", "search_volume": 16000, "share": 0.0077, "keyword_count": 1, "top_keywords": ["rattan mirror"], "growth_yoy": -0.15}]}, "style": {"name": "风格", "labels": [{"label": "复古", "search_volume": 34000, "share": 0.0164, "keyword_count": 1, "top_keywords": ["vintage mirror"], "growth_yoy": -0.04}, {"label": "波西米亚", "search_volume": 28000, "share": 0.0135, "keyword_count": 1, "top_keywords": ["boho mirror"], "growth_yoy": -0.08}, {"label": "ins风/Danish Pastel", "search_volume": 16100, "share": 0.0078, "keyword_count": 2, "top_keywords": ["wavy mirror aesthetic", "danish pastel mirror"], "growth_yoy": 0.8738}, {"label": "奶油风", "search_volume": 6800, "share": 0.0033, "keyword_count": 1, "top_keywords": ["cream wavy mirror"], "growth_yoy": 1.1499}]}, "material": {"name": "材质", "labels": [{"label": "实木", "search_volume": 19000, "share": 0.0092, "keyword_count": 1, "top_keywords": ["wood floor mirror"], "growth_yoy": 0.11}, {"label": "玻璃", "search_volume": 9900, "share": 0.0048, "keyword_count": 1, "top_keywords": ["shatterproof mirror"], "growth_yoy": 0.27}]}, "size": {"name": "尺寸", "labels": [{"label": "全身/大号", "search_volume": 833000, "share": 0.4029, "keyword_count": 10, "top_keywords": ["full length mirror", "floor mirror", "wavy mirror full length"], "growth_yoy": 0.1352}, {"label": "小号/桌面", "search_volume": 64700, "share": 0.0313, "keyword_count": 3, "top_keywords": ["mirror for small space", "full length mirror small space", "small wavy mirror desk"], "growth_yoy": 0.4486}], "inch_buckets": [{"label": "大号 (48-65in)", "search_volume": 19400, "share": 0.0094}, {"label": "中号 (24-47in)", "search_volume": 9400, "share": 0.0045}], "top_exact_sizes": [{"size": "64x21in", "search_volume": 14000}, {"size": "47x16in", "search_volume": 6100}, {"size": "63x20in", "search_volume": 5400}, {"size": "36x24in", "search_volume": 3300}]}, "feature": {"name": "功能卖点", "labels": [{"label": "带灯/LED", "search_volume": 98000, "share": 0.0474, "keyword_count": 2, "top_keywords": ["mirror with lights", "led full length mirror"], "growth_yoy": 0.1686}, {"label": "免打孔", "search_volume": 20500, "share": 0.0099, "keyword_count": 2, "top_keywords": ["no drill mirror", "over the door mirror no drill"], "growth_yoy": 0.5339}, {"label": "防爆/安全", "search_volume": 9900, "share": 0.0048, "keyword_count": 1, "top_keywords": ["shatterproof mirror"], "growth_yoy": 0.27}, {"label": "带置物/收纳", "search_volume": 9800, "share": 0.0047, "keyword_count": 1, "top_keywords": ["mirror with storage"], "growth_yoy": 0.19}]}}, "persona_signals": [{"persona": "大众家庭用户", "search_share": 0.1098}, {"persona": "空间受限的租房族/学生", "search_share": 0.0472}, {"persona": "城市小户型/租房年轻人", "search_share": 0.029}, {"persona": "大学生（Back to School 季）", "search_share": 0.016}, {"persona": "租房族（不能打孔、搬家频繁）", "search_share": 0.0136}, {"persona": "注重装饰的有房家庭", "search_share": 0.0102}, {"persona": "注重穿搭的年轻女性", "search_share": 0.006}], "rising_keywords": [{"keyword": "wavy mirror aesthetic", "search_volume": 12000, "growth_yoy": 0.93}, {"keyword": "wavy mirror full length", "search_volume": 74000, "growth_yoy": 0.82}, {"keyword": "white wavy mirror", "search_volume": 21000, "growth_yoy": 0.74}, {"keyword": "wavy mirror", "search_volume": 165000, "growth_yoy": 0.68}, {"keyword": "cloud mirror", "search_volume": 15000, "growth_yoy": 0.61}, {"keyword": "no drill mirror", "search_volume": 11000, "growth_yoy": 0.52}, {"keyword": "irregular mirror", "search_volume": 52000, "growth_yoy": 0.49}, {"keyword": "full length mirror small space", "search_volume": 22000, "growth_yoy": 0.47}, {"keyword": "mirror for small space", "search_volume": 38000, "growth_yoy": 0.41}, {"keyword": "asymmetrical mirror", "search_volume": 18000, "growth_yoy": 0.38}], "declining_keywords": [{"keyword": "rattan mirror", "search_volume": 16000, "growth_yoy": -0.15}, {"keyword": "rectangle wall mirror", "search_volume": 44000, "growth_yoy": -0.12}, {"keyword": "boho mirror", "search_volume": 28000, "growth_yoy": -0.08}, {"keyword": "round mirror", "search_volume": 120000, "growth_yoy": -0.06}, {"keyword": "vintage mirror", "search_volume": 34000, "growth_yoy": -0.04}], "top_keywords": [{"keyword": "full length mirror", "search_volume": 410000}, {"keyword": "bathroom mirror", "search_volume": 180000}, {"keyword": "wavy mirror", "search_volume": 165000}, {"keyword": "floor mirror", "search_volume": 135000}, {"keyword": "round mirror", "search_volume": 120000}, {"keyword": "arched mirror", "search_volume": 96000}, {"keyword": "over the door mirror", "search_volume": 88000}, {"keyword": "wavy mirror full length", "search_volume": 74000}, {"keyword": "mirror with lights", "search_volume": 72000}, {"keyword": "standing mirror", "search_volume": 61000}, {"keyword": "irregular mirror", "search_volume": 52000}, {"keyword": "mirror for bedroom", "search_volume": 47000}, {"keyword": "rectangle wall mirror", "search_volume": 44000}, {"keyword": "arch floor mirror", "search_volume": 41000}, {"keyword": "mirror for small space", "search_volume": 38000}]}, "category_trends": {"search_volume": {"metric": "类目月搜索量", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 58907580.0, "yoy_last_12m": 0.2414, "yoy_last_3m": 0.2434, "cagr": 0.2454, "trend_slope_per_month": 0.0178, "seasonality_index": {"1月": 0.97, "2月": 0.8, "3月": 0.81, "4月": 0.84, "5月": 0.8, "6月": 0.8, "7月": 1.02, "8月": 1.27, "9月": 1.03, "10月": 0.87, "11月": 1.55, "12月": 1.24}, "peak_months": ["11月", "8月", "12月"], "low_months": ["2月", "6月"], "seasonality_strength": 1.94, "verdict": "增长", "events": {"metric": "类目月搜索量", "by_year": {"2024": {"黑五/网一 (11月)": 2.22, "Prime Day (7月)": 1.25, "返校季 Back to School (8月)": 1.55, "圣诞季 (12月)": 1.71}, "2025": {"黑五/网一 (11月)": 2.08, "Prime Day (7月)": 1.23, "返校季 Back to School (8月)": 1.53, "圣诞季 (12月)": 1.68}, "2026": {"Prime Day (7月)": 1.2, "返校季 Back to School (8月)": 1.48}}, "average": {"黑五/网一 (11月)": 2.15, "Prime Day (7月)": 1.23, "返校季 Back to School (8月)": 1.52, "圣诞季 (12月)": 1.69}, "black_friday_multiplier": 2.15, "verdict": "黑五强爆发：必须提前 60-90 天备货 + 秒杀/Coupon 布局"}}, "units_sold": {"metric": "类目月销量", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 2703893.0, "yoy_last_12m": 0.2262, "yoy_last_3m": 0.1788, "cagr": 0.2386, "trend_slope_per_month": 0.0172, "seasonality_index": {"1月": 0.97, "2月": 0.78, "3月": 0.8, "4月": 0.81, "5月": 0.78, "6月": 0.79, "7月": 1.02, "8月": 1.22, "9月": 1.01, "10月": 0.82, "11月": 1.83, "12月": 1.18}, "peak_months": ["11月", "8月", "12月"], "low_months": ["2月", "5月"], "seasonality_strength": 2.36, "verdict": "增长", "events": {"metric": "类目月销量", "by_year": {"2024": {"黑五/网一 (11月)": 2.8, "Prime Day (7月)": 1.27, "返校季 Back to School (8月)": 1.62, "圣诞季 (12月)": 1.74}, "2025": {"黑五/网一 (11月)": 2.61, "Prime Day (7月)": 1.32, "返校季 Back to School (8月)": 1.51, "圣诞季 (12月)": 1.72}, "2026": {"Prime Day (7月)": 1.18, "返校季 Back to School (8月)": 1.39}}, "average": {"黑五/网一 (11月)": 2.71, "Prime Day (7月)": 1.26, "返校季 Back to School (8月)": 1.51, "圣诞季 (12月)": 1.73}, "black_friday_multiplier": 2.71, "verdict": "黑五强爆发：必须提前 60-90 天备货 + 秒杀/Coupon 布局"}}, "revenue": {"metric": "类目月销售额", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 152518724.0, "yoy_last_12m": 0.2281, "yoy_last_3m": 0.1797, "cagr": 0.2383, "trend_slope_per_month": 0.0172, "seasonality_index": {"1月": 0.99, "2月": 0.8, "3月": 0.82, "4月": 0.83, "5月": 0.8, "6月": 0.81, "7月": 0.92, "8月": 1.25, "9月": 1.03, "10月": 0.85, "11月": 1.67, "12月": 1.23}, "peak_months": ["11月", "8月", "12月"], "low_months": ["2月", "5月"], "seasonality_strength": 2.1, "verdict": "增长", "events": {"metric": "类目月销售额", "by_year": {"2024": {"黑五/网一 (11月)": 2.47, "Prime Day (7月)": 1.12, "返校季 Back to School (8月)": 1.62, "圣诞季 (12月)": 1.74}, "2025": {"黑五/网一 (11月)": 2.3, "Prime Day (7月)": 1.17, "返校季 Back to School (8月)": 1.51, "圣诞季 (12月)": 1.72}, "2026": {"Prime Day (7月)": 1.04, "返校季 Back to School (8月)": 1.39}}, "average": {"黑五/网一 (11月)": 2.38, "Prime Day (7月)": 1.11, "返校季 Back to School (8月)": 1.51, "圣诞季 (12月)": 1.73}, "black_friday_multiplier": 2.38, "verdict": "黑五强爆发：必须提前 60-90 天备货 + 秒杀/Coupon 布局"}}}, "google_trends": {"terms": {"wavy mirror": {"metric": "Google Trends: wavy mirror", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 844.0, "yoy_last_12m": 0.6948, "yoy_last_3m": 0.6968, "cagr": 0.6943, "trend_slope_per_month": 0.0427, "seasonality_index": {"1月": 0.82, "2月": 0.77, "3月": 0.81, "4月": 0.82, "5月": 0.84, "6月": 0.87, "7月": 1.06, "8月": 1.2, "9月": 1.11, "10月": 0.99, "11月": 1.43, "12月": 1.29}, "peak_months": ["11月", "12月", "8月"], "low_months": ["3月", "2月"], "seasonality_strength": 1.87, "verdict": "增长"}, "arched mirror": {"metric": "Google Trends: arched mirror", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 636.0, "yoy_last_12m": 0.1023, "yoy_last_3m": 0.1046, "cagr": 0.1017, "trend_slope_per_month": 0.008, "seasonality_index": {"1月": 0.99, "2月": 0.91, "3月": 0.92, "4月": 0.91, "5月": 0.91, "6月": 0.9, "7月": 1.03, "8月": 1.11, "9月": 1.01, "10月": 0.94, "11月": 1.26, "12月": 1.11}, "peak_months": ["11月", "8月", "12月"], "low_months": ["5月", "6月"], "seasonality_strength": 1.39, "verdict": "温和增长"}, "round mirror": {"metric": "Google Trends: round mirror", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 752.0, "yoy_last_12m": -0.06, "yoy_last_3m": -0.06, "cagr": -0.0589, "trend_slope_per_month": -0.0051, "seasonality_index": {"1月": 1.06, "2月": 0.97, "3月": 0.97, "4月": 0.95, "5月": 0.94, "6月": 0.93, "7月": 1.01, "8月": 1.07, "9月": 0.98, "10月": 0.93, "11月": 1.15, "12月": 1.04}, "peak_months": ["11月", "8月", "1月"], "low_months": ["10月", "6月"], "seasonality_strength": 1.25, "verdict": "温和下滑"}, "small space decor": {"metric": "Google Trends: small space decor", "months": 36, "start": "2023-10", "end": "2026-09", "last_12m_total": 698.0, "yoy_last_12m": 0.2691, "yoy_last_3m": 0.2692, "cagr": 0.2653, "trend_slope_per_month": 0.0194, "seasonality_index": {"1月": 0.95, "2月": 0.83, "3月": 0.85, "4月": 0.85, "5月": 0.85, "6月": 0.85, "7月": 1.04, "8月": 1.2, "9月": 1.03, "10月": 0.91, "11月": 1.45, "12月": 1.2}, "peak_months": ["11月", "8月", "12月"], "low_months": ["6月", "2月"], "seasonality_strength": 1.75, "verdict": "增长"}}, "ranking_by_yoy": [{"term": "wavy mirror", "yoy": 0.6948}, {"term": "small space decor", "yoy": 0.2691}, {"term": "arched mirror", "yoy": 0.1023}, {"term": "round mirror", "yoy": -0.06}]}, "competition": {"listings": 60, "sales_basis": "monthly_sales", "platforms": {"amazon": 60}, "price": {"median": 64.59, "p25": 44.27, "p75": 87.22}, "market_monthly_units": 49498, "market_monthlyrevenue_metric": 3451551.0, "brand_count": 13, "cr3": 0.5183, "cr5": 0.6729, "top_brands": [{"brand": "Neutype", "revenue_share": 0.2001}, {"brand": "WavyCo", "revenue_share": 0.1963}, {"brand": "Mirrorize", "revenue_share": 0.1219}, {"brand": "OGCAU", "revenue_share": 0.0856}, {"brand": "Beautypeak", "revenue_share": 0.0691}, {"brand": "HARRITPURE", "revenue_share": 0.0685}, {"brand": "Sweetcrispy", "revenue_share": 0.0681}, {"brand": "Hamilton Hills", "revenue_share": 0.0571}], "top10_median_reviews": 26073, "top10_avg_rating": 4.48, "low_rated_bestsellers": [{"asin": "B0DEMO0051", "title": "Full Length Mirror 63x20 Natural Wood Rectangle Wall Mirror Large Floor Mirror B", "rating": 3.8, "sales": 1067}, {"asin": "B0DEMO0044", "title": "Round Wall Mirror 59 inch Pink Metal Frame Bathroom Vanity Mirror", "rating": 4.0, "sales": 906}, {"asin": "B0DEMO0024", "title": "Wavy Full Length Mirror 24x24 Irregular Floor Mirror Gold Wave Frame for Bedroom", "rating": 3.9, "sales": 899}, {"asin": "B0DEMO0022", "title": "Irregular Asymmetrical Wall Mirror White Cloud Mirror Aesthetic Danish Pastel De", "rating": 3.8, "sales": 675}, {"asin": "B0DEMO0000", "title": "Wavy Full Length Mirror 36x24 Irregular Floor Mirror White Wave Frame for Bedroo", "rating": 4.1, "sales": 600}], "new_listing_count_12m": 19, "new_listing_sales_share_12m": 0.2753, "price_bands": [{"band": "$26-41", "low": 26.0, "high": 41.0, "listings": 13, "sales": 11652.0, "sales_share": 0.2354, "sales_per_listing": 896.3, "win_rate": 0.3846, "avg_rating": 4.35, "is_opportunity": true, "is_win_band": true}, {"band": "$41-58", "low": 41.0, "high": 58.0, "listings": 11, "sales": 9581.0, "sales_share": 0.1936, "sales_per_listing": 871.0, "win_rate": 0.3636, "avg_rating": 4.31}, {"band": "$58-75", "low": 58.0, "high": 75.0, "listings": 13, "sales": 11468.0, "sales_share": 0.2317, "sales_per_listing": 882.2, "win_rate": 0.1538, "avg_rating": 4.18}, {"band": "$75-97", "low": 75.0, "high": 97.0, "listings": 11, "sales": 8694.0, "sales_share": 0.1756, "sales_per_listing": 790.4, "win_rate": 0.3636, "avg_rating": 4.28}, {"band": "$97-157", "low": 97.0, "high": 157.01, "listings": 12, "sales": 8103.0, "sales_share": 0.1637, "sales_per_listing": 675.2, "win_rate": 0.25, "avg_rating": 4.33}], "attribute_gaps": [{"dimension": "pattern_shape", "label": "波浪纹", "demand_share": 0.1476, "supply_share": 0.0854, "listings": 8, "gap": 0.0622, "growth_yoy": 0.7433}, {"dimension": "scene", "label": "浴室", "demand_share": 0.0871, "supply_share": 0.0585, "listings": 7, "gap": 0.0286, "growth_yoy": 0.02}, {"dimension": "style", "label": "复古", "demand_share": 0.0164, "supply_share": 0.0, "listings": 0, "gap": 0.0164, "growth_yoy": -0.04}, {"dimension": "scene", "label": "衣帽间", "demand_share": 0.006, "supply_share": 0.0, "listings": 0, "gap": 0.006, "growth_yoy": 0.17}, {"dimension": "material", "label": "玻璃", "demand_share": 0.0048, "supply_share": 0.0, "listings": 0, "gap": 0.0048, "growth_yoy": 0.27}, {"dimension": "feature", "label": "防爆/安全", "demand_share": 0.0048, "supply_share": 0.0, "listings": 0, "gap": 0.0048, "growth_yoy": 0.27}, {"dimension": "feature", "label": "带置物/收纳", "demand_share": 0.0047, "supply_share": 0.0, "listings": 0, "gap": 0.0047, "growth_yoy": 0.19}, {"dimension": "color", "label": "透明/亚克力", "demand_share": 0.0018, "supply_share": 0.0, "listings": 0, "gap": 0.0018, "growth_yoy": 0.8803}, {"dimension": "pattern_shape", "label": "拱形", "demand_share": 0.0774, "supply_share": 0.0818, "listings": 8, "gap": -0.0044, "growth_yoy": 0.1793}, {"dimension": "style", "label": "ins风/Danish Pastel", "demand_share": 0.0078, "supply_share": 0.0609, "listings": 7, "gap": -0.0531, "growth_yoy": 0.8738}, {"dimension": "size", "label": "小号/桌面", "demand_share": 0.0313, "supply_share": 0.0854, "listings": 8, "gap": -0.0541, "growth_yoy": 0.4486}, {"dimension": "scene", "label": "小空间", "demand_share": 0.029, "supply_share": 0.0854, "listings": 8, "gap": -0.0564, "growth_yoy": 0.432}, {"dimension": "color", "label": "金色", "demand_share": 0.0111, "supply_share": 0.0764, "listings": 6, "gap": -0.0653, "growth_yoy": 0.05}, {"dimension": "scene", "label": "客厅", "demand_share": 0.0102, "supply_share": 0.0818, "listings": 8, "gap": -0.0716, "growth_yoy": 0.07}, {"dimension": "feature", "label": "带灯/LED", "demand_share": 0.0474, "supply_share": 0.122, "listings": 7, "gap": -0.0746, "growth_yoy": 0.1686}], "top_listings": [{"asin": "B0DEMO0011", "title": "Full Length Mirror 64x21 Cream Rectangle Wall Mirror Large Floor Mirror Bedroom", "brand": "WavyCo", "price": 72.94, "sales": 5603, "reviews": 73415, "rating": 4.4, "platform": "amazon"}, {"asin": "B0DEMO0029", "title": "LED Full Length Mirror with Lights 64x21 Cream Lighted Floor Standing Mirror", "brand": "Neutype", "price": 146.5, "sales": 2991, "reviews": 39046, "rating": 4.9, "platform": "amazon"}, {"asin": "B0DEMO0015", "title": "Rattan Wall Mirror 63 inch Boho Woven Round Mirror Cream", "brand": "Mirrorize", "price": 52.36, "sales": 2989, "reviews": 21239, "rating": 4.6, "platform": "amazon"}, {"asin": "B0DEMO0026", "title": "Over The Door Mirror Full Length 63x20 Silver No Drill Hanging Mirror Dorm", "brand": "WavyCo", "price": 37.17, "sales": 2444, "reviews": 14544, "rating": 4.2, "platform": "amazon"}, {"asin": "B0DEMO0034", "title": "Over The Door Mirror Full Length 64x21 Black No Drill Hanging Mirror Dorm", "brand": "Hamilton Hills", "price": 26.3, "sales": 1917, "reviews": 43320, "rating": 4.4, "platform": "amazon"}, {"asin": "B0DEMO0047", "title": "Rattan Wall Mirror 36 inch Boho Woven Round Mirror White", "brand": "Sweetcrispy", "price": 44.47, "sales": 1773, "reviews": 37938, "rating": 4.6, "platform": "amazon"}, {"asin": "B0DEMO0018", "title": "Over The Door Mirror Full Length 63x20 Cream No Drill Hanging Mirror Dorm", "brand": "Mirrorize", "price": 35.120000000000005, "sales": 1548, "reviews": 2162, "rating": 4.5, "platform": "amazon"}, {"asin": "B0DEMO0027", "title": "Full Length Mirror 36x24 White Rectangle Wall Mirror Large Floor Mirror Bedroom", "brand": "Mirrorize", "price": 79.92999999999999, "sales": 1428, "reviews": 7758, "rating": 4.3, "platform": "amazon"}, {"asin": "B0DEMO0035", "title": "Full Length Mirror 24x24 White Rectangle Wall Mirror Large Floor Mirror Bedroom", "brand": "Beautypeak", "price": 83.91, "sales": 1412, "reviews": 2201, "rating": 4.6, "platform": "amazon"}, {"asin": "B0DEMO0039", "title": "Rattan Wall Mirror 59 inch Boho Woven Round Mirror Gold", "brand": "Kiayaco", "price": 43.67, "sales": 1086, "reviews": 30908, "rating": 4.3, "platform": "amazon"}]}, "voc": {"review_count": 600, "avg_rating": 3.93, "rating_distribution": {"1": 71, "2": 53, "3": 56, "4": 88, "5": 332}, "negative_share": 0.3, "pain_points": [{"theme": "做工/质感差", "negative_mentions": 79, "negative_mention_rate": 0.4389, "positive_mentions": 0, "positive_mention_rate": 0.0, "improvement": "提升边框材质（实木/金属替代 PS 塑料），边缘打磨工艺", "examples": ["Warped distorted reflection like a funhouse mirror. Cheap plastic, returned.", "Smaller than expected, dimensions in the listing are misleading. Wobbly stand, it tipped over twice. Feels cheaply made plastic frame."]}, {"theme": "破损/运输", "negative_mentions": 53, "negative_mention_rate": 0.2944, "positive_mentions": 43, "positive_mention_rate": 0.1024, "improvement": "升级包装：EPE 珍珠棉 + 护角 + 蜂窝纸板，做 ISTA-6A 跌落测试；镜面可改防爆膜/亚克力镜", "examples": ["Broken corner and cracked glass on arrival, second one also cracked.", "Strong chemical smell and the frame was peeling. Broken corner and cracked glass on arrival, second one also cracked."]}, {"theme": "不稳/易倒", "negative_mentions": 47, "negative_mention_rate": 0.2611, "positive_mentions": 44, "positive_mention_rate": 0.1048, "improvement": "加宽支脚、加防倾倒墙绳、底部防滑垫", "examples": ["Smaller than expected, dimensions in the listing are misleading. Wobbly stand, it tipped over twice. Feels cheaply made plastic frame.", "Wobbly stand, it tipped over twice. Feels cheaply made plastic frame."]}, {"theme": "成像变形", "negative_mentions": 47, "negative_mention_rate": 0.2611, "positive_mentions": 0, "positive_mention_rate": 0.0, "improvement": "提高镜面平整度（4mm+ 银镜或 HD 玻璃），背板加加强筋", "examples": ["Looks nice but the reflection is a bit distorted at the bottom.", "Warped distorted reflection like a funhouse mirror. Cheap plastic, returned."]}, {"theme": "气味", "negative_mentions": 31, "negative_mention_rate": 0.1722, "positive_mentions": 0, "positive_mention_rate": 0.0, "improvement": "选用低 VOC 材料，出厂前散味，Listing 说明无味", "examples": ["Strong chemical smell and the frame was peeling. Broken corner and cracked glass on arrival, second one also cracked.", "Strong chemical smell and the frame was peeling. Broken corner and cracked glass on arrival, second one also cracked."]}, {"theme": "颜色不符", "negative_mentions": 28, "negative_mention_rate": 0.1556, "positive_mentions": 0, "positive_mention_rate": 0.0, "improvement": "主图实拍校色，补充自然光场景图，颜色命名与实物一致"}, {"theme": "粘胶/挂钩失效", "negative_mentions": 27, "negative_mention_rate": 0.15, "positive_mentions": 97, "positive_mention_rate": 0.231, "improvement": "升级 3M 胶条 / 加金属挂钩双保险，并说明可承重数据"}, {"theme": "安装难", "negative_mentions": 26, "negative_mention_rate": 0.1444, "positive_mentions": 97, "positive_mention_rate": 0.231, "improvement": "免工具/卡扣安装，附视频二维码；挂墙 + 落地 + 挂门三合一配件"}, {"theme": "尺寸不符", "negative_mentions": 24, "negative_mention_rate": 0.1333, "positive_mentions": 0, "positive_mention_rate": 0.0, "improvement": "主图标注真实尺寸与人物比例参照图，Listing 写清楚英寸/厘米"}], "delights": [{"theme": "颜值/好看", "negative_mentions": 0, "negative_mention_rate": 0.0, "positive_mentions": 356, "positive_mention_rate": 0.8476, "improvement": null}, {"theme": "适合小空间", "negative_mentions": 0, "negative_mention_rate": 0.0, "positive_mentions": 241, "positive_mention_rate": 0.5738, "improvement": null}, {"theme": "性价比", "negative_mentions": 0, "negative_mention_rate": 0.0, "positive_mentions": 237, "positive_mention_rate": 0.5643, "improvement": null}, {"theme": "安装难", "negative_mentions": 26, "negative_mention_rate": 0.1444, "positive_mentions": 97, "positive_mention_rate": 0.231, "improvement": "免工具/卡扣安装，附视频二维码；挂墙 + 落地 + 挂门三合一配件"}, {"theme": "粘胶/挂钩失效", "negative_mentions": 27, "negative_mention_rate": 0.15, "positive_mentions": 97, "positive_mention_rate": 0.231, "improvement": "升级 3M 胶条 / 加金属挂钩双保险，并说明可承重数据"}, {"theme": "不稳/易倒", "negative_mentions": 47, "negative_mention_rate": 0.2611, "positive_mentions": 44, "positive_mention_rate": 0.1048, "improvement": "加宽支脚、加防倾倒墙绳、底部防滑垫", "examples": ["Smaller than expected, dimensions in the listing are misleading. Wobbly stand, it tipped over twice. Feels cheaply made plastic frame.", "Wobbly stand, it tipped over twice. Feels cheaply made plastic frame."]}], "who_buys": [{"label": "大学生", "mentions": 188, "rate": 0.3133}, {"label": "租房者", "mentions": 174, "rate": 0.29}, {"label": "女儿/儿子", "mentions": 143, "rate": 0.2383}, {"label": "送礼", "mentions": 45, "rate": 0.075}], "usage_scenes": [{"label": "宿舍", "mentions": 188, "rate": 0.3133}, {"label": "租房", "mentions": 174, "rate": 0.29}, {"label": "小空间", "mentions": 90, "rate": 0.15}, {"label": "门后/挂门", "mentions": 90, "rate": 0.15}, {"label": "卧室", "mentions": 44, "rate": 0.0733}], "negative_phrases": [{"phrase": "wobbly stand", "count": 33}, {"phrase": "stand tipped", "count": 33}, {"phrase": "tipped over", "count": 33}, {"phrase": "over twice", "count": 33}, {"phrase": "twice feels", "count": 33}, {"phrase": "feels cheaply", "count": 33}, {"phrase": "cheaply made", "count": 33}, {"phrase": "made plastic", "count": 33}, {"phrase": "plastic frame", "count": 33}, {"phrase": "strong chemical", "count": 31}, {"phrase": "chemical smell", "count": 31}, {"phrase": "smell frame", "count": 31}, {"phrase": "frame peeling", "count": 31}, {"phrase": "broken corner", "count": 30}, {"phrase": "corner cracked", "count": 30}], "per_listing": [{"asin": "B0DEMO0005", "reviews": 16, "avg_rating": 3.88}, {"asin": "B0DEMO0031", "reviews": 16, "avg_rating": 3.81}, {"asin": "B0DEMO0050", "reviews": 16, "avg_rating": 4.19}, {"asin": "B0DEMO0002", "reviews": 15, "avg_rating": 3.6}, {"asin": "B0DEMO0020", "reviews": 15, "avg_rating": 3.73}, {"asin": "B0DEMO0059", "reviews": 15, "avg_rating": 4.13}, {"asin": "B0DEMO0058", "reviews": 14, "avg_rating": 3.79}, {"asin": "B0DEMO0026", "reviews": 14, "avg_rating": 3.43}, {"asin": "B0DEMO0006", "reviews": 13, "avg_rating": 3.77}, {"asin": "B0DEMO0024", "reviews": 13, "avg_rating": 3.54}]}, "persona": {"segments": [{"persona": "大众家庭用户", "search_share": 0.1098}, {"persona": "空间受限的租房族/学生", "search_share": 0.0472}, {"persona": "城市小户型/租房年轻人", "search_share": 0.029}, {"persona": "大学生（Back to School 季）", "search_share": 0.016}], "evidence": ["搜索词「浴室」占 9% 搜索量，如 bathroom mirror", "搜索词「门后/挂门」占 5% 搜索量，如 over the door mirror, over the door mirror no drill", "搜索词「小空间」占 3% 搜索量，如 mirror for small space, full length mirror small space", "搜索词「卧室」占 2% 搜索量，如 mirror for bedroom", "评论提及「大学生」188 次（31%）", "评论提及「租房者」174 次（29%）", "评论提及「女儿/儿子」143 次（24%）", "评论提及「送礼」45 次（8%）"], "what_they_value": ["颜值/好看", "适合小空间", "性价比", "安装难"], "what_they_hate": ["做工/质感差", "破损/运输", "不稳/易倒", "成像变形"]}, "product": {"concept": "面向「小空间 / 门后/挂门」场景，主打「波浪纹 / 不规则」款式、「白色 / 奶油色」配色、大号 (48-65in)，定价 $26-41，重点解决「做工/质感差」痛点", "spec": {"scene": [{"label": "小空间", "search_volume": 60000, "share": 0.029, "keyword_count": 2, "top_keywords": ["mirror for small space", "full length mirror small space"], "growth_yoy": 0.432, "supply_gap": -0.0564, "score": 0.0137}, {"label": "门后/挂门", "search_volume": 97500, "share": 0.0472, "keyword_count": 2, "top_keywords": ["over the door mirror", "over the door mirror no drill"], "growth_yoy": 0.1619, "supply_gap": 0.0, "score": 0.0124}], "pattern_shape": [{"label": "波浪纹", "search_volume": 305200, "share": 0.1476, "keyword_count": 10, "top_keywords": ["wavy mirror", "wavy mirror full length", "white wavy mirror"], "growth_yoy": 0.7433, "supply_gap": 0.0622, "score": 0.14}, {"label": "不规则", "search_volume": 85000, "share": 0.0411, "keyword_count": 3, "top_keywords": ["irregular mirror", "asymmetrical mirror", "cloud mirror"], "growth_yoy": 0.4879, "supply_gap": 0.0, "score": 0.0242}], "color": [{"label": "白色", "search_volume": 21000, "share": 0.0102, "keyword_count": 1, "top_keywords": ["white wavy mirror"], "growth_yoy": 0.74, "supply_gap": 0.0, "score": 0.0086}, {"label": "奶油色", "search_volume": 6800, "share": 0.0033, "keyword_count": 1, "top_keywords": ["cream wavy mirror"], "growth_yoy": 1.1499, "supply_gap": 0.0, "score": 0.0041}], "style": [{"label": "ins风/Danish Pastel", "search_volume": 16100, "share": 0.0078, "keyword_count": 2, "top_keywords": ["wavy mirror aesthetic", "danish pastel mirror"], "growth_yoy": 0.8738, "supply_gap": -0.0531, "score": 0.0068}, {"label": "奶油风", "search_volume": 6800, "share": 0.0033, "keyword_count": 1, "top_keywords": ["cream wavy mirror"], "growth_yoy": 1.1499, "supply_gap": 0.0, "score": 0.0041}], "material": [{"label": "实木", "search_volume": 19000, "share": 0.0092, "keyword_count": 1, "top_keywords": ["wood floor mirror"], "growth_yoy": 0.11, "supply_gap": 0.0, "score": 0.0019}, {"label": "玻璃", "search_volume": 9900, "share": 0.0048, "keyword_count": 1, "top_keywords": ["shatterproof mirror"], "growth_yoy": 0.27, "supply_gap": 0.0048, "score": 0.0018}], "feature": [{"label": "带灯/LED", "search_volume": 98000, "share": 0.0474, "keyword_count": 2, "top_keywords": ["mirror with lights", "led full length mirror"], "growth_yoy": 0.1686, "supply_gap": -0.0746, "score": 0.0108}, {"label": "免打孔", "search_volume": 20500, "share": 0.0099, "keyword_count": 2, "top_keywords": ["no drill mirror", "over the door mirror no drill"], "growth_yoy": 0.5339, "supply_gap": 0.0, "score": 0.0063}], "size": [{"label": "大号 (48-65in)", "search_volume": 19400, "share": 0.0094}, {"label": "中号 (24-47in)", "search_volume": 9400, "share": 0.0045}], "exact_sizes": [{"size": "64x21in", "search_volume": 14000}, {"size": "47x16in", "search_volume": 6100}, {"size": "63x20in", "search_volume": 5400}]}, "price": {"band": "$26-41", "why": "该价格带单品平均销量最高（896.3），竞品 13 个"}, "improvements": [{"pain_point": "做工/质感差", "negative_mention_rate": 0.4389, "fix": "提升边框材质（实木/金属替代 PS 塑料），边缘打磨工艺"}, {"pain_point": "破损/运输", "negative_mention_rate": 0.2944, "fix": "升级包装：EPE 珍珠棉 + 护角 + 蜂窝纸板，做 ISTA-6A 跌落测试；镜面可改防爆膜/亚克力镜"}, {"pain_point": "不稳/易倒", "negative_mention_rate": 0.2611, "fix": "加宽支脚、加防倾倒墙绳、底部防滑垫"}, {"pain_point": "成像变形", "negative_mention_rate": 0.2611, "fix": "提高镜面平整度（4mm+ 银镜或 HD 玻璃），背板加加强筋"}, {"pain_point": "气味", "negative_mention_rate": 0.1722, "fix": "选用低 VOC 材料，出厂前散味，Listing 说明无味"}], "launch_timing": {"peak_months": ["11月", "8月", "12月"], "launch_by": "8月", "stock_in_fba_by": "9月", "note": "上架后需 6-8 周积累评论和权重，因此在旺季前 3 个月上新", "black_friday_multiplier": 2.15}, "listing_keywords": ["wavy mirror aesthetic", "wavy mirror full length", "white wavy mirror", "wavy mirror", "cloud mirror", "no drill mirror", "irregular mirror", "full length mirror small space", "mirror for small space", "asymmetrical mirror"], "category_depth": {"score": 70.9, "verdict": "值得深耕：增长 + 分散 + 痛点明确，可以做系列化产品线", "factors": [{"factor": "市场增长", "score": 20.0, "reason": "近 12 个月同比 +24%"}, {"factor": "垄断程度", "score": 10.9, "reason": "CR5 品牌销售额占比 67%（<40% 为分散市场）"}, {"factor": "新品机会", "score": 20.0, "reason": "近 12 个月新品拿走 28% 销量（>25% 说明新品容易起量）"}, {"factor": "评论壁垒", "score": 0.0, "reason": "Top10 评论数中位数 26073（越低越容易追）"}, {"factor": "可改进空间", "score": 20.0, "reason": "差评前三痛点合计提及率 99%，首要痛点：做工/质感差"}]}, "product_line_ideas": ["主款：波浪纹 × 白色/奶油色 多色变体，同一 Listing 合并评论", "尺寸梯度：小号（桌面/挂墙）+ 大号（全身/落地）两个尺寸覆盖不同空间", "第二款式：不规则，复用供应链与包装", "延伸同风格配套品（如同纹理的置物架/相框/收纳盒），做店铺风格统一的品牌矩阵"]}, "category_depth": {"score": 70.9, "verdict": "值得深耕：增长 + 分散 + 痛点明确，可以做系列化产品线", "factors": [{"factor": "市场增长", "score": 20.0, "reason": "近 12 个月同比 +24%"}, {"factor": "垄断程度", "score": 10.9, "reason": "CR5 品牌销售额占比 67%（<40% 为分散市场）"}, {"factor": "新品机会", "score": 20.0, "reason": "近 12 个月新品拿走 28% 销量（>25% 说明新品容易起量）"}, {"factor": "评论壁垒", "score": 0.0, "reason": "Top10 评论数中位数 26073（越低越容易追）"}, {"factor": "可改进空间", "score": 20.0, "reason": "差评前三痛点合计提及率 99%，首要痛点：做工/质感差"}]}, "series": {"category_monthly": {"month": ["2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"], "search_volume": [2623768.0, 4487387.0, 3719390.0, 3243391.0, 2497434.0, 2594954.0, 2672454.0, 2626095.0, 2637663.0, 3331674.0, 4146708.0, 3399425.0, 3227053.0, 5931660.0, 4569038.0, 3806672.0, 3322304.0, 3248874.0, 3384684.0, 3279236.0, 3250846.0, 4148882.0, 5188131.0, 4095845.0, 3938250.0, 7032238.0, 5670612.0, 4893241.0, 4120777.0, 4197200.0, 4347483.0, 4018549.0, 3987119.0, 5118397.0, 6313837.0, 5269877.0], "units_sold": [117531.0, 243933.0, 161853.0, 149751.0, 115726.0, 119310.0, 117059.0, 119272.0, 119249.0, 151237.0, 193106.0, 154342.0, 149161.0, 334558.0, 207985.0, 175626.0, 140790.0, 144330.0, 149445.0, 143795.0, 144678.0, 197864.0, 225380.0, 191452.0, 165292.0, 390265.0, 256839.0, 225359.0, 190710.0, 194868.0, 192908.0, 177490.0, 185578.0, 228565.0, 269625.0, 226394.0], "revenue": [6816822.0, 12450329.0, 9387459.0, 8685547.0, 6712094.0, 6919978.0, 6789425.0, 6917757.0, 6916432.0, 7719127.0, 11200164.0, 8951854.0, 8651338.0, 17075831.0, 12063102.0, 10186298.0, 8165802.0, 8371134.0, 8667814.0, 8340085.0, 8391327.0, 10098974.0, 13072053.0, 11104197.0, 9586914.0, 19919108.0, 14896649.0, 13070833.0, 11061205.0, 11302327.0, 11188654.0, 10294441.0, 10763517.0, 11665976.0, 15638228.0, 13130872.0]}, "google_trends": {"month": ["2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"], "wavy mirror": [18.0, 26.0, 24.0, 22.0, 21.0, 22.0, 22.0, 23.0, 24.0, 29.0, 33.0, 30.0, 31.0, 45.0, 40.0, 38.0, 35.0, 37.0, 38.0, 39.0, 40.0, 49.0, 55.0, 51.0, 52.0, 76.0, 68.0, 64.0, 60.0, 63.0, 64.0, 66.0, 68.0, 82.0, 94.0, 87.0], "arched mirror": [40.0, 53.0, 47.0, 44.0, 40.0, 41.0, 40.0, 40.0, 40.0, 45.0, 49.0, 45.0, 44.0, 59.0, 52.0, 48.0, 44.0, 45.0, 44.0, 44.0, 44.0, 50.0, 54.0, 49.0, 48.0, 65.0, 57.0, 53.0, 49.0, 49.0, 49.0, 49.0, 48.0, 55.0, 60.0, 54.0], "round mirror": [70.0, 87.0, 78.0, 73.0, 67.0, 67.0, 66.0, 65.0, 64.0, 70.0, 74.0, 68.0, 66.0, 82.0, 74.0, 69.0, 63.0, 63.0, 62.0, 61.0, 60.0, 66.0, 70.0, 64.0, 62.0, 77.0, 69.0, 65.0, 60.0, 59.0, 58.0, 57.0, 57.0, 62.0, 66.0, 60.0], "small space decor": [30.0, 48.0, 40.0, 36.0, 31.0, 32.0, 32.0, 32.0, 32.0, 39.0, 45.0, 39.0, 38.0, 61.0, 50.0, 45.0, 40.0, 40.0, 40.0, 40.0, 40.0, 50.0, 57.0, 49.0, 48.0, 77.0, 64.0, 57.0, 50.0, 51.0, 51.0, 51.0, 51.0, 63.0, 73.0, 62.0]}}, "demo": true};</script>
+<script>/* 轻量 SVG 图表：折线（十字准线 + 提示框）、横向条形、纵向柱、发散条形。
+ * 无外部依赖。所有文字通过 textContent 写入（数据来自 CSV / 爬虫，不可信）。 */
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const SERIES = ["var(--series-1)", "var(--series-2)", "var(--series-3)", "var(--series-4)"];
+
+  function el(tag, attrs, parent) {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function h(tag, cls, text, parent) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  const tip = h("div", "viz-tip");
+  document.addEventListener("DOMContentLoaded", () => document.body.appendChild(tip));
+  function showTip(evt, rows) {
+    tip.replaceChildren();
+    rows.forEach(([key, val, color]) => {
+      const r = h("div", "viz-tip-row", null, tip);
+      if (color) { const k = h("span", "viz-tip-key", null, r); k.style.background = color; }
+      h("strong", null, val, r);
+      h("span", "viz-tip-label", key, r);
+    });
+    tip.style.display = "block";
+    const x = Math.min(evt.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+    const y = Math.max(8, evt.clientY - tip.offsetHeight - 10);
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { tip.style.display = "none"; }
+
+  function niceMax(v) {
+    if (v <= 0) return 1;
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    for (const m of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (m * p >= v) return m * p;
+    return 10 * p;
+  }
+  function width(container) { return Math.max(280, container.clientWidth || 600); }
+
+  function legend(container, names, kind) {
+    if (names.length < 2) return;
+    const lg = h("div", "viz-legend", null, container);
+    names.forEach((n, i) => {
+      const it = h("span", "viz-legend-item", null, lg);
+      const sw = h("span", kind === "line" ? "viz-key-line" : "viz-key-rect", null, it);
+      sw.style.background = SERIES[i];
+      h("span", null, n, it);
+    });
+  }
+
+  /* 折线：x 为类目标签数组，series=[{name, values}]，单一 y 轴 */
+  function line(container, x, series, fmt) {
+    container.replaceChildren();
+    legend(container, series.map(s => s.name), "line");
+    const W = width(container), H = 240, m = { l: 56, r: 16, t: 12, b: 28 };
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, class: "viz-svg", role: "img" }, container);
+    const max = niceMax(Math.max(...series.flatMap(s => s.values.filter(v => v != null))));
+    const xs = i => m.l + (i * (W - m.l - m.r)) / Math.max(1, x.length - 1);
+    const ys = v => H - m.b - (v / max) * (H - m.t - m.b);
+    for (let k = 0; k <= 4; k++) {
+      const v = (max * k) / 4, y = ys(v);
+      el("line", { x1: m.l, x2: W - m.r, y1: y, y2: y, class: k ? "viz-grid" : "viz-axis" }, svg);
+      el("text", { x: m.l - 8, y: y + 4, "text-anchor": "end", class: "viz-tick" }, svg).textContent = fmt(v);
+    }
+    const step = Math.ceil(x.length / Math.floor((W - m.l) / 70));
+    x.forEach((lab, i) => {
+      if (i % step === 0 || i === x.length - 1)
+        el("text", { x: xs(i), y: H - 8, "text-anchor": "middle", class: "viz-tick" }, svg).textContent = lab;
+    });
+    series.forEach((s, si) => {
+      const d = s.values.map((v, i) => (v == null ? "" : `${i && s.values[i - 1] != null ? "L" : "M"}${xs(i)},${ys(v)}`)).join("");
+      el("path", { d, fill: "none", stroke: SERIES[si], "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+      const li = s.values.length - 1;
+      el("circle", { cx: xs(li), cy: ys(s.values[li]), r: 4, fill: SERIES[si], stroke: "var(--surface-1)", "stroke-width": 2 }, svg);
+    });
+    const cross = el("line", { y1: m.t, y2: H - m.b, class: "viz-cross", visibility: "hidden" }, svg);
+    const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent", tabindex: 0 }, svg);
+    const move = evt => {
+      const r = svg.getBoundingClientRect();
+      const px = ((evt.clientX - r.left) / r.width) * W;
+      const i = Math.max(0, Math.min(x.length - 1, Math.round(((px - m.l) / (W - m.l - m.r)) * (x.length - 1))));
+      cross.setAttribute("x1", xs(i)); cross.setAttribute("x2", xs(i)); cross.setAttribute("visibility", "visible");
+      showTip(evt, [[x[i], "", null], ...series.map((s, si) => [s.name, fmt(s.values[i]), SERIES[si]])]);
+    };
+    hit.addEventListener("pointermove", move);
+    hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
+    table(container, ["月份", ...series.map(s => s.name)], x.map((lab, i) => [lab, ...series.map(s => fmt(s.values[i]))]));
+  }
+
+  /* 横向条形：rows=[{label, value, note}] */
+  function hbar(container, rows, fmt, opts = {}) {
+    container.replaceChildren();
+    if (!rows.length) { h("p", "muted", "无数据", container); return; }
+    const max = opts.max || Math.max(...rows.map(r => r.value)) || 1;
+    const list = h("div", "hbar", null, container);
+    rows.forEach(r => {
+      const row = h("div", "hbar-row" + (r.highlight ? " is-hi" : ""), null, list);
+      row.tabIndex = 0;
+      h("div", "hbar-label", r.label, row);
+      const track = h("div", "hbar-track", null, row);
+      const bar = h("div", "hbar-bar", null, track);
+      bar.style.width = Math.max(0.5, (100 * r.value) / max) + "%";
+      if (r.color) bar.style.background = r.color;
+      h("div", "hbar-value", fmt(r.value), row);
+      if (r.note !== undefined) h("div", "hbar-note", r.note, row);
+      const tipRows = [[r.label, fmt(r.value), null]].concat(r.tip || []);
+      row.addEventListener("pointermove", e => showTip(e, tipRows));
+      row.addEventListener("pointerleave", hideTip);
+      row.addEventListener("focus", () => { const b = row.getBoundingClientRect(); showTip({ clientX: b.left + 120, clientY: b.top }, tipRows); });
+      row.addEventListener("blur", hideTip);
+    });
+  }
+
+  /* 纵向柱：labels, values；highlight 索引集合 */
+  function columns(container, labels, values, fmt, highlight = []) {
+    container.replaceChildren();
+    const W = width(container), H = 200, m = { l: 44, r: 8, t: 18, b: 26 };
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, class: "viz-svg" }, container);
+    const max = niceMax(Math.max(...values));
+    const bw = (W - m.l - m.r) / labels.length;
+    const ys = v => H - m.b - (v / max) * (H - m.t - m.b);
+    for (let k = 0; k <= 4; k++) {
+      const v = (max * k) / 4;
+      el("line", { x1: m.l, x2: W - m.r, y1: ys(v), y2: ys(v), class: k ? "viz-grid" : "viz-axis" }, svg);
+      el("text", { x: m.l - 6, y: ys(v) + 4, "text-anchor": "end", class: "viz-tick" }, svg).textContent = fmt(v);
+    }
+    labels.forEach((lab, i) => {
+      const x = m.l + i * bw + 1, y = ys(values[i]), hgt = H - m.b - y;
+      const g = el("g", { tabindex: 0 }, svg);
+      el("rect", { x: m.l + i * bw, y: m.t, width: bw, height: H - m.t - m.b, fill: "transparent" }, g);
+      el("path", { d: roundTop(x, y, bw - 2, hgt, Math.min(4, (bw - 2) / 2)), class: highlight.includes(i) ? "col col-hi" : "col" }, g);
+      if (highlight.includes(i))
+        el("text", { x: x + (bw - 2) / 2, y: y - 5, "text-anchor": "middle", class: "viz-label" }, svg).textContent = fmt(values[i]);
+      el("text", { x: x + (bw - 2) / 2, y: H - 8, "text-anchor": "middle", class: "viz-tick" }, svg).textContent = lab;
+      g.addEventListener("pointermove", e => showTip(e, [[lab, fmt(values[i]), null]]));
+      g.addEventListener("pointerleave", hideTip);
+    });
+    table(container, ["", "值"], labels.map((l, i) => [l, fmt(values[i])]));
+  }
+  function roundTop(x, y, w, hgt, r) {
+    if (hgt <= 0) return "";
+    r = Math.min(r, hgt);
+    return `M${x},${y + hgt}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + hgt}Z`;
+  }
+
+  /* 发散条形：正值蓝（需求 > 供给），负值红 */
+  function diverging(container, rows, fmt) {
+    container.replaceChildren();
+    const max = Math.max(...rows.map(r => Math.abs(r.value))) || 1;
+    const list = h("div", "dbar", null, container);
+    rows.forEach(r => {
+      const row = h("div", "dbar-row", null, list);
+      h("div", "hbar-label", r.label, row);
+      const track = h("div", "dbar-track", null, row);
+      h("div", "dbar-mid", null, track);
+      const bar = h("div", "dbar-bar " + (r.value >= 0 ? "pos" : "neg"), null, track);
+      const pct = (50 * Math.abs(r.value)) / max;
+      bar.style.width = pct + "%";
+      bar.style.left = r.value >= 0 ? "50%" : 50 - pct + "%";
+      h("div", "hbar-value", fmt(r.value), row);
+      row.addEventListener("pointermove", e => showTip(e, [[r.label, fmt(r.value), null]].concat(r.tip || [])));
+      row.addEventListener("pointerleave", hideTip);
+    });
+  }
+
+  function table(container, head, rows) {
+    const d = h("details", "viz-table", null, container);
+    h("summary", null, "表格视图", d);
+    const t = h("table", null, null, d);
+    const tr = h("tr", null, null, h("thead", null, null, t));
+    head.forEach(c => h("th", null, c, tr));
+    const tb = h("tbody", null, null, t);
+    rows.forEach(r => { const row = h("tr", null, null, tb); r.forEach(c => h("td", null, c == null ? "—" : String(c), row)); });
+  }
+
+  window.Viz = { line, hbar, columns, diverging, table, h };
+})();
+
+/* 交互式 ROI 计算器（与 analyzers/roi.py 同一公式）。
+ * Viz.roi(container, scenarios) ; scenarios = [{name, price, cogs, freight, fba_fee, referral_rate, furniture_tiered, tacos, return_rate, storage_other, monthly_units, note}] */
+(function () {
+  const { h } = Viz;
+  const FIELDS = [
+    ["price", "售价 $", 0.01],
+    ["cogs", "出厂价 FOB $", 0.1],
+    ["freight", "头程/件 $", 0.1],
+    ["fba_fee", "FBA 配送费 $", 0.1],
+    ["tacos", "广告占销售额 %", 1, true],
+    ["return_rate", "退货率 %", 1, true],
+    ["storage_other", "仓储+其他/件 $", 0.1],
+    ["monthly_units", "预计月销量", 10],
+  ];
+  function referral(p, rate, tiered) { return tiered ? 0.15 * Math.min(p, 200) + 0.10 * Math.max(p - 200, 0) : Math.max(0.3, rate * p); }
+  function calc(s) {
+    const ref = referral(s.price, s.referral_rate, s.furniture_tiered);
+    const ads = s.tacos * s.price, ret = s.return_rate * s.price, landed = s.cogs + s.freight;
+    const profit = s.price - (landed + s.fba_fee + ref + ads + ret + s.storage_other);
+    const target = s.price * 0.8 - (s.freight + s.fba_fee + ref + ads + ret + s.storage_other);
+    return { ref, ads, ret, landed, profit, margin: profit / s.price, roi: profit / landed, be: (profit + ads) / s.price, month: profit * s.monthly_units, target };
+  }
+  const money = v => (v < 0 ? "-$" : "$") + Math.abs(v).toFixed(2);
+  const pct = v => (v * 100).toFixed(0) + "%";
+
+  function roi(container, scenarios) {
+    container.replaceChildren();
+    const tabs = h("div", "tabs", null, container);
+    const body = h("div", "roi-body", null, container);
+    let cur = 0;
+    const state = scenarios.map(s => Object.assign({}, s));
+    function render() {
+      [...tabs.children].forEach((b, i) => b.setAttribute("aria-selected", i === cur));
+      body.replaceChildren();
+      const s = state[cur];
+      const grid = h("div", "roi-grid", null, body);
+      const form = h("div", "roi-form", null, grid);
+      const out = h("div", "roi-out", null, grid);
+      FIELDS.forEach(([k, label, step, isPct]) => {
+        const row = h("label", "roi-field", null, form);
+        h("span", null, label, row);
+        const inp = h("input", null, null, row);
+        inp.type = "number"; inp.step = step; inp.min = 0;
+        inp.value = isPct ? Math.round(s[k] * 100) : s[k];
+        inp.addEventListener("input", () => { const v = parseFloat(inp.value) || 0; s[k] = isPct ? v / 100 : v; update(); });
+      });
+      if (s.note) h("p", "src", s.note, form);
+      const kp = h("div", "roi-kpis", null, out);
+      const tiles = ["单件利润", "净利率", "ROI", "盈亏平衡 ACoS", "月利润", "20% 净利目标出厂价"].map(l => { const t = h("div", "kpi", null, kp); h("div", "l", l, t); return h("div", "v", "", t); });
+      const verdict = h("p", "roi-verdict", "", out);
+      const tbl = h("table", null, null, out);
+      function update() {
+        const r = calc(s);
+        tiles[0].textContent = money(r.profit);
+        tiles[1].textContent = pct(r.margin);
+        tiles[2].textContent = pct(r.roi);
+        tiles[3].textContent = pct(r.be);
+        tiles[4].textContent = money(r.month).replace(".00", "");
+        tiles[5].textContent = money(r.target);
+        verdict.textContent = r.margin >= 0.2 && r.roi >= 0.8 ? "✓ 健康：净利率 ≥20%、ROI ≥80%" : r.margin >= 0.12 ? "△ 可做但偏薄：控制广告与退货" : r.margin > 0 ? "! 利润太薄：提价、降本或换尺寸档位" : "✕ 当前假设下亏损";
+        tbl.replaceChildren();
+        [["售价", s.price], ["佣金", -r.ref], ["FBA 配送", -s.fba_fee], ["广告", -r.ads], ["退货损失", -r.ret], ["仓储/其他", -s.storage_other], ["出厂价", -s.cogs], ["头程", -s.freight], ["单件利润", r.profit]]
+          .forEach(([l, v]) => { const tr = h("tr", null, null, tbl); h("td", null, l, tr); h("td", "num", money(v), tr); });
+      }
+      update();
+    }
+    scenarios.forEach((s, i) => { const b = h("button", null, s.name, tabs); b.type = "button"; b.onclick = () => { cur = i; render(); }; });
+    render();
+  }
+  Viz.roi = roi;
+})();
+</script>
+<script>/* 渲染 pipeline.run_analysis() 的结果。DATA 由 Python 注入。 */
+(function () {
+  const D = window.DATA;
+  const { h } = Viz;
+  const pct = v => (v == null ? "—" : (v * 100).toFixed(Math.abs(v) < 0.1 ? 1 : 0) + "%");
+  const sgn = v => (v == null ? "—" : (v > 0 ? "+" : "") + pct(v));
+  const num = v => (v == null ? "—" : v >= 1e6 ? (v / 1e6).toFixed(1) + "M" : v >= 1e3 ? (v / 1e3).toFixed(v >= 1e4 ? 0 : 1) + "K" : String(Math.round(v)));
+  const $ = id => document.getElementById(id);
+  const hide = id => { const n = $(id); if (n) n.closest("section").hidden = true; };
+
+  $("title").textContent = "选品分析：" + D.dataset;
+  $("meta").textContent = `生成于 ${D.generated_at} · 数据：${D.inputs.join(", ")} · 关键词量口径：${D.keyword_volume_basis}`;
+  if (D.demo) $("banner").hidden = false;
+
+  // KPI
+  const ct = D.category_trends || {};
+  const sv = ct.search_volume || ct.units_sold || {};
+  const units = ct.units_sold || {};
+  const kpis = [
+    ["类目趋势", sv.verdict || "—", sv.yoy_last_12m != null ? `近 12 月同比 ${sgn(sv.yoy_last_12m)}` : ""],
+    ["销量同比", sgn(units.yoy_last_12m), units.cagr != null ? `CAGR ${pct(units.cagr)}` : ""],
+    ["黑五爆发系数", (units.events || sv.events || {}).black_friday_multiplier ? (units.events || sv.events).black_friday_multiplier + "×" : "—", "11 月 ÷ 平日中位数"],
+    ["类目深耕评分", D.category_depth ? D.category_depth.score + " / 100" : "—", D.category_depth ? D.category_depth.verdict.split("：")[0] : ""],
+    ["CR5 品牌集中度", D.competition && D.competition.cr5 != null ? pct(D.competition.cr5) : "—", "Top5 品牌销售额占比"],
+    ["竞品平均评分", D.voc ? D.voc.avg_rating + " ★" : "—", D.voc ? `差评占比 ${pct(D.voc.negative_share)}` : ""],
+  ];
+  kpis.forEach(([l, v, d]) => { const k = h("div", "kpi", null, $("kpis")); h("div", "l", l, k); h("div", "v", v, k); h("div", "d", d, k); });
+
+  // 产品方案
+  const P = D.product;
+  $("concept").textContent = P.concept;
+  const specList = $("spec");
+  const dimName = { scene: "场景", pattern_shape: "款式/纹理", color: "颜色", style: "风格", material: "材质", feature: "功能" };
+  Object.entries(dimName).forEach(([k, name]) => {
+    const items = (P.spec || {})[k] || [];
+    if (!items.length) return;
+    const li = h("li", null, null, specList);
+    h("strong", null, name + "：", li);
+    items.forEach((it, i) => h("span", "tag" + (i === 0 ? " hi" : ""), `${it.label} ${pct(it.share)}${it.growth_yoy != null ? " · " + sgn(it.growth_yoy) : ""}`, li));
+  });
+  if (P.spec && P.spec.exact_sizes && P.spec.exact_sizes.length) {
+    const li = h("li", null, null, specList); h("strong", null, "热门尺寸：", li);
+    P.spec.exact_sizes.forEach(s => h("span", "tag", `${s.size} (${num(s.search_volume)})`, li));
+  }
+  if (P.price) { const li = h("li", null, null, specList); h("strong", null, "定价：", li); h("span", null, `${P.price.band} — ${P.price.why}`, li); }
+  if (P.launch_timing) {
+    const t = P.launch_timing, li = h("li", null, null, specList);
+    h("strong", null, "上新节奏：", li);
+    h("span", null, `旺季 ${t.peak_months.join("、")}；${t.launch_by}前上架，${t.stock_in_fba_by}前入仓 FBA`, li);
+  }
+  (P.improvements || []).forEach(i => { const li = h("li", null, null, $("improve")); h("strong", null, `${i.pain_point}（差评提及 ${pct(i.negative_mention_rate)}）：`, li); h("span", null, i.fix, li); });
+  (P.product_line_ideas || []).forEach(t => h("li", null, t, $("line")));
+  (P.listing_keywords || []).forEach(k => h("span", "tag", k, $("lk")));
+
+  // 画像
+  const pe = D.persona || {};
+  Viz.hbar($("persona-chart"), (pe.segments || []).map(s => ({ label: s.persona, value: s.search_share })), pct);
+  (pe.evidence || []).forEach(t => h("li", null, t, $("persona-ev")));
+  if (pe.what_they_value) { h("p", "sub", "在意：" + pe.what_they_value.join("、"), $("persona-ev").parentNode); }
+  if (pe.what_they_hate) { h("p", "sub", "讨厌：" + pe.what_they_hate.join("、"), $("persona-ev").parentNode); }
+
+  // 趋势
+  const S = D.series || {};
+  if (S.category_monthly) {
+    const cm = S.category_monthly;
+    if (cm.search_volume) Viz.line($("sv-line"), cm.month, [{ name: "类目月搜索量", values: cm.search_volume }], num); else $("sv-line").closest(".card").hidden = true;
+    if (cm.units_sold) Viz.line($("units-line"), cm.month, [{ name: "类目月销量", values: cm.units_sold }], num); else $("units-line").closest(".card").hidden = true;
+    const seas = (units.seasonality_index && units) || sv;
+    if (seas.seasonality_index) {
+      const labels = Object.keys(seas.seasonality_index), vals = Object.values(seas.seasonality_index);
+      const hi = seas.peak_months.map(m => labels.indexOf(m));
+      Viz.columns($("season"), labels, vals, v => v.toFixed(2), hi);
+      $("season-note").textContent = `旺季：${seas.peak_months.join("、")}；淡季：${seas.low_months.join("、")}；季节强度 ${seas.seasonality_strength}×（峰/谷）`;
+    }
+    const ev = (units.events || sv.events || {});
+    if (ev.average) {
+      Viz.hbar($("events"), Object.entries(ev.average).map(([k, v]) => ({ label: k, value: v, highlight: k.startsWith("黑五") })), v => v.toFixed(2) + "×");
+      $("events-note").textContent = ev.verdict;
+    }
+  } else hide("sv-line");
+  if (S.google_trends) {
+    const gt = S.google_trends, names = Object.keys(gt).filter(k => k !== "month").slice(0, 4);
+    Viz.line($("gt-line"), gt.month, names.map(n => ({ name: n, values: gt[n] })), v => Math.round(v));
+    const rank = (D.google_trends || {}).ranking_by_yoy || [];
+    $("gt-note").textContent = rank.length ? "同比：" + rank.map(r => `${r.term} ${sgn(r.yoy)}`).join("；") : "";
+  } else $("gt-line").closest(".card").hidden = true;
+
+  // 需求拆解
+  const K = D.keywords;
+  if (K) {
+    const dims = Object.entries(K.dimensions).filter(([, v]) => v.labels.length);
+    const tabs = $("dim-tabs");
+    const show = key => {
+      [...tabs.children].forEach(b => b.setAttribute("aria-selected", b.dataset.k === key));
+      const rows = K.dimensions[key].labels.map(r => ({
+        label: r.label, value: r.share, note: r.growth_yoy != null ? sgn(r.growth_yoy) : "",
+        tip: [["搜索量", num(r.search_volume), null], ["关键词", r.top_keywords.join(", "), null]],
+      }));
+      Viz.hbar($("dim-chart"), rows, pct);
+    };
+    dims.forEach(([k, v]) => { const b = h("button", null, v.name, tabs); b.dataset.k = k; b.type = "button"; b.onclick = () => show(k); });
+    show(dims[0][0]);
+    const rk = K.rising_keywords || K.top_keywords;
+    $("rising-title").textContent = K.rising_keywords ? "增长最快的关键词" : "搜索量最高的关键词";
+    const tb = $("rising").querySelector("tbody");
+    rk.forEach(r => { const tr = h("tr", null, null, tb); h("td", null, r.keyword, tr); h("td", "num", num(r.search_volume), tr); h("td", "num", r.growth_yoy != null ? sgn(r.growth_yoy) : "—", tr); });
+  } else hide("dim-chart");
+
+  // 竞争
+  const C = D.competition;
+  if (C) {
+    if (C.attribute_gaps && C.attribute_gaps.length)
+      Viz.diverging($("gaps"), C.attribute_gaps.slice(0, 10).map(g => ({ label: g.label, value: g.gap, tip: [["需求占比", pct(g.demand_share), null], ["供给占比", pct(g.supply_share), null], ["在售竞品", String(g.listings), null]] })), sgn);
+    else $("gaps").closest(".card").hidden = true;
+    Viz.hbar($("bands"), C.price_bands.map(b => ({ label: b.band + (b.is_win_band ? " ★" : ""), value: b.win_rate, note: num(b.sales_per_listing), highlight: b.is_win_band, tip: [["单品平均销量", num(b.sales_per_listing), null], ["竞品数", String(b.listings), null], ["销量占比", pct(b.sales_share), null]] })), pct, { max: 1 });
+    const wb = C.price_bands.find(b => b.is_win_band);
+    $("bands-note").textContent = `条长 = 胜率（该价格带进入头部 30% 的竞品比例），右列 = 单品平均销量；口径：${C.sales_basis}。★ 胜率价位：${wb ? wb.band : "—"}`;
+    if (wb) {
+      const price = Math.round(((wb.low + wb.high) / 2)) - 0.01;
+      Viz.roi($("roi"), [{ name: "胜率价位 " + wb.band, price, cogs: +(price * 0.22).toFixed(2), freight: +(price * 0.08).toFixed(2), fba_fee: +(price * 0.2).toFixed(2), referral_rate: 0.15, furniture_tiered: false, tacos: 0.15, return_rate: 0.05, storage_other: 1, monthly_units: Math.round(wb.sales_per_listing) || 300, note: "出厂价/头程/FBA 默认按售价比例假设，请替换为工厂报价与 FBA 计算器结果。" }]);
+    }
+    if (C.top_brands) Viz.hbar($("brands"), C.top_brands.map(b => ({ label: b.brand, value: b.revenue_share })), pct);
+    else $("brands").closest(".card").hidden = true;
+    const tb = $("listings").querySelector("tbody");
+    C.top_listings.forEach(r => { const tr = h("tr", null, null, tb); h("td", null, r.title, tr); h("td", null, r.brand || "", tr); h("td", "num", "$" + r.price.toFixed(2), tr); h("td", "num", num(r.sales), tr); h("td", "num", num(r.reviews), tr); h("td", "num", r.rating ? r.rating.toFixed(1) : "—", tr); });
+  } else hide("bands");
+
+  // VOC
+  const V = D.voc;
+  if (V) {
+    Viz.hbar($("pain"), V.pain_points.slice(0, 8).map(p => ({ label: p.theme, value: p.negative_mention_rate, tip: (p.examples || []).slice(0, 1).map(e => ["", e, null]) })), pct);
+    Viz.hbar($("delight"), V.delights.map(p => ({ label: p.theme, value: p.positive_mention_rate })), pct);
+    Viz.hbar($("who"), V.who_buys.slice(0, 6).map(p => ({ label: p.label, value: p.rate })), pct);
+    (V.negative_phrases || []).slice(0, 12).forEach(p => h("span", "tag", `${p.phrase} ×${p.count}`, $("phrases")));
+  } else hide("pain");
+
+  // 深耕
+  const Dp = D.category_depth;
+  if (Dp) {
+    Viz.hbar($("depth"), Dp.factors.map(f => ({ label: f.factor, value: f.score, tip: [["", f.reason, null]] })), v => v.toFixed(1), { max: 20 });
+    $("depth-verdict").textContent = `${Dp.score} / 100 — ${Dp.verdict}`;
+    Dp.factors.forEach(f => h("li", null, `${f.factor}：${f.reason}`, $("depth-reasons")));
+  }
+
+})();
+</script>
+</body>
+</html>

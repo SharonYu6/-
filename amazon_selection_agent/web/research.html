@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全身镜与曲线家具选品</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div><h1 id="title"></h1><p class="sub" id="subtitle"></p></div></header>
+  <p class="src" id="method"></p>
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2>结论速览</h2>
+    <div class="card"><ul class="clean" id="summary"></ul></div>
+  </section>
+
+  <section>
+    <h2>① 市场容量</h2>
+    <div class="grid-2">
+      <div class="card"><h3>可见爆款月销（徽章下限合计，按品类）</h3><div id="cap-chart"></div><p class="src" id="cap-note"></p></div>
+      <div class="card"><h3>BSR 校准估算（你的截图）</h3><p id="bsr"></p>
+        <div class="kpis" id="bsr-kpis" style="margin-top:8px"></div>
+        <h3 style="margin-top:16px" id="dorm-title"></h3><div id="dorm"></div><p class="sub" id="dorm-note"></p></div>
+    </div>
+  </section>
+
+  <section id="sec-trend"></section>
+  <section id="sec-season"></section>
+
+  <section>
+    <h2>④ 用户分层 & 各层价格分布</h2>
+    <p class="sub" id="seg-note"></p>
+    <div class="card"><h3>各人群可接受价格区间</h3><div id="seg-price"></div><p class="src">色条 = 该人群可接受价格区间；黑点 = 观察到的真实爆款价格</p></div>
+    <div class="grid" id="seg-cards" style="margin-top:16px"></div>
+  </section>
+
+  <section>
+    <h2>⑤ 胜率价位</h2>
+    <div class="grid-2">
+      <div class="card"><div class="callout"><strong id="win-verdict"></strong></div><ul class="clean" id="win-notes" style="margin-top:12px"></ul></div>
+      <div class="card"><h3>有价格的爆款：价格 × 月销</h3><div id="price-sales"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑥ 颜色喜好 & 款式</h2>
+    <div class="grid-2">
+      <div class="card"><h3>爆款颜色（按可见月销加权）</h3><div id="colors"></div><p class="src">权重 = bought in past month 下限；无徽章的爆款（Best Seller 等）记 1 次出现不计销量</p></div>
+      <div class="card"><h3>爆款款式（按可见月销加权）</h3><div id="styles"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑦ 应用场景</h2>
+    <div class="grid-2">
+      <div class="card"><h3>爆款标题中的场景词（按可见月销加权）</h3><div id="scenes"></div></div>
+      <div class="card"><h3>解读</h3><ul class="clean" id="scene-notes"></ul></div>
+    </div>
+  </section>
+
+  <section id="sec-design"></section>
+  <section id="sec-keywords"></section>
+
+  <section>
+    <h2>⑩ VOC：痛点 & 爽点</h2>
+    <div class="grid-2">
+      <div class="card"><h3>痛点</h3><div id="pains"></div></div>
+      <div class="card"><h3>爽点</h3><div id="delights"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑪ 产品方案</h2>
+    <div class="grid-2">
+      <div class="card"><div class="callout"><strong id="p-name"></strong><p id="p-concept" style="margin-top:6px"></p></div>
+        <table id="p-spec" style="margin-top:12px"></table></div>
+      <div class="card"><h3>针对差评的改进</h3><table id="p-improve"></table>
+        <h3 style="margin-top:14px">类目深耕 / 产品线</h3><ul class="clean" id="p-line"></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑫ 利润 & ROI 测算</h2>
+    <p class="sub" id="fees"></p>
+    <div class="card" id="roi"></div>
+  </section>
+
+  <section>
+    <h2>⑬ 能否类目深耕？</h2>
+    <div class="card"><div class="callout"><strong id="depth-verdict"></strong></div>
+      <table id="depth" style="margin-top:12px"><thead><tr><th>维度</th><th>判断</th><th>依据</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>全部真实商品信号</h2>
+    <p class="src" id="list-note"></p>
+    <div class="card scroll-x"><table id="listings"><thead><tr><th>品类</th><th>品牌</th><th>商品</th><th>颜色</th><th class="num">价格</th><th class="num">已购</th><th>人群</th><th>备注</th><th>来源</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>数据缺口 & 补齐方法</h2>
+    <div class="card"><ul class="clean" id="gaps"></ul></div>
+  </section>
+</div>
+<script>window.DATA = /*__DATA__*/;</script>
+<script>/*__CHARTS__*/</script>
+<script>/*__APP__*/</script>
+</body>
+</html>

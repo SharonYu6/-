@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>选品分析看板</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1 id="title">选品分析</h1>
+      <p class="sub" id="meta"></p>
+    </div>
+  </header>
+  <div class="banner" id="banner" hidden>⚠ 演示数据：本页数字由 scripts/make_demo_data.py 模拟生成，仅用于展示分析流程，不代表真实市场。接入卖家精灵/Helium 10 导出或运行 Amazon 采集脚本后自动替换。</div>
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <h2>① 产品开发方案（爆款假设）</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="callout"><strong id="concept"></strong></div>
+        <ul class="clean" id="spec" style="margin-top:12px"></ul>
+      </div>
+      <div class="card">
+        <h3>针对竞品差评的改进点</h3>
+        <ul class="clean" id="improve"></ul>
+        <h3 style="margin-top:14px">类目深耕 / 产品线</h3>
+        <ul class="clean" id="line"></ul>
+        <h3 style="margin-top:14px">Listing 埋词</h3>
+        <div id="lk"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>② 用户画像</h2>
+    <div class="grid-2">
+      <div class="card"><h3>人群（按场景词搜索占比）</h3><div id="persona-chart"></div></div>
+      <div class="card"><h3>证据</h3><ul class="clean" id="persona-ev"></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>③ 类目趋势：增长还是下滑？黑五是否爆发？</h2>
+    <div class="grid-2">
+      <div class="card"><h3>类目月搜索量</h3><div id="sv-line"></div></div>
+      <div class="card"><h3>类目月销量</h3><div id="units-line"></div></div>
+      <div class="card"><h3>季节性指数（1.0 = 全年平均）</h3><div id="season"></div><p class="sub" id="season-note"></p></div>
+      <div class="card"><h3>大促爆发系数</h3><div id="events"></div><p class="sub" id="events-note"></p></div>
+      <div class="card"><h3>Google Trends（0-100 指数）</h3><div id="gt-line"></div><p class="sub" id="gt-note"></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>④ 需求拆解：颜色 / 款式 / 尺寸 / 场景</h2>
+    <div class="grid-2">
+      <div class="card"><div class="tabs" id="dim-tabs" role="tablist"></div><div id="dim-chart"></div><p class="src">条长 = 搜索量占比；右列绿色 = 同比增长</p></div>
+      <div class="card scroll-x"><h3 id="rising-title"></h3>
+        <table id="rising"><thead><tr><th>关键词</th><th class="num">月搜索量</th><th class="num">同比</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>⑤ 竞争格局</h2>
+    <div class="grid-2">
+      <div class="card"><h3>供需差（需求占比 − 供给占比，蓝色 = 缺货属性）</h3><div id="gaps"></div></div>
+      <div class="card"><h3>价格带胜率（胜率价位）</h3><div id="bands"></div><p class="src" id="bands-note"></p></div>
+      <div class="card"><h3>品牌销售额占比</h3><div id="brands"></div></div>
+    </div>
+    <div class="card scroll-x" style="margin-top:16px"><h3>头部竞品</h3>
+      <table id="listings"><thead><tr><th>标题</th><th>品牌</th><th class="num">价格</th><th class="num">月销</th><th class="num">评论</th><th class="num">评分</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>⑤-b 利润 & ROI 测算</h2>
+    <div class="card" id="roi"></div>
+  </section>
+
+  <section>
+    <h2>⑥ VOC：用户在抱怨什么、喜欢什么</h2>
+    <div class="grid">
+      <div class="card"><h3>差评痛点（差评中提及率）</h3><div id="pain"></div></div>
+      <div class="card"><h3>好评爽点（好评中提及率）</h3><div id="delight"></div></div>
+      <div class="card"><h3>谁在买</h3><div id="who"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><h3>差评高频短语</h3><div id="phrases"></div></div>
+  </section>
+
+  <section>
+    <h2>⑦ 能否类目深耕？</h2>
+    <div class="grid-2">
+      <div class="card"><h3 id="depth-verdict"></h3><div id="depth"></div></div>
+      <div class="card"><ul class="clean" id="depth-reasons"></ul></div>
+    </div>
+  </section>
+</div>
+<script>window.DATA = /*__DATA__*/;</script>
+<script>/*__CHARTS__*/</script>
+<script>/*__APP__*/</script>
+</body>
+</html>

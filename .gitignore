@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+output/*
+!output/research_report.html
+!output/demo_dashboard.html
